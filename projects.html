@@ -3,164 +3,17 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Ashley Yoon</title>
+    <title>Work — Ashley Yoon</title>
 
-    <!-- Favicon -->
-    <link
-      rel="icon"
-      type="image/png"
-      href="/images/favicon-96x96.png"
-      sizes="96x96"
-    />
+    <link rel="icon" type="image/png" href="/images/favicon-96x96.png" sizes="96x96" />
     <link rel="icon" type="image/svg+xml" href="/images/favicon.svg" />
     <link rel="shortcut icon" href="/favicon.ico" />
-    <link
-      rel="apple-touch-icon"
-      sizes="180x180"
-      href="/images/apple-touch-icon.png"
-    />
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png" />
     <link rel="manifest" href="/images/site.webmanifest" />
     <link rel="stylesheet" href="styles.css" />
+
+    <!-- Redirect to homepage work section -->
+    <script>window.location.replace("/#work");</script>
   </head>
-  <body>
-    <div class="custom-cursor"></div>
-
-    <nav>
-      <a href="/" class="logo">
-        <img src="/images/favicon.svg" />
-      </a>
-      <div class="hamburger" id="hamburger">
-        <span></span>
-        <span></span>
-        <span></span>
-      </div>
-      <ul class="nav-links" id="navLinks">
-        <li><a href="/">Home</a></li>
-        <li><a href="/projects.html">Projects</a></li>
-        <li>
-          <a href="images/Ashley_Yoon_Resume.pdf" target="_blank">Resume</a>
-        </li>
-      </ul>
-    </nav>
-
-    <main class="projects-list-container">
-      <div class="projects-list">
-        <!-- Project 1 -->
-        <a href="project1.html" class="project-item">
-          <div class="project-item-image">
-            <img src="/images/P2P.jpg" alt="Project 1" />
-          </div>
-          <div class="project-item-content">
-            <div class="project-title-row">
-              <h2>Page to Pillow</h2>
-              <div class="project-item-meta">
-                <span>2025</span>
-                <span>Product Design</span>
-              </div>
-            </div>
-            <div class="project-item-info">
-              <p>
-                A wellness app designed to help users wind down through bedtime
-                reading and relaxation.
-              </p>
-            </div>
-          </div>
-        </a>
-
-        <!-- Project 2 -->
-        <a href="project2.html" class="project-item">
-          <div class="project-item-image">
-            <img src="images/curry.jpg" alt="Project 2" />
-          </div>
-          <div class="project-item-content">
-            <div class="project-title-row">
-              <h2>Editorial Spreads</h2>
-              <div class="project-item-meta">
-                <span>2025</span>
-                <span>Editorial</span>
-              </div>
-            </div>
-            <div class="project-item-info">
-              <p>
-                A series of editorial spread designs that reimagine a Stephen
-                Curry article through different visual approaches.
-              </p>
-            </div>
-          </div>
-        </a>
-
-        <!-- Project 3 -->
-        <a href="project3.html" class="project-item">
-          <div class="project-item-image">
-            <img src="images/postcard_mockup.jpg" alt="Project 3" />
-          </div>
-          <div class="project-item-content">
-            <div class="project-title-row">
-              <h2>Helvetica Type Specimen</h2>
-              <div class="project-item-meta">
-                <span>2025</span>
-                <span>Typography</span>
-              </div>
-            </div>
-            <div class="project-item-info">
-              <p>
-                Postcard sets that showcases Helvetica's typeface anatomy,
-                characteristics, and more.
-              </p>
-            </div>
-          </div>
-        </a>
-
-        <!-- Project 4 -->
-      </div>
-
-      <footer id="contact">
-        <div class="social-links">
-          <a href="mailto:yoon.ash@northeastern.edu">Email</a>
-          <a href="https://github.com/ashleyoon" target="_blank">GitHub</a>
-          <a href="https://www.linkedin.com/in/ashleyooon/" target="_blank"
-            >LinkedIn</a
-          >
-        </div>
-      </footer>
-    </main>
-
-    <script>
-      const hamburger = document.getElementById("hamburger");
-      const navLinks = document.getElementById("navLinks");
-
-      hamburger.addEventListener("click", () => {
-        navLinks.classList.toggle("active");
-      });
-
-      navLinks.querySelectorAll("a").forEach((link) => {
-        link.addEventListener("click", () => {
-          navLinks.classList.remove("active");
-        });
-      });
-
-      // Custom cursor
-      const cursor = document.querySelector(".custom-cursor");
-
-      document.addEventListener("mousemove", (e) => {
-        cursor.style.left = e.clientX + "px";
-        cursor.style.top = e.clientY + "px";
-      });
-
-      // Make cursor bigger on hover over links
-      const hoverElements = document.querySelectorAll(
-        "a, button, .project-item",
-      );
-
-      hoverElements.forEach((element) => {
-        element.addEventListener("mouseenter", () => {
-          cursor.classList.add("hover");
-        });
-
-        element.addEventListener("mouseleave", () => {
-          cursor.classList.remove("hover");
-        });
-      });
-    </script>
-  </body>
+  <body></body>
 </html>

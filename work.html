@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Work - Ashley Yoon</title>
+    <link
+      rel="icon"
+      type="image/png"
+      href="/images/favicon-128x128.png"
+      sizes="96x96"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="custom-cursor"></div>
+
+    <div class="about-page">
+      <div class="about-page-inner">
+        <a href="/" class="back-button"></a>
+
+        <div class="about-blurb" style="margin-bottom: 3rem">
+          <p>
+            Typography, editorial design, and graphic design are where I spend
+            most of my creative energy outside of product work. I'm drawn to how
+            type and layout can shape the way people feel about content, not
+            just read it.
+          </p>
+          <br />
+          <p>
+            I'm also into film photography, book cover design, and anything that
+            sits at the intersection of print and digital. Always looking for
+            the next thing that makes me think differently about visual
+            communication.
+          </p>
+        </div>
+
+        <div class="projects-grid">
+          <a href="project2.html" class="project-card">
+            <div class="project-card-image">
+              <img src="/images/curry.jpg" alt="Editorial Spreads" />
+            </div>
+            <div class="project-card-info">
+              <div class="project-card-top">
+                <h3>Editorial Spreads</h3>
+                <span class="project-card-arrow"
+                  ><svg
+                    width="14"
+                    height="14"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <polyline points="9 18 15 12 9 6" /></svg
+                ></span>
+              </div>
+              <p>
+                A series of editorial spread designs reimagining a Stephen Curry
+                article through varied visual approaches.
+              </p>
+              <div class="project-tags">
+                <span>Editorial</span>
+                <span>2025</span>
+              </div>
+            </div>
+          </a>
+
+          <a href="project3.html" class="project-card">
+            <div class="project-card-image">
+              <img
+                src="/images/postcard_mockup.jpg"
+                alt="Helvetica Type Specimen"
+              />
+            </div>
+            <div class="project-card-info">
+              <div class="project-card-top">
+                <h3>Helvetica Type Specimen</h3>
+                <span class="project-card-arrow"
+                  ><svg
+                    width="14"
+                    height="14"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <polyline points="9 18 15 12 9 6" /></svg
+                ></span>
+              </div>
+              <p>
+                Postcard sets that showcase Helvetica&rsquo;s typeface anatomy,
+                characteristics, and more.
+              </p>
+              <div class="project-tags">
+                <span>Typography</span>
+                <span>2025</span>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const cursor = document.querySelector(".custom-cursor");
+      document.addEventListener("mousemove", (e) => {
+        cursor.style.left = e.clientX + "px";
+        cursor.style.top = e.clientY + "px";
+      });
+      document.querySelectorAll("a, button").forEach((el) => {
+        el.addEventListener("mouseenter", () => cursor.classList.add("hover"));
+        el.addEventListener("mouseleave", () =>
+          cursor.classList.remove("hover"),
+        );
+      });
+    </script>
+  </body>
+</html>

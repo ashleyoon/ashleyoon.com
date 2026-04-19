@@ -3,83 +3,62 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Project Title - Ashley Yoon</title>
-    <link rel="stylesheet" href="../styles.css">
+    <title>Helvetica Type Specimen - Ashley Yoon</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="custom-cursor"></div>
-    
-    <nav>
-        <a href="/" class="logo">
-            <img src="images/logo.png">
-        </a>
-        <div class="hamburger" id="hamburger">
-            <span></span>
-            <span></span>
-            <span></span>
-        </div>
-        <ul class="nav-links" id="navLinks">
-            <li><a href="/">Home</a></li>
-            <li><a href="/projects.html">Projects</a></li>
-            <li><a href="images/Ashley_Yoon_Resume.pdf" target="_blank">Resume</a></li>
-        </ul>
-    </nav>
 
-    <main class="project-detail-container">
-        <!-- Back Button -->
-        <a href="/projects.html" class="back-button">←</a>
+    <div class="about-page">
+      <div class="about-page-inner">
+          <!-- Back Button -->
+          <a href="/work.html" class="back-button"></a>
 
-        <!-- Project Header -->
-        <div class="project-detail-header">
-            <h1>Helvetica Type Specimen</h1>
-            <p class="project-subtitle">This project explores Neue Helvetica's history, characteristics, and its transformative role in the NYC subway system, where it brought clarity to wayfinding in the 1970s.</p>
-            
-            <div class="project-meta">
-                <div class="meta-item">
-                    <span class="meta-label">Role</span>
-                    <span class="meta-value">Designer</span>
-                </div>
-                <div class="meta-item">
-                    <span class="meta-label">Timeline</span>
-                    <span class="meta-value">September 2025</span>
-                </div>
-                <div class="meta-item">
-                    <span class="meta-label">Tools</span>
-                    <span class="meta-value">Adobe InDesign</span>
-                </div>
-            </div>
-        </div>
+          <!-- Project Header -->
+          <div class="project-detail-header">
+              <h1>Helvetica Type Specimen</h1>
+              <p class="project-subtitle">This project explores Neue Helvetica's history, characteristics, and its transformative role in the NYC subway system, where it brought clarity to wayfinding in the 1970s.</p>
 
-        <!-- Hero Image -->
-        <div class="project-hero-image">
-            <img src="./images/postcard_mockup.jpg" alt="Postcard mockup">
-        </div>
+              <div class="project-meta">
+                  <div class="meta-item">
+                      <span class="meta-label">Role</span>
+                      <span class="meta-value">Designer</span>
+                  </div>
+                  <div class="meta-item">
+                      <span class="meta-label">Timeline</span>
+                      <span class="meta-value">September 2025</span>
+                  </div>
+                  <div class="meta-item">
+                      <span class="meta-label">Tools</span>
+                      <span class="meta-value">Adobe InDesign</span>
+                  </div>
+              </div>
+          </div>
 
-        <div class="project-hero-image">
-            <img src="./images/postcard-mockup1.jpg" alt="Postcard mockup 1">
-        </div>
+          <!-- Hero Images -->
+          <div class="project-hero-image">
+              <img src="./images/postcard_mockup.jpg" alt="Postcard mockup">
+          </div>
 
-        <div class="project-hero-image">
-            <img src="./images/postcard_mockup2.jpg" alt="Postcard mockup 2">
-        </div>
+          <div class="project-hero-image">
+              <img src="./images/postcard-mockup1.jpg" alt="Postcard mockup 1">
+          </div>
 
-        <div class="project-images-grid">
-            <img src="./images/nyc.png" alt="Detail 1">
-            <img src="./images/nyc1.png" alt="Detail 2">
-            <img src="./images/nyc2.png" alt="Detail 3">
-            <img src="./images/nyc3.png" alt="Detail 4">
-            <img src="./images/nyc4.png" alt="Detail 5">
-            <img src="./images/nyc5.png" alt="Detail 6">
-        </div>
+          <div class="project-hero-image">
+              <img src="./images/postcard_mockup2.jpg" alt="Postcard mockup 2">
+          </div>
 
-        <footer id="contact">
-            <div class="social-links">
-                <a href="mailto:yoon.ash@northeastern.edu">Email</a>
-                <a href="https://github.com/ashleyoon" target="_blank">GitHub</a>
-                <a href="https://www.linkedin.com/in/ashleyooon/" target="_blank">LinkedIn</a>
-            </div>
-        </footer>
-    </main>
+          <div class="project-images-grid">
+              <img src="./images/nyc.png" alt="Detail 1">
+              <img src="./images/nyc1.png" alt="Detail 2">
+              <img src="./images/nyc2.png" alt="Detail 3">
+              <img src="./images/nyc3.png" alt="Detail 4">
+              <img src="./images/nyc4.png" alt="Detail 5">
+              <img src="./images/nyc5.png" alt="Detail 6">
+          </div>
+
+      </div>
+    </div>
 
     <!-- Lightbox -->
     <div class="lightbox" id="lightbox">
@@ -88,72 +67,54 @@
     </div>
 
     <script>
-        const hamburger = document.getElementById('hamburger');
-        const navLinks = document.getElementById('navLinks');
-
-        hamburger.addEventListener('click', () => {
-            navLinks.classList.toggle('active');
-        });
-
-        navLinks.querySelectorAll('a').forEach(link => {
-            link.addEventListener('click', () => {
-                navLinks.classList.remove('active');
-            });
-        });
+        // Live clock
+        function updateTime() {
+            const el = document.getElementById('liveTime');
+            if (el) el.textContent = new Date().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+        }
+        updateTime();
+        setInterval(updateTime, 1000);
 
         // Custom cursor
         const cursor = document.querySelector('.custom-cursor');
-        
+
         document.addEventListener('mousemove', (e) => {
             cursor.style.left = e.clientX + 'px';
             cursor.style.top = e.clientY + 'px';
         });
 
-        // Make cursor bigger on hover over links and images
-        const hoverElements = document.querySelectorAll('a, button, .lightbox-close, .project-images-grid img, .project-hero-image img');
-        
-        hoverElements.forEach(element => {
-            element.addEventListener('mouseenter', () => {
-                cursor.classList.add('hover');
-            });
-            
-            element.addEventListener('mouseleave', () => {
-                cursor.classList.remove('hover');
-            });
+        document.querySelectorAll('a, button, .lightbox-close, .project-images-grid img, .project-hero-image img').forEach(element => {
+            element.addEventListener('mouseenter', () => cursor.classList.add('hover'));
+            element.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
         });
 
         // Lightbox functionality
         const lightbox = document.getElementById('lightbox');
         const lightboxImg = document.getElementById('lightbox-img');
         const lightboxClose = document.querySelector('.lightbox-close');
-        
-        // Add click event to all images in the grid and hero images
-        document.querySelectorAll('.project-images-grid img, .project-hero-image img, nav-links img').forEach(img => {
+
+        document.querySelectorAll('.project-images-grid img, .project-hero-image img').forEach(img => {
             img.addEventListener('click', () => {
                 lightbox.style.display = 'flex';
                 lightboxImg.src = img.src;
             });
         });
-        
-        // Close lightbox when clicking the X
+
         lightboxClose.addEventListener('click', () => {
             lightbox.style.display = 'none';
         });
-        
-        // Close lightbox when clicking outside the image
+
         lightbox.addEventListener('click', (e) => {
             if (e.target === lightbox) {
                 lightbox.style.display = 'none';
             }
         });
 
-        // Close lightbox with ESC key
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape' && lightbox.style.display === 'flex') {
                 lightbox.style.display = 'none';
             }
         });
-
     </script>
 </body>
 </html>

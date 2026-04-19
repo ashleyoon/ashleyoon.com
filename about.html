@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>About - Ashley Yoon</title>
+    <link
+      rel="icon"
+      type="image/png"
+      href="/images/favicon-128x128.png"
+      sizes="96x96"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="custom-cursor"></div>
+
+    <div class="about-page">
+      <div class="about-page-inner">
+        <a href="/" class="back-button"></a>
+
+        <div class="about-intro" style="margin-bottom: 4rem">
+          <div class="about-blurb">
+            <p>
+              Ashley is a product and UX designer who leads with people first.
+              Currently pursuing her degree, she builds interfaces that are
+              intuitive, inclusive, and crafted with the kind of care that makes
+              users feel genuinely considered.
+            </p>
+            <br />
+            <p>
+              Outside of design, Ashley finds inspiration in music, film,
+              travel, and new people. She's a collector of perspectives, and it
+              comes through in everything she creates.
+            </p>
+          </div>
+          <img
+            src="/images/BabyPic.png"
+            alt="Ashley Yoon"
+            class="about-photo"
+          />
+        </div>
+
+        <div class="extracurriculars">
+          <p
+            class="sidebar-section-label"
+            style="
+              margin-bottom: 1.5rem;
+              font-size: 0.85rem;
+              text-transform: uppercase;
+              letter-spacing: 0;
+              font-family: &quot;IBM Plex Mono&quot;, monospace;
+            "
+          >
+            Involvement...
+          </p>
+
+          <div class="extra-item">
+            <div class="extra-header">
+              <a
+                href="https://www.khoury.northeastern.edu/current-undergraduate-students/khoury-undergraduate-student-advisory-board/"
+                target="_blank"
+                class="extra-title extra-link"
+                >Khoury Undergraduate Student Advisory Board</a
+              >
+              <span class="extra-tag">Northeastern University</span>
+            </div>
+            <p class="extra-desc">
+              Representing the undergraduate student body, collaborating with
+              faculty and staff, and advocating for a stronger college
+              experience.
+            </p>
+          </div>
+
+          <div class="extra-item">
+            <div class="extra-header">
+              <a
+                href="https://www.c4cneu.com/"
+                target="_blank"
+                class="extra-title extra-link"
+                >Code4Community</a
+              >
+              <span class="extra-tag">Student Organization</span>
+            </div>
+            <p class="extra-desc">
+              Student-run initiative delivering free software to local
+              nonprofits. As design lead, set design vision, ensured product
+              consistency, and mentored a growing team of designers.
+            </p>
+          </div>
+
+          <div class="extra-item">
+            <div class="extra-header">
+              <a
+                href="https://coe.northeastern.edu/orgs/ecoscholars/"
+                target="_blank"
+                class="extra-title extra-link"
+                >EcoScholars</a
+              >
+              <span class="extra-tag">Community Outreach</span>
+            </div>
+            <p class="extra-desc">
+              Visiting elementary schools to teach kids about the environment
+              through hands-on crafts and activities.
+            </p>
+          </div>
+
+          <div class="extra-item">
+            <div class="extra-header">
+              <a
+                href="https://northeastern.badges.parchment.com/public/credentials/CAGBrN7ETLmg2yQs7buxiQ?identity__email=yoon.ash@northeastern.edu"
+                target="_blank"
+                class="extra-title extra-link"
+                >Blueprint Leadership Badge</a
+              >
+              <span class="extra-tag">Issued Dec 2025</span>
+            </div>
+            <p class="extra-desc">
+              Completed 8 weekly leadership workshops exploring accessibility,
+              experiential learning, justice, and interdependence to develop a
+              personal leadership blueprint.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const cursor = document.querySelector(".custom-cursor");
+      document.addEventListener("mousemove", (e) => {
+        cursor.style.left = e.clientX + "px";
+        cursor.style.top = e.clientY + "px";
+      });
+      document.querySelectorAll("a, button").forEach((el) => {
+        el.addEventListener("mouseenter", () => cursor.classList.add("hover"));
+        el.addEventListener("mouseleave", () =>
+          cursor.classList.remove("hover"),
+        );
+      });
+    </script>
+  </body>
+</html>

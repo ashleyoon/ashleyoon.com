@@ -5,15 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Ashley Yoon</title>
 
-    <!-- Favicon -->
     <link
       rel="icon"
       type="image/png"
-      href="/images/favicon-96x96.png"
+      href="/images/favicon-128x128.png"
       sizes="96x96"
     />
-    <link rel="icon" type="image/svg+xml" href="/images/favicon.svg" />
-    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="icon" type="image/svg+xml" href= />
+    <link rel="shortcut icon" href= />
     <link
       rel="apple-touch-icon"
       sizes="180x180"
@@ -25,189 +24,190 @@
   <body>
     <div class="custom-cursor"></div>
 
-    <nav>
-      <a href="/" class="logo">
-        <img src="/images/favicon.svg" />
-      </a>
-      <div class="hamburger" id="hamburger">
-        <span></span>
-        <span></span>
-        <span></span>
-      </div>
-      <ul class="nav-links" id="navLinks">
-        <li><a href="/">Home</a></li>
-        <li><a href="/projects.html">Projects</a></li>
-        <li>
-          <a href="images/Ashley_Yoon_Resume.pdf" target="_blank">Resume</a>
-        </li>
-      </ul>
-    </nav>
+    <div class="layout">
+      <!-- ===== LEFT SIDEBAR ===== -->
+      <aside class="sidebar">
+        <div class="sidebar-inner">
+          <div class="sidebar-bio">
+            <img src="/images/AshleyYoonLogo.webp" alt="Ashley Yoon" class="sidebar-avatar" />
+            <p>
+              An aspiring designer with a love for beautiful,
+              purposeful work. 
+            </p>
+            <p>
+              Currently studying Computer Science and Design
+             @ Northeastern University
+            </p>
+          </div>
 
-    <main class="home-container">
-      <div class="profile-section">
-        <div class="profile-header">
-          <div class="profile-image">
-            <img src="/images/Frame 2.png" />
+          <nav class="sidebar-nav">
+            <p class="sidebar-section-label">Table of Contents</p>
+            <ol class="sidebar-list">
+              <li>
+                <a href="about.html" class="sidebar-link">
+                  <span class="sidebar-num">01.</span>
+                  <span class="sidebar-link-text">About Me</span>
+                  <span class="sidebar-arrow"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></span>
+                </a>
+              </li>
+              <li>
+                <a href="work.html" class="sidebar-link">
+                  <span class="sidebar-num">02.</span>
+                  <span class="sidebar-link-text">Work</span>
+                  <span class="sidebar-arrow"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></span>
+                </a>
+              </li>
+            </ol>
+
+            <p class="sidebar-section-label" style="margin-top: 1rem">Contact</p>
+            <ol class="sidebar-list" start="4">
+              <li>
+                <a href="mailto:yoon.ash@northeastern.edu" class="sidebar-link">
+                  <span class="sidebar-num">04.</span>
+                  <span class="sidebar-link-text">Email</span>
+                  <span class="sidebar-arrow"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></span>
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://www.linkedin.com/in/ashleyooon/"
+                  target="_blank"
+                  class="sidebar-link"
+                >
+                  <span class="sidebar-num">05.</span>
+                  <span class="sidebar-link-text">LinkedIn</span>
+                  <span class="sidebar-arrow"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></span>
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://github.com/ashleyoon"
+                  target="_blank"
+                  class="sidebar-link"
+                >
+                  <span class="sidebar-num">06.</span>
+                  <span class="sidebar-link-text">GitHub</span>
+                  <span class="sidebar-arrow"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></span>
+                </a>
+              </li>
+              <li>
+                <a
+                  href="images/Ashley_Yoon_Resume.pdf"
+                  target="_blank"
+                  class="sidebar-link"
+                >
+                  <span class="sidebar-num">07.</span>
+                  <span class="sidebar-link-text">Resume</span>
+                  <span class="sidebar-arrow"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></span>
+                </a>
+              </li>
+            </ol>
+          </nav>
+
+          <div class="sidebar-footer">
+            <span class="live-time" id="liveTime"></span>
           </div>
         </div>
+      </aside>
 
-        <div class="about-text">
-          <h1>
-            An aspiring
-            <span class="highlight rotating-text">product designer</span>
-            passionate about creating beautiful and functional digital
-            experiences.
-          </h1>
+      <!-- ===== RIGHT PANEL ===== -->
+      <main class="main-content">
+        <!-- Work section -->
+        <section id="work" class="content-block">
+          <div class="projects-grid">
+            <div class="project-card project-card--coming-soon">
+              <div class="project-card-image project-card-image--empty"></div>
+              <div class="project-card-info">
+                <div class="project-card-top">
+                  <h3>Coming Soon</h3>
+                </div>
+                <p>Something new in the works.</p>
+                <div class="project-tags">
+                  <span>TBD</span>
+                  <span>2025</span>
+                </div>
+              </div>
+            </div>
 
-          <p>Computer Science and Design @ Northeastern University.</p>
-        </div>
-      </div>
+            <a href="project1.html" class="project-card">
+              <div class="project-card-image">
+                <video autoplay muted loop playsinline style="object-position: 30% center;">
+                  <source src="/images/P2P.mp4" type="video/mp4">
+                </video>
+              </div>
+              <div class="project-card-info">
+                <div class="project-card-top">
+                  <h3>Page to Pillow</h3>
+                  <span class="project-card-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></span>
+                </div>
+                <p>
+                  A wellness app designed to help users wind down through
+                  bedtime reading and relaxation.
+                </p>
+                <div class="project-tags">
+                  <span>Product Design</span>
+                  <span>2025</span>
+                </div>
+              </div>
+            </a>
 
-      <footer id="contact">
-        <div class="social-links">
-          <a href="mailto:yoon.ash@northeastern.edu">Email</a>
-          <a href="https://github.com/ashleyoon" target="_blank">GitHub</a>
-          <a href="https://www.linkedin.com/in/ashleyooon/" target="_blank"
-            >LinkedIn</a
-          >
-        </div>
-      </footer>
-    </main>
+          </div>
 
     <!-- Lightbox -->
     <div class="lightbox" id="lightbox">
-      <span class="lightbox-close">&times;</span>
+      <span class="lightbox-close" id="lightboxClose">&times;</span>
       <img class="lightbox-content" id="lightbox-img" alt="Enlarged view" />
     </div>
 
     <script>
-      // Rotating text effect - typing animation
-      const roles = [
-        "product designer",
-        "ui/ux designer",
-        "graphic designer",
-        "visual designer",
-        "brand designer",
-      ];
-
-      let currentRoleIndex = 0;
-      let currentCharIndex = 0;
-      let isDeleting = false;
-      const rotatingText = document.querySelector(".rotating-text");
-
-      function typeText() {
-        if (!rotatingText) return;
-
-        const currentRole = roles[currentRoleIndex];
-
-        if (isDeleting) {
-          // Remove character
-          rotatingText.textContent = currentRole.substring(
-            0,
-            currentCharIndex - 1,
-          );
-          currentCharIndex--;
-
-          if (currentCharIndex === 0) {
-            isDeleting = false;
-            currentRoleIndex = (currentRoleIndex + 1) % roles.length;
-            setTimeout(typeText, 500); // Pause before typing next
-            return;
-          }
-        } else {
-          // Add character
-          rotatingText.textContent = currentRole.substring(
-            0,
-            currentCharIndex + 1,
-          );
-          currentCharIndex++;
-
-          if (currentCharIndex === currentRole.length) {
-            isDeleting = true;
-            setTimeout(typeText, 2000); // Pause on complete word
-            return;
-          }
-        }
-
-        setTimeout(typeText, isDeleting ? 50 : 100); // Speed of typing/deleting
+      // Live clock
+      function updateTime() {
+        const el = document.getElementById("liveTime");
+        if (el)
+          el.textContent = new Date().toLocaleTimeString("en-US", {
+            hour: "2-digit",
+            minute: "2-digit",
+            second: "2-digit",
+          });
       }
-
-      // Start the animation
-      if (rotatingText) {
-        typeText();
-      }
-
-      const hamburger = document.getElementById("hamburger");
-      const navLinks = document.getElementById("navLinks");
-
-      hamburger.addEventListener("click", () => {
-        navLinks.classList.toggle("active");
-      });
-
-      navLinks.querySelectorAll("a").forEach((link) => {
-        link.addEventListener("click", () => {
-          navLinks.classList.remove("active");
-        });
-      });
+      updateTime();
+      setInterval(updateTime, 1000);
 
       // Custom cursor
       const cursor = document.querySelector(".custom-cursor");
-
       document.addEventListener("mousemove", (e) => {
         cursor.style.left = e.clientX + "px";
         cursor.style.top = e.clientY + "px";
       });
+      document.querySelectorAll("a, button").forEach((el) => {
+        el.addEventListener("mouseenter", () => cursor.classList.add("hover"));
+        el.addEventListener("mouseleave", () =>
+          cursor.classList.remove("hover"),
+        );
+      });
 
-      // Make cursor bigger on hover over links
-      const hoverElements = document.querySelectorAll(
-        "a, button, .project-card",
-      );
-
-      hoverElements.forEach((element) => {
-        element.addEventListener("mouseenter", () => {
-          cursor.classList.add("hover");
-        });
-
-        element.addEventListener("mouseleave", () => {
-          cursor.classList.remove("hover");
+      // Smooth scroll for TOC links
+      document.querySelectorAll('.sidebar-link[href^="#"]').forEach((link) => {
+        link.addEventListener("click", (e) => {
+          e.preventDefault();
+          const target = document.querySelector(link.getAttribute("href"));
+          if (target) target.scrollIntoView({ behavior: "smooth" });
         });
       });
 
-      // Lightbox functionality
+      // Lightbox
       const lightbox = document.getElementById("lightbox");
       const lightboxImg = document.getElementById("lightbox-img");
-      const lightboxClose = document.querySelector(".lightbox-close");
-
-      // Add click event to all images in the grid and hero images
-      document
-        .querySelectorAll(
-          ".project-images-grid img, .project-hero-image img",
-          ".onboarding-images-grid img",
-        )
-        .forEach((img) => {
-          img.addEventListener("click", () => {
-            lightbox.style.display = "flex";
-            lightboxImg.src = img.src;
-          });
-        });
-
-      // Close lightbox when clicking the X
-      lightboxClose.addEventListener("click", () => {
-        lightbox.style.display = "none";
-      });
-
-      // Close lightbox when clicking outside the image
+      const lightboxClose = document.getElementById("lightboxClose");
+      lightboxClose.addEventListener(
+        "click",
+        () => (lightbox.style.display = "none"),
+      );
       lightbox.addEventListener("click", (e) => {
-        if (e.target === lightbox) {
-          lightbox.style.display = "none";
-        }
+        if (e.target === lightbox) lightbox.style.display = "none";
       });
-
-      // Close lightbox with ESC key
       document.addEventListener("keydown", (e) => {
-        if (e.key === "Escape" && lightbox.style.display === "flex") {
-          lightbox.style.display = "none";
-        }
+        if (e.key === "Escape") lightbox.style.display = "none";
       });
     </script>
   </body>
