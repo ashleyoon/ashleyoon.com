@@ -254,7 +254,7 @@ img {
 
 .about-blurb p {
     font-size: 0.85rem;
-    color: var(--muted);
+    color: var(--text);
     line-height: 1.85;
     max-width: 540px;
 }
@@ -441,7 +441,7 @@ img {
 
 .extra-tag {
     font-size: 0.72rem;
-    color: var(--muted);
+    color: var(--text);
     white-space: nowrap;
     font-family: 'IBM Plex Mono', monospace;
     text-transform: uppercase;
@@ -449,7 +449,7 @@ img {
 
 .extra-desc {
     font-size: 0.78rem;
-    color: var(--muted);
+    color: var(--text);
     line-height: 1.75;
     max-width: 560px;
     margin-top: 0.3rem;
