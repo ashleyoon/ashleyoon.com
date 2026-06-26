@@ -119,7 +119,7 @@ img {
 /* Bio paragraphs */
 .sidebar-bio p {
     font-size: 0.74rem;
-    color: var(--muted);
+    color: var(--text);
     line-height: 1.85;
     margin-bottom: 0.9rem;
 }
@@ -139,7 +139,7 @@ img {
     font-size: 0.74rem;
     font-weight: 600;
     letter-spacing: 0.05em;
-    color: var(--muted);
+    color: var(--text);
     margin-bottom: 0.3rem;
 }
 
@@ -157,7 +157,7 @@ img {
     padding: 0.3rem 0;
     font-family: var(--sans);
     font-size: 0.74rem;
-    color: var(--muted);
+    color: var(--text);
     transition: color 0.2s ease;
 }
 
@@ -167,7 +167,7 @@ img {
 
 .sidebar-num {
     font-size: 0.62rem;
-    color: var(--muted);
+    color: var(--text);
     flex-shrink: 0;
     font-variant-numeric: tabular-nums;
 }
@@ -196,7 +196,7 @@ img {
 .live-time {
     font-family: 'IBM Plex Mono', monospace;
     font-size: 0.74rem;
-    color: var(--muted);
+    color: var(--text);
     text-transform: uppercase;
 }
 
@@ -343,7 +343,7 @@ img {
 
 .project-card-info p {
     font-size: 0.78rem;
-    color: var(--muted);
+    color: var(--text);
     line-height: 1.6;
 }
 
@@ -359,7 +359,7 @@ img {
     font-size: 0.62rem;
     letter-spacing: 0.08em;
     text-transform: uppercase;
-    color: var(--muted);
+    color: var(--text);
     border: 1px solid var(--border);
     padding: 0.15rem 0.45rem;
 }
