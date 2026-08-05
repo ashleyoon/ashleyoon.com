@@ -118,7 +118,7 @@ img {
 
 /* Bio paragraphs */
 .sidebar-bio p {
-    font-size: 0.74rem;
+    font-size: 0.82rem;
     color: var(--text);
     line-height: 1.85;
     margin-bottom: 0.9rem;
@@ -136,7 +136,7 @@ img {
 
 .sidebar-section-label {
     font-family: var(--sans);
-    font-size: 0.74rem;
+    font-size: 0.82rem;
     font-weight: 600;
     letter-spacing: 0.05em;
     color: var(--text);
@@ -156,7 +156,7 @@ img {
     gap: 0.55rem;
     padding: 0.3rem 0;
     font-family: var(--sans);
-    font-size: 0.74rem;
+    font-size: 0.82rem;
     color: var(--text);
     transition: color 0.2s ease;
 }
@@ -166,7 +166,7 @@ img {
 }
 
 .sidebar-num {
-    font-size: 0.62rem;
+    font-size: 0.68rem;
     color: var(--text);
     flex-shrink: 0;
     font-variant-numeric: tabular-nums;
@@ -195,7 +195,7 @@ img {
 
 .live-time {
     font-family: 'IBM Plex Mono', monospace;
-    font-size: 0.74rem;
+    font-size: 0.82rem;
     color: var(--text);
     text-transform: uppercase;
 }
