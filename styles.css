@@ -31,13 +31,12 @@ body {
     line-height: 1.6;
     font-size: 14px;
     font-weight: 300;
-    cursor: none;
 }
 
 a, button {
     color: inherit;
     text-decoration: none;
-    cursor: none;
+    cursor: pointer;
 }
 
 img {
@@ -49,6 +48,7 @@ img {
    CURSOR
 ---------------------------------------- */
 .custom-cursor {
+    display: none;
     width: 12px;
     height: 12px;
     border-radius: 50%;
@@ -270,7 +270,11 @@ img {
     display: flex;
     flex-direction: column;
     gap: 0;
-    overflow: hidden;
+    transition: transform 0.35s ease;
+}
+
+.project-card:hover {
+    transform: translateY(-6px);
 }
 
 .project-card-image {
@@ -279,6 +283,11 @@ img {
     overflow: hidden;
     background: #E8E3DC;
     border-radius: 16px;
+    transition: box-shadow 0.35s ease;
+}
+
+.project-card:hover .project-card-image {
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
 }
 
 .project-card--coming-soon {
@@ -299,12 +308,14 @@ img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    transform: scale(1.08);
     transition: transform 0.5s ease, filter 0.4s ease;
     filter: grayscale(10%);
 }
 
-.project-card:hover .project-card-image img {
-    transform: scale(1.03);
+.project-card:hover .project-card-image img,
+.project-card:hover .project-card-image video {
+    transform: scale(1);
     filter: grayscale(0%);
 }
 
@@ -462,7 +473,7 @@ img {
 }
 
 .project-detail-inner {
-    max-width: 860px;
+    max-width: 1150px;
     margin: 0 auto;
     padding-top: 0;
     padding-bottom: 6rem;
@@ -475,7 +486,7 @@ img {
     font-size: 0.72rem;
     letter-spacing: 0.1em;
     text-transform: uppercase;
-    color: var(--muted);
+    color: rgb(84, 84, 84);
     margin-bottom: 3.5rem;
     transition: color 0.2s ease, gap 0.2s ease;
 }
@@ -492,6 +503,29 @@ img {
     gap: 0.8rem;
 }
 
+/* Bare chevron back arrow (no circle) */
+.back-button--circle {
+    padding: 0;
+    gap: 0;
+    color: rgb(84, 84, 84);
+    transition: transform 0.18s ease, color 0.18s ease;
+}
+
+.back-button--circle::before {
+    content: none;
+}
+
+.back-button--circle svg {
+    width: 19px;
+    height: 19px;
+}
+
+.back-button--circle:hover {
+    color: var(--text);
+    gap: 0;
+    transform: translateX(-3px);
+}
+
 .project-detail-header {
     margin-bottom: 2rem;
     padding-bottom: 1.5rem;
@@ -499,17 +533,17 @@ img {
 
 .project-detail-header h1 {
     font-family: var(--sans);
-    font-size: clamp(2.2rem, 5vw, 3.5rem);
-    font-weight: 300;
+    font-size: clamp(2rem, 4.4vw, 3rem);
+    font-weight: 500;
     letter-spacing: -0.02em;
     line-height: 1.15;
     margin-bottom: 1rem;
 }
 
 .project-subtitle {
-    font-size: 0.85rem;
-    color: var(--muted);
-    line-height: 1.8;
+    font-size: 1.05rem;
+    color: rgb(84, 84, 84);
+    line-height: 1.65;
     max-width: 100%;
     margin-bottom: 1.8rem;
 }
@@ -541,30 +575,41 @@ img {
 }
 
 .project-links-header {
-    display: flex;
+    display: inline-flex;
     gap: 0.8rem;
     flex-wrap: wrap;
+
+    /* Grey field sized to the button. A subtle two-tone gradient (not a flat
+       fill) keeps variation behind the glass so the frosted blur still reads.
+       Swap this for your real content/background whenever you like. */
+    padding: 0;
+    border-radius: 999px;
+    background: linear-gradient(135deg, #e3e3e8 0%, #f4f4f6 52%, #dedee4 100%);
 }
 
 .btn-primary, .btn-secondary {
-    padding: 0.6rem 1.4rem;
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 0.72rem;
-    letter-spacing: 0.1em;
-    border-radius: 6px;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.7rem 1.6rem;
+    font-family: var(--sans);
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    border-radius: 999px;
     text-transform: uppercase;
-    transition: all 0.2s ease;
-    display: inline-block;
+    transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
 }
 
 .btn-primary {
-    background: #fff;
+    background: transparent;
     color: var(--text);
-    border: 1px solid #D0CECE;
+    border: 1.5px solid var(--text);
 }
 
 .btn-primary:hover {
-    border-color: var(--text);
+    background: var(--text);
+    color: #fff;
 }
 
 .btn-secondary {
@@ -575,6 +620,97 @@ img {
 .btn-secondary:hover {
     border-color: var(--text);
     color: var(--text);
+}
+
+/* Apple-style Liquid Glass button (translucent + frosted) */
+.btn-soft {
+    /* Tweakable design tokens */
+    --glass-alpha: 0.14;                         /* fill translucency — raise for lighter glass */
+    --glass-fill: rgba(255, 255, 255, var(--glass-alpha));
+    --glass-fill-hover: rgba(255, 255, 255, 0.24);
+    --glass-blur: 18px;
+    --glass-border: rgba(255, 255, 255, 0.4);
+    --glass-highlight: rgba(255, 255, 255, 0.65);
+    --glass-lowlight: rgba(0, 0, 0, 0.14);
+    --glass-shadow: rgba(0, 0, 0, 0.07);
+    --glass-text: #1c1c1e;
+    --glass-focus: rgba(255, 255, 255, 0.9);
+
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.9rem;
+    padding: 0.5rem 0.5rem 0.5rem 2.2rem;
+    border-radius: 999px;
+    background: var(--glass-fill);
+    -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(180%);
+    backdrop-filter: blur(var(--glass-blur)) saturate(180%);
+    color: var(--glass-text);
+    font-family: var(--sans);
+    font-size: 1rem;
+    font-weight: 450;
+    letter-spacing: 0.005em;
+    border: 1px solid var(--glass-border);
+    box-shadow:
+        0 6px 16px var(--glass-shadow),
+        inset 0 1px 1px var(--glass-highlight),
+        inset 0 -1px 1px var(--glass-lowlight);
+    transition: box-shadow 0.18s ease, transform 0.18s ease, background 0.18s ease;
+}
+
+.btn-soft-label {
+    line-height: 1;
+    padding-bottom: 1px;
+}
+
+/* Circular arrow — same glass material */
+.btn-soft-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    background: var(--glass-fill);
+    -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(180%);
+    backdrop-filter: blur(var(--glass-blur)) saturate(180%);
+    border: 1px solid var(--glass-border);
+    color: var(--glass-text);
+    box-shadow:
+        inset 0 1px 1px var(--glass-highlight),
+        inset 0 -1px 1px var(--glass-lowlight);
+}
+
+.btn-soft-icon svg {
+    width: 15px;
+    height: 15px;
+}
+
+.btn-soft:hover {
+    transform: translateY(-1px);
+    background: var(--glass-fill-hover);
+    box-shadow:
+        0 10px 22px var(--glass-shadow),
+        inset 0 1px 1px var(--glass-highlight),
+        inset 0 -1px 1px var(--glass-lowlight);
+}
+
+.btn-soft:active {
+    transform: translateY(0);
+    box-shadow:
+        0 4px 10px var(--glass-shadow),
+        inset 0 2px 6px var(--glass-lowlight),
+        inset 0 1px 1px var(--glass-highlight);
+}
+
+.btn-soft:focus-visible {
+    outline: none;
+    box-shadow:
+        0 14px 34px var(--glass-shadow),
+        inset 0 1px 1px var(--glass-highlight),
+        inset 0 -1px 1px var(--glass-lowlight),
+        0 0 0 3px var(--glass-focus);
 }
 
 /* Hero image */
@@ -589,6 +725,67 @@ img {
     cursor: zoom-in;
 }
 
+/* Let header and content fill the case-study column width */
+.project-detail-header,
+.project-detail-content {
+    max-width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Tighten the gap between a full-bleed banner and the content below it */
+.project-banner + .about-page {
+    padding-top: 2rem;
+}
+
+/* Full-bleed filler banner placeholder (until a real banner image exists) */
+.project-banner {
+    width: 100%;
+    aspect-ratio: 16 / 3;
+    min-height: 130px;
+    background:
+        repeating-linear-gradient(45deg, #D8D2C9, #D8D2C9 24px, #CBC4BA 24px, #CBC4BA 48px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 0;
+    color: #6B6459;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.8rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+}
+
+/* Stacked metadata rows (case-study style) */
+.project-meta-stack {
+    margin: 2rem 0 2rem;
+    border-top: 1px solid var(--border);
+}
+
+.meta-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 2rem;
+    padding: 0.9rem 0;
+    border-bottom: 1px solid var(--border);
+}
+
+.meta-row .meta-label {
+    font-size: 0.65rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+    flex-shrink: 0;
+    min-width: 110px;
+}
+
+.meta-row .meta-value {
+    font-size: 0.85rem;
+    color: var(--text);
+    text-align: right;
+}
+
 /* Content sections */
 .project-detail-content {
     max-width: 100%;
@@ -599,18 +796,40 @@ img {
 }
 
 .content-section h2 {
-    font-family: var(--sans);
-    font-size: 1.5rem;
-    font-weight: 400;
-    margin-bottom: 0.9rem;
-    color: var(--text);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 1.05rem;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    margin-bottom: 1.1rem;
+    color: rgb(84, 84, 84);
 }
 
 .content-section p {
-    font-size: 0.85rem;
-    line-height: 1.9;
-    color: var(--muted);
-    margin-bottom: 0.9rem;
+    font-size: 1.05rem;
+    line-height: 1.65;
+    color: rgb(84, 84, 84);
+    margin-bottom: 1.1rem;
+}
+
+/* Apple-style large opening line */
+.content-section .lead {
+    font-size: clamp(1.35rem, 2.6vw, 1.7rem);
+    line-height: 1.35;
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    color: rgb(84, 84, 84);
+    margin-bottom: 1.4rem;
+}
+
+/* Big pull-statement for a key insight */
+.content-section .statement {
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    line-height: 1.3;
+    font-weight: 600;
+    letter-spacing: -0.025em;
+    color: rgb(84, 84, 84);
+    margin: 1.8rem 0;
 }
 
 /* Image grids */
@@ -649,7 +868,7 @@ img {
 .image-caption {
     text-align: center;
     font-size: 0.9rem;
-    color: var(--muted);
+    color: rgb(84, 84, 84);
     font-style: italic;
     margin-top: 0.5rem;
 }
@@ -699,12 +918,94 @@ img {
     font-size: 1rem;
     font-weight: 400;
     margin-bottom: 0.25rem;
+    color: rgb(84, 84, 84);
 }
 
 .screen-item p {
     font-size: 0.78rem;
-    color: var(--muted);
+    color: rgb(84, 84, 84);
     line-height: 1.5;
+}
+
+/* Apple-Weather-style stat cards */
+.stat-cards {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.1rem;
+    margin: 2rem 0 2.5rem;
+}
+
+.stat-card {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1.4rem;
+    padding: 1.8rem 1.6rem;
+    border-radius: 24px;
+    background: #fff;
+    box-shadow: 0 10px 30px rgba(17, 17, 17, 0.06),
+                0 2px 6px rgba(17, 17, 17, 0.04);
+    animation: statCardIn 0.5s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+.stat-card:nth-child(2) { animation-delay: 0.08s; }
+.stat-card:nth-child(3) { animation-delay: 0.16s; }
+
+@keyframes statCardIn {
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: none; }
+}
+
+.stat-viz {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+}
+
+.stat-text {
+    flex: 1;
+    min-width: 0;
+}
+
+.stat-viz svg { overflow: visible; }
+.viz-ring  { width: 132px; height: 132px; }
+.viz-gauge { width: 150px; }
+
+.viz-num {
+    font-family: var(--sans);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    fill: var(--text);
+}
+
+.viz-sub {
+    font-family: var(--sans);
+    font-weight: 600;
+    fill: rgb(150, 150, 150);
+}
+
+.stat-label {
+    font-size: 1rem;
+    line-height: 1.45;
+    color: rgb(84, 84, 84);
+}
+
+.stat-source {
+    font-size: 0.78rem;
+    color: rgb(150, 150, 150);
+    margin-top: 0.6rem;
+}
+
+@media (max-width: 720px) {
+    .stat-cards {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .stat-card { animation: none; }
 }
 
 /* Callout */
@@ -724,7 +1025,7 @@ img {
 
 .insight-callout p {
     font-size: 0.82rem;
-    color: var(--muted);
+    color: rgb(84, 84, 84);
     margin: 0;
     line-height: 1.75;
 }
@@ -893,7 +1194,7 @@ img {
     font-family: var(--sans);
     line-height: 1;
     transition: color 0.2s ease;
-    cursor: none;
+    cursor: pointer;
 }
 
 .lightbox-close:hover {

@@ -10,19 +10,29 @@
 <body>
     <div class="custom-cursor"></div>
 
+    <!-- Full-bleed banner (filler placeholder until a real banner image is ready) -->
+    <div class="project-banner">Banner Image Coming Soon</div>
+
     <div class="about-page">
       <div class="about-page-inner">
+        <div class="project-detail-inner">
           <!-- Back Button -->
-          <a href="/" class="back-button"></a>
+          <a href="/" class="back-button back-button--circle" aria-label="Back to home">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 6 9 12 15 18"/></svg>
+          </a>
 
           <!-- Project Header -->
           <div class="project-detail-header">
               <h1>Page to Pillow</h1>
-              <p class="project-subtitle">A wellness app that helps users wind down for sleep through personalized reading experiences. Combining smart sleep scheduling with curated book recommendations to help people with insomnia, busy schedules, and anyone who loves bedtime reading.</p>
-
+              <p class="project-subtitle">A wellness app that helps you wind down for sleep, pairing smart sleep scheduling with personalized book recommendations for better bedtime reading.</p>
 
               <div class="project-links-header">
-                  <a href="https://www.figma.com/proto/32SNyCSzkgurxfrGdzhYcX/SleepApp-Wireframe?node-id=1-2&p=f&t=Is3D1Wkpc7zIrSXq-1&scaling=scale-down&content-scaling=fixed&page-id=0%3A1&starting-point-node-id=1%3A2" target="_blank" class="btn-primary">View Figma Prototype</a>
+                  <a href="https://www.figma.com/proto/32SNyCSzkgurxfrGdzhYcX/SleepApp-Wireframe?node-id=1-2&p=f&t=Is3D1Wkpc7zIrSXq-1&scaling=scale-down&content-scaling=fixed&page-id=0%3A1&starting-point-node-id=1%3A2" target="_blank" class="btn-soft">
+                      <span class="btn-soft-label">Prototype</span>
+                      <span class="btn-soft-icon" aria-hidden="true">
+                          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 6 15 12 9 18"/></svg>
+                      </span>
+                  </a>
               </div>
           </div>
 
@@ -31,22 +41,63 @@
               <!-- Overview Section -->
               <section class="content-section">
                   <h2>Overview</h2>
-                  <p>In today's fast-paced world, many people struggle to fall asleep due to stress, anxiety, and excessive screen time before bed. While reading is a proven method to wind down, finding the right books and carving out time for reading remains a challenge.</p>
-                  <p>Page to Pillow bridges this gap by creating a dedicated space for bedtime reading. The app intelligently calculates optimal wind-down times based on users' schedules and sleep goals, while offering personalized book recommendations that match their preferences.</p>
+                  <p class="lead">We all sleep better when we wind down. We just can't find the time.</p>
+                  <p>Stress, late-night screens, and packed schedules make falling asleep hard. Reading is a proven way to slow down, but finding the right book, and the time to read it, is its own hurdle.</p>
+                  <p>Page to Pillow makes bedtime reading effortless. It calculates your ideal wind-down window from your schedule and sleep goals, then serves up books you'll actually want to open.</p>
               </section>
 
               <!-- Research & Discovery -->
               <section class="content-section">
                   <h2>Research & Discovery</h2>
-                  <p>Our research journey began with existing sleep scheduling apps, but we quickly realized this space was already saturated with solutions like Sleepytime and Rise. We pivoted to explore wind-down apps like BetterSleep, Calm, and Noisli, which focus on meditation and ambient sounds.</p>
+                  <p>We started with sleep schedulers like Sleepytime and Rise, then explored wind-down apps like Calm and BetterSleep. One insight reframed the whole project:</p>
 
-                  <p>However, our research revealed a critical insight: <strong>reading is the most effective research-backed method for winding down before bed.</strong> Unlike scrolling social media or watching videos, which increase brain activity, reading physically slows you down and improves sleep quality.</p>
+                  <p><strong>Reading is the most effective, research-backed way to wind down.</strong></p>
 
-                  <p>This presented our opportunity: the market had plenty of meditation apps and sleep calculators, but nothing that specifically addressed reading as a wind-down tool. By combining sleep scheduling with reading discovery, we could address two problems simultaneously, helping users both find time to read and improve their sleep quality.</p>
+                  <p>Unlike scrolling or watching, reading physically slows you down and improves sleep quality. Meditation apps and sleep calculators already existed, but nothing paired sleep scheduling with reading. That gap became Page to Pillow.</p>
 
-                  <div class="insight-callout">
-                      <p><strong>46% of U.S. adults didn't read a book in 2023</strong>, with "lack of time" as the primary reason. By integrating reading into bedtime routines, Page to Pillow helps users discover they actually do have time, while simultaneously improving their sleep quality.</p>
-                      <p class="source">Source: YouGov Survey, 2023</p>
+                  <div class="stat-cards">
+                      <!-- Reading Gap: progress ring at 46% -->
+                      <div class="stat-card">
+                          <div class="stat-viz">
+                              <svg class="viz-ring" viewBox="0 0 100 100" role="img" aria-label="46 percent">
+                                  <defs>
+                                      <linearGradient id="ringGrad1" x1="0" y1="0" x2="1" y2="1">
+                                          <stop offset="0" stop-color="#3AD9C9"/><stop offset="1" stop-color="#12B7A6"/>
+                                      </linearGradient>
+                                  </defs>
+                                  <circle cx="50" cy="50" r="40" fill="none" stroke="#EAF7F5" stroke-width="11"/>
+                                  <circle cx="50" cy="50" r="40" fill="none" stroke="url(#ringGrad1)" stroke-width="11"
+                                      stroke-linecap="round" stroke-dasharray="115.6 251.3" transform="rotate(-90 50 50)"/>
+                                  <text x="50" y="50" text-anchor="middle" dominant-baseline="central" class="viz-num" font-size="23">46%</text>
+                              </svg>
+                          </div>
+                          <div class="stat-text">
+                              <div class="stat-label">of U.S. adults didn't read a book in 2023, with "lack of time" the top reason</div>
+                              <div class="stat-source">Source: YouGov, 2023</div>
+                          </div>
+                      </div>
+
+                      <!-- Stress Relief: semicircular gauge at 68% -->
+                      <div class="stat-card">
+                          <div class="stat-viz">
+                              <svg class="viz-gauge" viewBox="0 0 100 60" role="img" aria-label="68 percent">
+                                  <defs>
+                                      <linearGradient id="gaugeGrad" x1="0" y1="0" x2="1" y2="0">
+                                          <stop offset="0" stop-color="#A7F3B0"/><stop offset="1" stop-color="#34C759"/>
+                                      </linearGradient>
+                                  </defs>
+                                  <path d="M8,50 A42,42 0 0 1 92,50" fill="none" stroke="#EDEDED" stroke-width="9" stroke-linecap="round"/>
+                                  <path d="M8,50 A42,42 0 0 1 72.5,14.5" fill="none" stroke="url(#gaugeGrad)" stroke-width="9" stroke-linecap="round"/>
+                                  <circle cx="72.5" cy="14.5" r="6.5" fill="#fff" stroke="#34C759" stroke-width="3"/>
+                                  <text x="50" y="44" text-anchor="middle" class="viz-num" font-size="21">68%</text>
+                              </svg>
+                          </div>
+                          <div class="stat-text">
+                              <div class="stat-label">less stress after just six minutes of reading, more than music or a walk</div>
+                              <div class="stat-source">Source: University of Sussex, 2009</div>
+                          </div>
+                      </div>
+
                   </div>
               </section>
 
@@ -99,13 +150,8 @@
               </div>
               </section>
 
-              <!-- Mockup/Image 3 -->
-              <div class="project-image-showcase">
-                  <img src="/images/Frame 1.png" alt="Wind down and reading interface">
-                  <p class="image-caption">Calming color palette optimized for nighttime use</p>
-              </div>
-
           </div>
+        </div>
 
 
       </div>
