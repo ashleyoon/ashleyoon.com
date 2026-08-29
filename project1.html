@@ -10,8 +10,10 @@
 <body>
     <div class="custom-cursor"></div>
 
-    <!-- Full-bleed banner (filler placeholder until a real banner image is ready) -->
-    <div class="project-banner">Banner Image Coming Soon</div>
+    <!-- Full-bleed banner -->
+    <div class="project-banner">
+        <img src="images/p2p.png" alt="Page to Pillow app screens on three phones">
+    </div>
 
     <div class="about-page">
       <div class="about-page-inner">
@@ -29,9 +31,6 @@
               <div class="project-links-header">
                   <a href="https://www.figma.com/proto/32SNyCSzkgurxfrGdzhYcX/SleepApp-Wireframe?node-id=1-2&p=f&t=Is3D1Wkpc7zIrSXq-1&scaling=scale-down&content-scaling=fixed&page-id=0%3A1&starting-point-node-id=1%3A2" target="_blank" class="btn-soft">
                       <span class="btn-soft-label">Prototype</span>
-                      <span class="btn-soft-icon" aria-hidden="true">
-                          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 6 15 12 9 18"/></svg>
-                      </span>
                   </a>
               </div>
           </div>
@@ -62,10 +61,10 @@
                               <svg class="viz-ring" viewBox="0 0 100 100" role="img" aria-label="46 percent">
                                   <defs>
                                       <linearGradient id="ringGrad1" x1="0" y1="0" x2="1" y2="1">
-                                          <stop offset="0" stop-color="#3AD9C9"/><stop offset="1" stop-color="#12B7A6"/>
+                                          <stop offset="0" stop-color="#E4E5FC"/><stop offset="1" stop-color="#6E72EC"/>
                                       </linearGradient>
                                   </defs>
-                                  <circle cx="50" cy="50" r="40" fill="none" stroke="#EAF7F5" stroke-width="11"/>
+                                  <circle cx="50" cy="50" r="40" fill="none" stroke="rgba(110, 114, 236, 0.15)" stroke-width="11"/>
                                   <circle cx="50" cy="50" r="40" fill="none" stroke="url(#ringGrad1)" stroke-width="11"
                                       stroke-linecap="round" stroke-dasharray="115.6 251.3" transform="rotate(-90 50 50)"/>
                                   <text x="50" y="50" text-anchor="middle" dominant-baseline="central" class="viz-num" font-size="23">46%</text>
@@ -83,12 +82,12 @@
                               <svg class="viz-gauge" viewBox="0 0 100 60" role="img" aria-label="68 percent">
                                   <defs>
                                       <linearGradient id="gaugeGrad" x1="0" y1="0" x2="1" y2="0">
-                                          <stop offset="0" stop-color="#A7F3B0"/><stop offset="1" stop-color="#34C759"/>
+                                          <stop offset="0" stop-color="#E1EDFF"/><stop offset="1" stop-color="#5099FF"/>
                                       </linearGradient>
                                   </defs>
-                                  <path d="M8,50 A42,42 0 0 1 92,50" fill="none" stroke="#EDEDED" stroke-width="9" stroke-linecap="round"/>
+                                  <path d="M8,50 A42,42 0 0 1 92,50" fill="none" stroke="rgba(80, 153, 255, 0.15)" stroke-width="9" stroke-linecap="round"/>
                                   <path d="M8,50 A42,42 0 0 1 72.5,14.5" fill="none" stroke="url(#gaugeGrad)" stroke-width="9" stroke-linecap="round"/>
-                                  <circle cx="72.5" cy="14.5" r="6.5" fill="#fff" stroke="#34C759" stroke-width="3"/>
+                                  <circle cx="72.5" cy="14.5" r="6.5" fill="#fff" stroke="#5099FF" stroke-width="3"/>
                                   <text x="50" y="44" text-anchor="middle" class="viz-num" font-size="21">68%</text>
                               </svg>
                           </div>
@@ -104,48 +103,76 @@
               <!-- Onboarding Images Grid -->
               <section class="content-section">
               <h2>Onboarding Flow</h2>
-              <p>Users input their schedule, sleep goals, and reading preferences to personalize their experience</p>
+              <p>Users input their favorite genres, sleep goals, and reading preferences to personalize their experience</p>
               </section>
 
               <div class="onboarding-images-grid">
               <div class="onboarding-item">
-              <img src="images/onboarding.png" alt="Welcome screen">
+              <div class="phone-frame">
+              <div class="phone-notch"></div>
+              <div class="phone-screen">
+              <img src="images/onboarding.png" alt="Reading preferences selection">
+              </div>
+              </div>
               </div>
               <div class="onboarding-item">
-              <img src="images/onboarding1.png" alt="Schedule input">
+              <div class="phone-frame">
+              <div class="phone-notch"></div>
+              <div class="phone-screen">
+              <img src="images/onboarding1.png" alt="Wake-up time and sleep goal">
+              </div>
+              </div>
               </div>
               <div class="onboarding-item">
-              <img src="images/onboarding2.png" alt="Sleep goals">
+              <div class="phone-frame">
+              <div class="phone-notch"></div>
+              <div class="phone-screen">
+              <img src="images/onboarding2.png" alt="Wind-down duration">
+              </div>
+              </div>
               </div>
               <div class="onboarding-item">
-              <img src="images/onboarding3.png" alt="Reading preferences">
+              <div class="phone-frame">
+              <div class="phone-notch"></div>
+              <div class="phone-screen">
+              <img src="images/onboarding3.png" alt="Tonight's pick">
+              </div>
+              </div>
               </div>
               <div class="onboarding-item">
-              <img src="images/onboarding4.png" alt="Setup complete">
+              <div class="phone-frame">
+              <div class="phone-notch"></div>
+              <div class="phone-screen">
+              <img src="images/onboarding4.png" alt="Reminder setup">
+              </div>
+              </div>
               </div>
               </div>
 
-              <!-- Solution Section -->
+              <section class="content-section">
+              <h2>Home & Reading Loop</h2>
+              <p>This is the daily home screen for someone already settled into the app. The morning view reports last night's reading as minutes read against a personal reading goal (a lightweight, guilt-free measure of the habit rather than a sleep score the app has no real way to verify). Directly below, it resumes the book you're in the middle of and previews when tonight's wind-down window opens, so the next action is always one tap away.</p>
+              <p>The heart of the app is the reading loop. In the Books library you browse everything available to read and save titles to lists for later, then choose one as tonight's wind-down book. Once it's set, a notification arrives at your personal wind-down time and takes you straight to the Wind-Down screen, where you can read the book, or switch to its audiobook when your eyes are too tired to read. The reminder is the mechanism that turns "I should read more" into actually opening the book, timed to the exact moment your evening should slow down.</p>
+              </section>
 
-              <div class="app-screens-grid">
-              <div class="screen-item">
-              <img src="/images/P2P2.jpg" alt="Home page showing sleep tracking">
-              <h4>Home</h4>
+              <section class="content-section">
+              <h2>Planned Features</h2>
+              <div class="features-grid">
+              <div class="feature-item">
+              <h3>Reading goals & progress</h3>
+              <p>A nightly minutes target with streak-free, low-pressure feedback (the ring/goal the home screen is designed around).</p>
               </div>
-
-              <div class="screen-item">
-              <img src="/images/P2P3.jpg" alt="Books page with recommendations">
-              <h4>Books</h4>
+              <div class="feature-item">
+              <h3>Saved lists & library</h3>
+              <p>Collections for "reading now," "up next," and finished books.</p>
               </div>
-
-              <div class="screen-item">
-              <img src="/images/winddown.jpg" alt="Wind down timer and reading interface">
-              <h4>Wind-Down</h4>
+              <div class="feature-item">
+              <h3>Audiobook mode</h3>
+              <p>Seamless switch between reading and listening within a wind-down session.</p>
               </div>
-
-              <div class="screen-item">
-              <img src="/images/friends.jpg" alt="Social page with streaks and friends">
-              <h4>Profile</h4>
+              <div class="feature-item">
+              <h3>Real sleep data</h3>
+              <p>A HealthKit / Health Connect integration to upgrade the morning card's estimated sleep into a measured figure.</p>
               </div>
               </div>
               </section>
@@ -180,7 +207,7 @@
             cursor.style.top = e.clientY + 'px';
         });
 
-        document.querySelectorAll('a, button, .lightbox-close, .app-screens-grid img').forEach(element => {
+        document.querySelectorAll('a, button, .lightbox-close').forEach(element => {
             element.addEventListener('mouseenter', () => cursor.classList.add('hover'));
             element.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
         });
@@ -190,7 +217,7 @@
         const lightboxImg = document.getElementById('lightbox-img');
         const lightboxClose = document.querySelector('.lightbox-close');
 
-        document.querySelectorAll('.app-screens-grid img, .onboarding-images-grid img, .onboarding-item img').forEach(img => {
+        document.querySelectorAll('.onboarding-images-grid img, .onboarding-item img').forEach(img => {
             img.addEventListener('click', () => {
                 lightbox.style.display = 'flex';
                 lightboxImg.src = img.src;
