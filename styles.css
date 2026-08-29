@@ -297,7 +297,7 @@ img {
 }
 
 .project-card-image--empty {
-    background: #B8BCC2;
+    background: #F0F0F0;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -317,6 +317,20 @@ img {
 .project-card:hover .project-card-image video {
     transform: scale(1);
     filter: grayscale(0%);
+}
+
+/* Light grey letterbox for app-mockup style cover images (shown in full, not cropped) */
+.project-card-image--contain {
+    background: #F0F0F0;
+}
+
+.project-card-image--contain img {
+    object-fit: contain;
+    transform: none;
+}
+
+.project-card:hover .project-card-image--contain img {
+    transform: none;
 }
 
 .project-card-info {
