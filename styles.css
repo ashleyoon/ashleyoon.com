@@ -290,21 +290,8 @@ img {
     box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
 }
 
-.project-card--coming-soon {
-    opacity: 0.55;
-    pointer-events: none;
-    filter: grayscale(0.4);
-}
-
-.project-card-image--empty {
-    background: #F0F0F0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.project-card-image img,
-.project-card-image video {
+.project-card-image > img,
+.project-card-image > video {
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -313,8 +300,8 @@ img {
     filter: grayscale(10%);
 }
 
-.project-card:hover .project-card-image img,
-.project-card:hover .project-card-image video {
+.project-card:hover .project-card-image > img,
+.project-card:hover .project-card-image > video {
     transform: scale(1);
     filter: grayscale(0%);
 }
@@ -322,15 +309,43 @@ img {
 /* Light grey letterbox for app-mockup style cover images (shown in full, not cropped) */
 .project-card-image--contain {
     background: #F0F0F0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.project-card-image--contain img {
+/* Soft pastel wash echoing CarGurus' red/blue brand colors */
+.project-card-image--cargurus {
+    background: linear-gradient(180deg, #FBDCE0 0%, #FEFCFC 100%);
+}
+
+/* Soft pastel wash echoing Page to Pillow's lavender/blue wind-down palette */
+.project-card-image--pillow {
+    background: linear-gradient(180deg, #E4E5FC 0%, #FAFAFE 100%);
+}
+
+.project-card-image--contain > img,
+.project-card-image--contain > video {
     object-fit: contain;
     transform: none;
 }
 
-.project-card:hover .project-card-image--contain img {
+.project-card:hover .project-card-image--contain > img,
+.project-card:hover .project-card-image--contain > video {
     transform: none;
+}
+
+/* Browser-framed video sits smaller within the card, with whitespace around it */
+.project-card-image--contain .browser-frame {
+    width: 88%;
+    aspect-ratio: 1.63;
+    display: flex;
+    flex-direction: column;
+}
+
+.project-card-image--contain .browser-screen {
+    flex: 1;
+    min-height: 0;
 }
 
 .project-card-info {
@@ -654,6 +669,11 @@ img {
     transition: transform 0.18s ease;
 }
 
+/* CarGurus red/blue brand stroke, matching that project's theme */
+.btn-soft--cargurus {
+    background-image: linear-gradient(#fff, #fff), linear-gradient(90deg, #FF4D7A 0%, #FFB3C6 50%, #FF4D7A 100%);
+}
+
 .btn-soft-label {
     line-height: 1;
     padding-bottom: 1px;
@@ -710,11 +730,40 @@ img {
     overflow: hidden;
 }
 
-.project-banner img {
+/* Soft pastel wash echoing CarGurus' red/blue brand colors */
+.project-banner--cargurus {
+    background: linear-gradient(180deg, #FBDCE0 0%, #FEFCFC 100%);
+    align-items: flex-start;
+    padding-top: 2rem;
+}
+
+.project-banner > img {
     width: auto;
     height: 82%;
     max-width: 100%;
     object-fit: contain;
+    display: block;
+}
+
+/* Browser-framed video is deliberately oversized and bleeds off the bottom edge,
+   so only the top slice of the page (chrome + hero) shows in the banner */
+.project-banner .browser-frame {
+    height: 150%;
+    max-width: 95%;
+    aspect-ratio: 1.63;
+    display: flex;
+    flex-direction: column;
+}
+
+.project-banner .browser-screen {
+    flex: 1;
+    min-height: 0;
+}
+
+.project-banner .browser-screen video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
     display: block;
 }
 
@@ -884,6 +933,193 @@ img {
     background: #000;
     border-radius: 999px;
     z-index: 2;
+}
+
+/* Browser mockup frame (dark Chrome-style chrome) */
+.browser-frame {
+    border-radius: 6px;
+    overflow: hidden;
+    background: #202124;
+    box-shadow: 0 20px 40px -14px rgba(0, 0, 0, 0.4);
+}
+
+.browser-topbar {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    padding: 3px 7px 0;
+    background: #202124;
+}
+
+.browser-dots {
+    display: flex;
+    gap: 3px;
+    flex-shrink: 0;
+    padding-bottom: 2px;
+}
+
+.browser-dot {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+}
+
+.browser-dot--red { background: #FF5F57; }
+.browser-dot--yellow { background: #FEBC2E; }
+.browser-dot--green { background: #28C840; }
+
+.browser-tab {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    max-width: 110px;
+    background: #35363A;
+    border-radius: 2px 2px 0 0;
+    padding: 2px 4px;
+}
+
+.browser-tab-favicon {
+    width: 5px;
+    height: 5px;
+    object-fit: contain;
+    flex-shrink: 0;
+    display: block;
+}
+
+.browser-tab-title {
+    font-family: var(--sans);
+    font-size: 0.4rem;
+    color: #E8EAED;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.browser-tab-close {
+    width: 6px;
+    height: 6px;
+    flex-shrink: 0;
+    color: #9AA0A6;
+}
+
+.browser-tab-new {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 7px;
+    height: 7px;
+    color: #9AA0A6;
+    flex-shrink: 0;
+    margin-bottom: 2px;
+}
+
+.browser-toolbar {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    padding: 2px 7px;
+    background: #35363A;
+}
+
+.browser-nav-icon {
+    width: 6px;
+    height: 6px;
+    color: #9AA0A6;
+    flex-shrink: 0;
+}
+
+.browser-address-bar {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    padding: 1px 5px;
+    background: #202124;
+    border-radius: 999px;
+    min-width: 0;
+}
+
+.browser-address-bar svg {
+    width: 5px;
+    height: 5px;
+    flex-shrink: 0;
+    color: #9AA0A6;
+}
+
+.browser-address-bar span {
+    font-family: var(--sans);
+    font-size: 0.4rem;
+    color: #BDC1C6;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.browser-menu-icon {
+    width: 6px;
+    height: 6px;
+    color: #9AA0A6;
+    flex-shrink: 0;
+}
+
+.browser-screen {
+    overflow: hidden;
+}
+
+.browser-screen img,
+.browser-screen video {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+.browser-screen img {
+    cursor: zoom-in;
+    transition: opacity 0.3s ease;
+}
+
+.browser-screen img:hover {
+    opacity: 0.85;
+}
+
+/* Before & After comparison rows */
+.before-after-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+    margin-top: 1.2rem;
+    margin-bottom: 3rem;
+}
+
+.before-after-pair {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    align-items: start;
+    gap: 1.5rem;
+}
+
+.before-after-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+}
+
+.before-after-label {
+    align-self: flex-start;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+    padding: 0.25rem 0.7rem;
+    border-radius: 999px;
+    background: rgba(0, 0, 0, 0.05);
+}
+
+.before-after-label--after {
+    color: #FF4D7A;
+    background: rgba(255, 77, 122, 0.1);
 }
 
 /* Apple-Weather-style stat cards */
@@ -1207,6 +1443,10 @@ img {
 
     .onboarding-images-grid {
         grid-template-columns: repeat(2, 1fr);
+    }
+
+    .before-after-pair {
+        grid-template-columns: 1fr;
     }
 
     .project-detail-inner {
