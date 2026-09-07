@@ -555,8 +555,7 @@ img {
 }
 
 .project-detail-header {
-    margin-bottom: 2rem;
-    padding-bottom: 1.5rem;
+    margin-bottom: 3rem;
 }
 
 .project-detail-header h1 {
@@ -573,7 +572,6 @@ img {
     color: rgb(84, 84, 84);
     line-height: 1.65;
     max-width: 100%;
-    margin-bottom: 1.8rem;
 }
 
 .project-meta {
@@ -600,19 +598,6 @@ img {
     font-family: var(--sans);
     font-size: 1rem;
     color: var(--text);
-}
-
-.project-links-header {
-    display: inline-flex;
-    gap: 0.8rem;
-    flex-wrap: wrap;
-
-    /* Grey field sized to the button. A subtle two-tone gradient (not a flat
-       fill) keeps variation behind the glass so the frosted blur still reads.
-       Swap this for your real content/background whenever you like. */
-    padding: 0;
-    border-radius: 999px;
-    background: linear-gradient(135deg, #e3e3e8 0%, #f4f4f6 52%, #dedee4 100%);
 }
 
 .btn-primary, .btn-secondary {
@@ -648,48 +633,6 @@ img {
 .btn-secondary:hover {
     border-color: var(--text);
     color: var(--text);
-}
-
-/* White pill with gradient border */
-.btn-soft {
-    position: relative;
-    display: inline-flex;
-    align-items: center;
-    padding: 0.65rem 1.7rem;
-    border-radius: 999px;
-    background-image: linear-gradient(#fff, #fff), linear-gradient(90deg, #5099FF, #6E72EC);
-    background-origin: border-box;
-    background-clip: padding-box, border-box;
-    border: 2px solid transparent;
-    color: #1c1c1e;
-    font-family: var(--sans);
-    font-size: 1rem;
-    font-weight: 450;
-    letter-spacing: 0.005em;
-    transition: transform 0.18s ease;
-}
-
-/* CarGurus red/blue brand stroke, matching that project's theme */
-.btn-soft--cargurus {
-    background-image: linear-gradient(#fff, #fff), linear-gradient(90deg, #FF4D7A 0%, #FFB3C6 50%, #FF4D7A 100%);
-}
-
-.btn-soft-label {
-    line-height: 1;
-    padding-bottom: 1px;
-}
-
-.btn-soft:hover {
-    transform: translateY(-1px);
-}
-
-.btn-soft:active {
-    transform: translateY(0);
-}
-
-.btn-soft:focus-visible {
-    outline: none;
-    box-shadow: 0 0 0 3px rgba(110, 114, 236, 0.35);
 }
 
 /* Hero image */
@@ -891,6 +834,46 @@ img {
     gap: 1.2rem;
     margin: 1.5rem auto 3.5rem;
     max-width: 1500px;
+}
+
+/* Text beside a couple of phone screens, instead of a mostly-empty wide grid */
+.split-with-phones {
+    display: flex;
+    align-items: flex-start;
+    gap: 3rem;
+    margin-top: 1.2rem;
+}
+
+.split-text {
+    flex: 1.3;
+    min-width: 0;
+}
+
+.split-phones {
+    display: flex;
+    gap: 1.2rem;
+    flex-shrink: 0;
+    width: 320px;
+}
+
+.split-phones .onboarding-item {
+    flex: 1;
+}
+
+.split-phones .phone-frame {
+    border-radius: 1.3rem;
+    padding: 0.32rem;
+    box-shadow:
+        0 8px 16px -8px rgba(0, 0, 0, 0.25),
+        inset 0 0 0 1.5px rgba(255, 255, 255, 0.08);
+}
+
+.split-phones .phone-screen {
+    border-radius: 0.95rem;
+}
+
+.split-phones .phone-notch {
+    height: 0.6rem;
 }
 
 .onboarding-item img {
@@ -1443,6 +1426,17 @@ img {
 
     .onboarding-images-grid {
         grid-template-columns: repeat(2, 1fr);
+    }
+
+    .split-with-phones {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .split-phones {
+        width: 100%;
+        max-width: 320px;
+        margin: 0 auto;
     }
 
     .before-after-pair {
