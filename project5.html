@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multivariate Tool Redesign - Ashley Yoon</title>
+    <link rel="icon" type="image/png" href="/images/favicon.png" />
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="project-workflow-page">
+    <div class="custom-cursor"></div>
+
+    <!-- Full-bleed banner -->
+    <div class="project-banner project-banner--workflow">
+        <div class="browser-frame">
+            <div class="browser-topbar">
+                <div class="browser-dots">
+                    <span class="browser-dot browser-dot--red"></span>
+                    <span class="browser-dot browser-dot--yellow"></span>
+                    <span class="browser-dot browser-dot--green"></span>
+                </div>
+                <div class="browser-tab">
+                    <img class="browser-tab-favicon" src="/images/cargurus-logo.png" alt="">
+                    <span class="browser-tab-title">Multivariate Test (MVT) Admin</span>
+                    <svg class="browser-tab-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></svg>
+                </div>
+                <svg class="browser-tab-new" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            </div>
+            <div class="browser-toolbar">
+                <svg class="browser-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 6 9 12 15 18"/></svg>
+                <svg class="browser-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 6 15 12 9 18"/></svg>
+                <svg class="browser-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-3-6.7"/><polyline points="21 3 21 9 15 9"/></svg>
+                <div class="browser-address-bar">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>
+                    <span>admin.cargurus.com/mvt</span>
+                </div>
+                <svg class="browser-menu-icon" viewBox="0 0 24 24" fill="currentColor" stroke="none"><circle cx="12" cy="5" r="1.8"/><circle cx="12" cy="12" r="1.8"/><circle cx="12" cy="19" r="1.8"/></svg>
+            </div>
+            <div class="browser-screen">
+                <img src="/images/mvt-after-overview.webp" alt="Redesigned MVT admin table">
+            </div>
+        </div>
+    </div>
+
+    <div class="about-page">
+      <div class="about-page-inner">
+        <div class="project-detail-inner">
+          <!-- Back Button -->
+          <a href="/" class="back-button back-button--circle" aria-label="Back to home">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 6 9 12 15 18"/></svg>
+          </a>
+
+          <!-- Project Header -->
+          <div class="project-detail-header">
+              <h1>Multivariate Tool Redesign</h1>
+              <p class="project-subtitle">An end-to-end redesign of CarGurus' internal A/B and multivariate testing platform, from a clearer status workflow to a more scannable admin overview.</p>
+          </div>
+
+          <!-- Project Content -->
+          <div class="project-detail-content">
+              <!-- Overview Section -->
+              <section class="content-section">
+                  <h2>Overview</h2>
+                  <p class="lead">A powerful testing tool that nobody could read at a glance.</p>
+                  <p>As a UX Design Intern at CarGurus, I worked on the internal platform teams use to run A/B and multivariate tests. The old workflow, Created, Initialized, Active, Inactive, Archived, treated a test's entire life as one long "Active" phase. A test running at 1% of traffic for an initial sanity check looked identical, status-wise, to one fully ramped and being watched for real results. There was also no way to pause a test in progress: if something needed a closer look mid-run, the only options were to leave it running or take it down entirely, either way losing the ability to trust the data that had been collected.</p>
+                  <p>The work broke into three parts: information architecture, defining the new statuses and how they relate; interaction model, mapping how a test moves from one status to the next; and UI redesign, rebuilding the interface around that workflow.</p>
+              </section>
+
+              <!-- Research & Discovery -->
+              <section class="content-section">
+                  <h2>Research & Discovery</h2>
+                  <p>I started by digging into the three power users of this tool, PMs, analysts, and engineers, mapping out each one's responsibilities and where their pain points showed up. From there, I traced a full flow of where each role enters and exits a test's lifecycle, which made it clear the existing status list didn't match how any of them actually worked.</p>
+                  <p>To pressure-test that mapping, I workshopped several workflow iterations with stakeholders from all three groups and used their input to converge on a structure that would hold up for people using it every day. I also ran one-on-one interviews to get more candid, specific feedback than a workshop setting allows, which gave me real data to back up the design decisions in the final workflow.</p>
+              </section>
+
+              <!-- Approach -->
+              <section class="content-section">
+              <h2>Approach</h2>
+              <div class="features-grid">
+              <div class="feature-item">
+              <h3>Information architecture</h3>
+              <p>Defined seven statuses in place of the old five, each mapped to a real moment in a test's life: initial setup, small-scale validation, full experimentation, an intentional hold, and the two possible outcomes before archiving.</p>
+              </div>
+              <div class="feature-item">
+              <h3>Interaction model</h3>
+              <p>Mapped exactly how and when a test can move between statuses, including who is responsible for that transition, an engineer, an analyst, or the system itself, and designed how that action is actually taken in the UI and how the interface reflects it back.</p>
+              </div>
+              <div class="feature-item">
+              <h3>UI redesign</h3>
+              <p>Rebuilt the interface around the new workflow so a test's current status, and what can happen to it next, is clear without digging into its history.</p>
+              </div>
+              </div>
+              </section>
+
+              <!-- Workflow Diagrams -->
+              <section class="content-section">
+              <h2>Old vs. New Workflow</h2>
+              <p>The old workflow was a straight line that couldn't represent validation, pausing, or a final outcome. The new one adds the states that were missing.</p>
+
+              <div class="workflow-diagram-columns">
+
+              <div class="workflow-diagram-column">
+              <p class="workflow-label">Old workflow</p>
+              <div class="workflow-diagram workflow-diagram--old">
+                  <div class="workflow-row">
+                      <div class="workflow-node">Created</div>
+                      <span class="workflow-arrow">→</span>
+                      <div class="workflow-node">Initialized</div>
+                      <span class="workflow-arrow">→</span>
+                      <div class="workflow-node">Active</div>
+                      <span class="workflow-arrow">→</span>
+                      <div class="workflow-node">Inactive</div>
+                      <span class="workflow-arrow">→</span>
+                      <div class="workflow-node">Archived</div>
+                  </div>
+              </div>
+              </div>
+
+              <div class="workflow-diagram-column">
+              <p class="workflow-label">New workflow</p>
+              <div class="workflow-diagram workflow-diagram--new">
+                  <div class="workflow-row">
+                      <div class="workflow-node">Initialized</div>
+                      <span class="workflow-arrow">→</span>
+                      <div class="workflow-branch-group">
+                          <div class="workflow-branch-top">
+                              <div class="workflow-node">Smoke/QA</div>
+                              <span class="workflow-arrow">→</span>
+                              <div class="workflow-node">Experimenting</div>
+                          </div>
+                          <div class="workflow-branch-connector"></div>
+                          <div class="workflow-node workflow-node--pause">Paused</div>
+                      </div>
+                      <span class="workflow-arrow">→</span>
+                      <div class="workflow-outcome-group">
+                          <div class="workflow-node workflow-node--rollout">Rollout</div>
+                          <div class="workflow-node workflow-node--no-rollout">No Rollout</div>
+                      </div>
+                      <span class="workflow-arrow">→</span>
+                      <div class="workflow-node">Archived</div>
+                  </div>
+              </div>
+              </div>
+
+              </div>
+              </section>
+
+              <!-- How It Works -->
+              <section class="content-section">
+              <h2>How a Test Moves Through It</h2>
+              <p>An engineer creates the test, which starts it at Initialized. An analyst then ramps it to a small percentage of traffic, typically 1%, moving it into Smoke/QA to confirm it's behaving correctly before anyone relies on its data. Once it looks good, the analyst ramps it further into Experimenting, where it runs at real scale.</p>
+              <p>From either Smoke/QA or Experimenting, a test can move into Paused. This didn't exist before, and without it, any hold on a test caused data loss and made the surrounding results untrustworthy. With Paused, an analyst can stop a test cleanly, without corrupting what's already been collected.</p>
+              <p>When an analyst has enough signal, the test moves to Rollout if it should go live to everyone, or No Rollout if it shouldn't. Once engineering bakes the outcome into production, the test is moved to Archived and its life in the platform is done.</p>
+
+              <div class="flow-sequence">
+              <div class="flow-row">
+
+              <div class="flow-step">
+              <img class="flow-step-image" src="images/interaction-initialized.webp" alt="Test panel at Initialized, with a Move to Smoke/QA action">
+              <span class="flow-step-label">Initialized</span>
+              </div>
+
+              <span class="flow-arrow">→</span>
+
+              <div class="flow-step">
+              <img class="flow-step-image" src="images/interaction-smoke-qa.webp" alt="Test panel at Smoke/QA, ramped to 1% with Pause and Move to Experimenting actions">
+              <span class="flow-step-label">Smoke/QA</span>
+              </div>
+
+              <span class="flow-arrow">→</span>
+
+              <div class="flow-step">
+              <img class="flow-step-image" src="images/interaction-experimenting.webp" alt="Test panel at Experimenting, ramped to 100% with Pause, Mark no rollout, and Mark rollout actions">
+              <span class="flow-step-label">Experimenting</span>
+              </div>
+
+              </div>
+              </div>
+              </section>
+
+              <!-- Admin Overview Before & After -->
+              <section class="content-section">
+              <h2>Before & After</h2>
+              <p>The admin overview is where users go to look up a specific test, so the redesign focused on making it scannable and surfacing the right information in each field.</p>
+              </section>
+
+              <div class="before-after-grid">
+              <div class="before-after-pair">
+              <div class="before-after-item">
+              <span class="before-after-label">Before</span>
+              <div class="browser-frame">
+              <div class="browser-topbar">
+              <div class="browser-dots">
+              <span class="browser-dot browser-dot--red"></span>
+              <span class="browser-dot browser-dot--yellow"></span>
+              <span class="browser-dot browser-dot--green"></span>
+              </div>
+              <div class="browser-tab">
+              <img class="browser-tab-favicon" src="images/cargurus-logo.png" alt="">
+              <span class="browser-tab-title">Multivariate Test (MVT) Admin</span>
+              <svg class="browser-tab-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></svg>
+              </div>
+              <svg class="browser-tab-new" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              </div>
+              <div class="browser-toolbar">
+              <svg class="browser-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 6 9 12 15 18"/></svg>
+              <svg class="browser-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 6 15 12 9 18"/></svg>
+              <svg class="browser-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-3-6.7"/><polyline points="21 3 21 9 15 9"/></svg>
+              <div class="browser-address-bar">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>
+              <span>admin.cargurus.com/mvt</span>
+              </div>
+              <svg class="browser-menu-icon" viewBox="0 0 24 24" fill="currentColor" stroke="none"><circle cx="12" cy="5" r="1.8"/><circle cx="12" cy="12" r="1.8"/><circle cx="12" cy="19" r="1.8"/></svg>
+              </div>
+              <div class="browser-screen">
+              <img src="images/mvt-before-overview.webp" alt="Old MVT admin table with an unclear status lifecycle">
+              </div>
+              </div>
+              </div>
+              <div class="before-after-item">
+              <span class="before-after-label before-after-label--after-blue">After</span>
+              <div class="browser-frame">
+              <div class="browser-topbar">
+              <div class="browser-dots">
+              <span class="browser-dot browser-dot--red"></span>
+              <span class="browser-dot browser-dot--yellow"></span>
+              <span class="browser-dot browser-dot--green"></span>
+              </div>
+              <div class="browser-tab">
+              <img class="browser-tab-favicon" src="images/cargurus-logo.png" alt="">
+              <span class="browser-tab-title">Multivariate Test (MVT) Admin</span>
+              <svg class="browser-tab-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></svg>
+              </div>
+              <svg class="browser-tab-new" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              </div>
+              <div class="browser-toolbar">
+              <svg class="browser-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 6 9 12 15 18"/></svg>
+              <svg class="browser-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 6 15 12 9 18"/></svg>
+              <svg class="browser-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-3-6.7"/><polyline points="21 3 21 9 15 9"/></svg>
+              <div class="browser-address-bar">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>
+              <span>admin.cargurus.com/mvt</span>
+              </div>
+              <svg class="browser-menu-icon" viewBox="0 0 24 24" fill="currentColor" stroke="none"><circle cx="12" cy="5" r="1.8"/><circle cx="12" cy="12" r="1.8"/><circle cx="12" cy="19" r="1.8"/></svg>
+              </div>
+              <div class="browser-screen">
+              <img src="images/mvt-after-overview.webp" alt="Redesigned MVT admin table showing the new statuses">
+              </div>
+              </div>
+              </div>
+              </div>
+              </div>
+
+              <!-- Test Creation Flow -->
+              <section class="content-section">
+              <h2>Creating a New Test</h2>
+              <p>The old form asked for everything at once. The redesign breaks test creation into a guided flow: test type, test details, variants, then target.</p>
+
+              <span class="before-after-label before-after-label--standalone">Before</span>
+              <div class="browser-frame browser-frame--flow-single">
+              <div class="browser-topbar">
+              <div class="browser-dots">
+              <span class="browser-dot browser-dot--red"></span>
+              <span class="browser-dot browser-dot--yellow"></span>
+              <span class="browser-dot browser-dot--green"></span>
+              </div>
+              <div class="browser-tab">
+              <img class="browser-tab-favicon" src="images/cargurus-logo.png" alt="">
+              <span class="browser-tab-title">Create New Multivariate Test</span>
+              <svg class="browser-tab-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></svg>
+              </div>
+              <svg class="browser-tab-new" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              </div>
+              <div class="browser-toolbar">
+              <svg class="browser-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 6 9 12 15 18"/></svg>
+              <svg class="browser-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 6 15 12 9 18"/></svg>
+              <svg class="browser-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-3-6.7"/><polyline points="21 3 21 9 15 9"/></svg>
+              <div class="browser-address-bar">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>
+              <span>admin.cargurus.com/mvt/create</span>
+              </div>
+              <svg class="browser-menu-icon" viewBox="0 0 24 24" fill="currentColor" stroke="none"><circle cx="12" cy="5" r="1.8"/><circle cx="12" cy="12" r="1.8"/><circle cx="12" cy="19" r="1.8"/></svg>
+              </div>
+              <div class="browser-screen">
+              <img src="images/mvt-before-create-test.webp" alt="Old single-page form for creating a new test">
+              </div>
+              </div>
+
+              <span class="before-after-label before-after-label--after-blue before-after-label--standalone">After, a guided flow</span>
+              <div class="flow-sequence">
+
+              <div class="flow-row">
+
+              <div class="flow-step">
+              <div class="browser-frame browser-frame--flow">
+              <div class="browser-topbar">
+              <div class="browser-dots">
+              <span class="browser-dot browser-dot--red"></span>
+              <span class="browser-dot browser-dot--yellow"></span>
+              <span class="browser-dot browser-dot--green"></span>
+              </div>
+              <div class="browser-tab">
+              <img class="browser-tab-favicon" src="images/cargurus-logo.png" alt="">
+              <span class="browser-tab-title">Create MVT · Test Type</span>
+              <svg class="browser-tab-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></svg>
+              </div>
+              <svg class="browser-tab-new" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              </div>
+              <div class="browser-toolbar">
+              <svg class="browser-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 6 9 12 15 18"/></svg>
+              <svg class="browser-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 6 15 12 9 18"/></svg>
+              <svg class="browser-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-3-6.7"/><polyline points="21 3 21 9 15 9"/></svg>
+              <div class="browser-address-bar">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>
+              <span>admin.cargurus.com/mvt/create/type</span>
+              </div>
+              <svg class="browser-menu-icon" viewBox="0 0 24 24" fill="currentColor" stroke="none"><circle cx="12" cy="5" r="1.8"/><circle cx="12" cy="12" r="1.8"/><circle cx="12" cy="19" r="1.8"/></svg>
+              </div>
+              <div class="browser-screen">
+              <img src="images/mvt-after-test-type.webp" alt="Step 1: choosing a test type">
+              </div>
+              </div>
+              <span class="flow-step-label">Test Type</span>
+              </div>
+
+              <span class="flow-arrow">→</span>
+
+              <div class="flow-step">
+              <div class="browser-frame browser-frame--flow">
+              <div class="browser-topbar">
+              <div class="browser-dots">
+              <span class="browser-dot browser-dot--red"></span>
+              <span class="browser-dot browser-dot--yellow"></span>
+              <span class="browser-dot browser-dot--green"></span>
+              </div>
+              <div class="browser-tab">
+              <img class="browser-tab-favicon" src="images/cargurus-logo.png" alt="">
+              <span class="browser-tab-title">Create MVT · Test Details</span>
+              <svg class="browser-tab-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></svg>
+              </div>
+              <svg class="browser-tab-new" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              </div>
+              <div class="browser-toolbar">
+              <svg class="browser-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 6 9 12 15 18"/></svg>
+              <svg class="browser-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 6 15 12 9 18"/></svg>
+              <svg class="browser-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-3-6.7"/><polyline points="21 3 21 9 15 9"/></svg>
+              <div class="browser-address-bar">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>
+              <span>admin.cargurus.com/mvt/create/details</span>
+              </div>
+              <svg class="browser-menu-icon" viewBox="0 0 24 24" fill="currentColor" stroke="none"><circle cx="12" cy="5" r="1.8"/><circle cx="12" cy="12" r="1.8"/><circle cx="12" cy="19" r="1.8"/></svg>
+              </div>
+              <div class="browser-screen">
+              <img src="images/mvt-after-test-details.webp" alt="Step 2: entering test details, jira ID, and team">
+              </div>
+              </div>
+              <span class="flow-step-label">Test Details</span>
+              </div>
+
+              </div>
+
+              <div class="flow-row">
+
+              <div class="flow-step">
+              <div class="browser-frame browser-frame--flow">
+              <div class="browser-topbar">
+              <div class="browser-dots">
+              <span class="browser-dot browser-dot--red"></span>
+              <span class="browser-dot browser-dot--yellow"></span>
+              <span class="browser-dot browser-dot--green"></span>
+              </div>
+              <div class="browser-tab">
+              <img class="browser-tab-favicon" src="images/cargurus-logo.png" alt="">
+              <span class="browser-tab-title">Create MVT · Variants</span>
+              <svg class="browser-tab-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></svg>
+              </div>
+              <svg class="browser-tab-new" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              </div>
+              <div class="browser-toolbar">
+              <svg class="browser-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 6 9 12 15 18"/></svg>
+              <svg class="browser-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 6 15 12 9 18"/></svg>
+              <svg class="browser-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-3-6.7"/><polyline points="21 3 21 9 15 9"/></svg>
+              <div class="browser-address-bar">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>
+              <span>admin.cargurus.com/mvt/create/variants</span>
+              </div>
+              <svg class="browser-menu-icon" viewBox="0 0 24 24" fill="currentColor" stroke="none"><circle cx="12" cy="5" r="1.8"/><circle cx="12" cy="12" r="1.8"/><circle cx="12" cy="19" r="1.8"/></svg>
+              </div>
+              <div class="browser-screen">
+              <img src="images/mvt-after-variants.webp" alt="Step 3: adding variants">
+              </div>
+              </div>
+              <span class="flow-step-label">Variants</span>
+              </div>
+
+              <span class="flow-arrow">→</span>
+
+              <div class="flow-step">
+              <div class="browser-frame browser-frame--flow">
+              <div class="browser-topbar">
+              <div class="browser-dots">
+              <span class="browser-dot browser-dot--red"></span>
+              <span class="browser-dot browser-dot--yellow"></span>
+              <span class="browser-dot browser-dot--green"></span>
+              </div>
+              <div class="browser-tab">
+              <img class="browser-tab-favicon" src="images/cargurus-logo.png" alt="">
+              <span class="browser-tab-title">Create MVT · Target</span>
+              <svg class="browser-tab-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></svg>
+              </div>
+              <svg class="browser-tab-new" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              </div>
+              <div class="browser-toolbar">
+              <svg class="browser-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 6 9 12 15 18"/></svg>
+              <svg class="browser-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 6 15 12 9 18"/></svg>
+              <svg class="browser-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-3-6.7"/><polyline points="21 3 21 9 15 9"/></svg>
+              <div class="browser-address-bar">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>
+              <span>admin.cargurus.com/mvt/create/target</span>
+              </div>
+              <svg class="browser-menu-icon" viewBox="0 0 24 24" fill="currentColor" stroke="none"><circle cx="12" cy="5" r="1.8"/><circle cx="12" cy="12" r="1.8"/><circle cx="12" cy="19" r="1.8"/></svg>
+              </div>
+              <div class="browser-screen">
+              <img src="images/mvt-after-target.webp" alt="Step 4: choosing a test's target">
+              </div>
+              </div>
+              <span class="flow-step-label">Target</span>
+              </div>
+
+              </div>
+
+              </div>
+              </section>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox">
+        <span class="lightbox-close">&times;</span>
+        <img class="lightbox-content" id="lightbox-img" alt="Enlarged view">
+    </div>
+
+    <script>
+        // Custom cursor
+        const cursor = document.querySelector('.custom-cursor');
+
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+        });
+
+        document.querySelectorAll('a, button, .lightbox-close').forEach(element => {
+            element.addEventListener('mouseenter', () => cursor.classList.add('hover'));
+            element.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
+        });
+
+        // Lightbox functionality
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightbox-img');
+        const lightboxClose = document.querySelector('.lightbox-close');
+
+        document.querySelectorAll('.browser-screen img, .flow-step-image').forEach(img => {
+            img.addEventListener('click', () => {
+                lightbox.style.display = 'flex';
+                lightboxImg.src = img.src;
+            });
+        });
+
+        lightboxClose.addEventListener('click', () => {
+            lightbox.style.display = 'none';
+        });
+
+        lightbox.addEventListener('click', (e) => {
+            if (e.target === lightbox) {
+                lightbox.style.display = 'none';
+            }
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && lightbox.style.display === 'flex') {
+                lightbox.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>

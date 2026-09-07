@@ -12,7 +12,10 @@
 
     <!-- Full-bleed banner -->
     <div class="project-banner project-banner--pillow">
-        <img src="images/p2p.webp" alt="Page to Pillow app screens on three phones">
+        <div class="pillow-hero">
+            <img class="pillow-hero-home" src="images/homeframe.webp" alt="Page to Pillow home screen">
+            <img class="pillow-hero-book" src="images/bookframe.webp" alt="Page to Pillow books screen">
+        </div>
     </div>
 
     <div class="about-page">
@@ -151,22 +154,8 @@
               <p>The heart of the app is the reading loop. In the Books library you browse everything available to read and save titles to lists for later, then choose one as tonight's wind-down book. Once it's set, a notification arrives at your personal wind-down time and takes you straight to the Wind-Down screen, where you can read the book, or switch to its audiobook when your eyes are too tired to read. The reminder is the mechanism that turns "I should read more" into actually opening the book, timed to the exact moment your evening should slow down.</p>
               </div>
               <div class="split-phones">
-              <div class="onboarding-item">
-              <div class="phone-frame">
-              <div class="phone-notch"></div>
-              <div class="phone-screen">
-              <img src="images/home.webp" alt="Home screen with reading progress and wind-down window">
-              </div>
-              </div>
-              </div>
-              <div class="onboarding-item">
-              <div class="phone-frame">
-              <div class="phone-notch"></div>
-              <div class="phone-screen">
-              <img src="images/books.webp" alt="Books library for browsing and saving titles">
-              </div>
-              </div>
-              </div>
+              <img src="images/homeframe.webp" alt="Home screen with reading progress and wind-down window">
+              <img src="images/bookframe.webp" alt="Books library for browsing and saving titles">
               </div>
               </div>
               </section>
@@ -233,7 +222,7 @@
         const lightboxImg = document.getElementById('lightbox-img');
         const lightboxClose = document.querySelector('.lightbox-close');
 
-        document.querySelectorAll('.onboarding-images-grid img, .onboarding-item img').forEach(img => {
+        document.querySelectorAll('.onboarding-images-grid img, .onboarding-item img, .split-phones img').forEach(img => {
             img.addEventListener('click', () => {
                 lightbox.style.display = 'flex';
                 lightboxImg.src = img.src;

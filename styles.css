@@ -322,6 +322,43 @@ img {
 /* Soft pastel wash echoing Page to Pillow's lavender/blue wind-down palette */
 .project-card-image--pillow {
     background: linear-gradient(180deg, #E4E5FC 0%, #FAFAFE 100%);
+    position: relative;
+}
+
+.pillow-hero {
+    position: absolute;
+    inset: 0;
+}
+
+.pillow-hero-home,
+.pillow-hero-book {
+    position: absolute;
+    width: auto;
+    transition: transform 0.5s ease;
+}
+
+.pillow-hero-home {
+    height: 90%;
+    top: 5%;
+    left: 11%;
+    z-index: 1;
+    filter: drop-shadow(0 12px 18px rgba(0, 0, 0, 0.12));
+}
+
+.pillow-hero-book {
+    height: 118%;
+    top: 20%;
+    right: 11%;
+    z-index: 2;
+    filter: drop-shadow(0 16px 24px rgba(0, 0, 0, 0.16));
+}
+
+.project-card:hover .pillow-hero-home {
+    transform: translateY(-4px);
+}
+
+.project-card:hover .pillow-hero-book {
+    transform: translateY(-6px);
 }
 
 .project-card-image--contain > img,
@@ -346,6 +383,20 @@ img {
 .project-card-image--contain .browser-screen {
     flex: 1;
     min-height: 0;
+}
+
+/* Full screenshot shown (matching the Before & After frames), not cropped */
+.project-card-image--workflow .browser-frame {
+    aspect-ratio: auto;
+}
+
+.project-card-image--workflow .browser-screen {
+    flex: none;
+}
+
+.project-card-image--workflow .browser-screen img {
+    width: 100%;
+    height: auto;
 }
 
 .project-card-info {
@@ -636,6 +687,7 @@ img {
 
 /* Full-bleed banner */
 .project-banner {
+    position: relative;
     width: 100%;
     aspect-ratio: 16 / 3;
     min-height: 130px;
@@ -645,6 +697,18 @@ img {
     align-items: flex-end;
     justify-content: center;
     overflow: hidden;
+}
+
+.project-banner .pillow-hero-home {
+    height: 160%;
+    top: 14%;
+    left: 36%;
+}
+
+.project-banner .pillow-hero-book {
+    height: 160%;
+    top: 14%;
+    right: 30%;
 }
 
 /* Soft pastel wash echoing CarGurus' red/blue brand colors */
@@ -657,6 +721,153 @@ img {
 /* Soft pastel wash echoing Page to Pillow's lavender/blue wind-down palette */
 .project-banner--pillow {
     background: linear-gradient(180deg, #E4E5FC 0%, #FAFAFE 100%);
+}
+
+/* Cool steel-blue wash for the internal testing platform project */
+.project-banner--workflow {
+    background: linear-gradient(180deg, #DCE7FB 0%, #FAFBFE 100%);
+}
+
+/* Workflow status diagram: pill nodes connected by arrows, with a
+   branch group for shared transitions (e.g. two states that can both pause) */
+.workflow-diagram {
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+    margin: 1.2rem 0;
+}
+
+.workflow-label {
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: rgba(0, 0, 0, 0.4);
+    margin-bottom: -0.4rem;
+}
+
+.workflow-diagram-columns {
+    display: flex;
+    align-items: flex-start;
+    gap: 3rem;
+}
+
+.workflow-diagram-column {
+    flex: 1;
+    min-width: 0;
+}
+
+.workflow-diagram-column .workflow-row {
+    flex-wrap: nowrap;
+}
+
+.workflow-diagram-column .workflow-node {
+    font-size: 0.68rem;
+    padding: 0.38rem 0.6rem;
+    white-space: nowrap;
+}
+
+.workflow-diagram-column .workflow-arrow {
+    font-size: 0.8rem;
+    flex-shrink: 0;
+}
+
+.workflow-diagram-column .workflow-branch-top {
+    gap: 0.4rem;
+}
+
+.workflow-row {
+    display: flex;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+}
+
+.workflow-node {
+    background: #fff;
+    border: 1.5px solid rgba(0, 0, 0, 0.08);
+    border-radius: 999px;
+    padding: 0.55rem 1.1rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    white-space: nowrap;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+}
+
+.workflow-arrow {
+    color: rgba(0, 0, 0, 0.3);
+    font-size: 1rem;
+    margin-top: 0.65rem;
+}
+
+.workflow-diagram--old .workflow-node {
+    background: #F4F4F4;
+    color: rgba(0, 0, 0, 0.5);
+    border-color: rgba(0, 0, 0, 0.06);
+    box-shadow: none;
+}
+
+.workflow-branch-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.45rem;
+}
+
+.workflow-branch-top {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+}
+
+.workflow-branch-top .workflow-arrow {
+    margin-top: 0;
+}
+
+.workflow-branch-connector {
+    width: 0;
+    height: 14px;
+    border-left: 1.5px dashed rgba(0, 0, 0, 0.2);
+}
+
+.workflow-node--pause {
+    background: rgba(255, 77, 122, 0.08);
+    border-color: rgba(255, 77, 122, 0.25);
+    color: #FF4D7A;
+}
+
+.workflow-outcome-group {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.4rem;
+}
+
+.workflow-node--rollout {
+    background: rgba(47, 111, 224, 0.1);
+    border-color: rgba(47, 111, 224, 0.3);
+    color: #2F6FE0;
+}
+
+.workflow-node--no-rollout {
+    background: rgba(0, 0, 0, 0.04);
+    color: rgba(0, 0, 0, 0.45);
+}
+
+.workflow-caption {
+    font-size: 0.85rem;
+    color: rgba(0, 0, 0, 0.55);
+    margin-top: 0.2rem;
+}
+
+.project-banner--workflow {
+    align-items: flex-start;
+    padding-top: 2rem;
+}
+
+/* Same steel-blue wash on the homepage project card */
+.project-card-image--workflow {
+    background: linear-gradient(180deg, #DCE7FB 0%, #FAFBFE 100%);
 }
 
 .project-banner > img {
@@ -680,6 +891,12 @@ img {
 .project-banner .browser-screen {
     flex: 1;
     min-height: 0;
+}
+
+.project-banner--workflow .browser-screen img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 .project-banner .browser-screen video {
@@ -830,29 +1047,18 @@ img {
 
 .split-phones {
     display: flex;
+    align-items: flex-end;
     gap: 1.2rem;
     flex-shrink: 0;
     width: 320px;
 }
 
-.split-phones .onboarding-item {
+.split-phones img {
     flex: 1;
-}
-
-.split-phones .phone-frame {
-    border-radius: 1.3rem;
-    padding: 0.32rem;
-    box-shadow:
-        0 8px 16px -8px rgba(0, 0, 0, 0.25),
-        inset 0 0 0 1.5px rgba(255, 255, 255, 0.08);
-}
-
-.split-phones .phone-screen {
-    border-radius: 0.95rem;
-}
-
-.split-phones .phone-notch {
-    height: 0.6rem;
+    width: 100%;
+    min-width: 0;
+    height: auto;
+    cursor: zoom-in;
 }
 
 .onboarding-item img {
@@ -903,6 +1109,10 @@ img {
     overflow: hidden;
     background: #202124;
     box-shadow: 0 20px 40px -14px rgba(0, 0, 0, 0.4);
+}
+
+.project-workflow-page .browser-frame {
+    box-shadow: 0 8px 16px -10px rgba(0, 0, 0, 0.25);
 }
 
 .browser-topbar {
@@ -1044,6 +1254,63 @@ img {
     opacity: 0.85;
 }
 
+/* Single wide browser-frame used above a multi-step flow */
+.browser-frame--flow-single {
+    max-width: 500px;
+    margin-bottom: 1.6rem;
+}
+
+/* Two rows of two browser-frames showing a step-by-step flow */
+.flow-sequence {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.6rem;
+}
+
+.flow-row {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    width: 100%;
+}
+
+.flow-step {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    flex: 1;
+    min-width: 0;
+}
+
+.flow-step-image {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 8px 16px -10px rgba(0, 0, 0, 0.25);
+    cursor: zoom-in;
+}
+
+.flow-step-label {
+    align-self: center;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.78rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: rgba(0, 0, 0, 0.45);
+}
+
+.flow-arrow {
+    flex-shrink: 0;
+    color: rgba(0, 0, 0, 0.25);
+    font-size: 1.1rem;
+}
+
+.flow-arrow--down {
+    align-self: flex-end;
+    margin-right: calc(25% - 0.55rem);
+}
+
 /* Before & After comparison rows */
 .before-after-grid {
     display: flex;
@@ -1063,7 +1330,7 @@ img {
 .before-after-item {
     display: flex;
     flex-direction: column;
-    gap: 0.6rem;
+    gap: 1rem;
 }
 
 .before-after-label {
@@ -1082,6 +1349,18 @@ img {
 .before-after-label--after {
     color: #FF4D7A;
     background: rgba(255, 77, 122, 0.1);
+}
+
+/* Used when the pill sits directly above a frame, outside a before-after-item flex column */
+.before-after-label--standalone {
+    display: inline-block;
+    margin-bottom: 1rem;
+}
+
+/* Blue variant for the internal testing platform project */
+.before-after-label--after-blue {
+    color: #2F6FE0;
+    background: rgba(47, 111, 224, 0.1);
 }
 
 /* Apple-Weather-style stat cards */
