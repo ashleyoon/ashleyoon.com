@@ -680,6 +680,11 @@ img {
     padding-top: 2rem;
 }
 
+/* Soft pastel wash echoing Page to Pillow's lavender/blue wind-down palette */
+.project-banner--pillow {
+    background: linear-gradient(180deg, #E4E5FC 0%, #FAFAFE 100%);
+}
+
 .project-banner > img {
     width: auto;
     height: 82%;
