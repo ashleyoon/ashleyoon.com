@@ -844,9 +844,9 @@ img {
 }
 
 .workflow-node--rollout {
-    background: rgba(47, 111, 224, 0.1);
-    border-color: rgba(47, 111, 224, 0.3);
-    color: #2F6FE0;
+    background: rgba(47, 158, 100, 0.1);
+    border-color: rgba(47, 158, 100, 0.3);
+    color: #2F9E64;
 }
 
 .workflow-node--no-rollout {
