@@ -1291,6 +1291,29 @@ img {
     cursor: zoom-in;
 }
 
+.flow-step-image--single {
+    display: block;
+    max-width: 500px;
+    margin-bottom: 1.6rem;
+}
+
+.flow-before-row {
+    display: flex;
+    align-items: center;
+    gap: 2.5rem;
+    margin: 1.2rem 0 1.6rem;
+}
+
+.flow-before-image {
+    flex: 0 0 auto;
+    width: 380px;
+}
+
+.flow-before-text {
+    flex: 1;
+    min-width: 0;
+}
+
 .flow-step-label {
     align-self: center;
     font-family: 'IBM Plex Mono', monospace;

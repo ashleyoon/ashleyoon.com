@@ -92,95 +92,10 @@
               </div>
               </section>
 
-              <!-- Workflow Diagrams -->
-              <section class="content-section">
-              <h2>Old vs. New Workflow</h2>
-              <p>The old workflow was a straight line that couldn't represent validation, pausing, or a final outcome. The new one adds the states that were missing.</p>
-
-              <div class="workflow-diagram-columns">
-
-              <div class="workflow-diagram-column">
-              <p class="workflow-label">Old workflow</p>
-              <div class="workflow-diagram workflow-diagram--old">
-                  <div class="workflow-row">
-                      <div class="workflow-node">Created</div>
-                      <span class="workflow-arrow">→</span>
-                      <div class="workflow-node">Initialized</div>
-                      <span class="workflow-arrow">→</span>
-                      <div class="workflow-node">Active</div>
-                      <span class="workflow-arrow">→</span>
-                      <div class="workflow-node">Inactive</div>
-                      <span class="workflow-arrow">→</span>
-                      <div class="workflow-node">Archived</div>
-                  </div>
-              </div>
-              </div>
-
-              <div class="workflow-diagram-column">
-              <p class="workflow-label">New workflow</p>
-              <div class="workflow-diagram workflow-diagram--new">
-                  <div class="workflow-row">
-                      <div class="workflow-node">Initialized</div>
-                      <span class="workflow-arrow">→</span>
-                      <div class="workflow-branch-group">
-                          <div class="workflow-branch-top">
-                              <div class="workflow-node">Smoke/QA</div>
-                              <span class="workflow-arrow">→</span>
-                              <div class="workflow-node">Experimenting</div>
-                          </div>
-                          <div class="workflow-branch-connector"></div>
-                          <div class="workflow-node workflow-node--pause">Paused</div>
-                      </div>
-                      <span class="workflow-arrow">→</span>
-                      <div class="workflow-outcome-group">
-                          <div class="workflow-node workflow-node--rollout">Rollout</div>
-                          <div class="workflow-node workflow-node--no-rollout">No Rollout</div>
-                      </div>
-                      <span class="workflow-arrow">→</span>
-                      <div class="workflow-node">Archived</div>
-                  </div>
-              </div>
-              </div>
-
-              </div>
-              </section>
-
-              <!-- How It Works -->
-              <section class="content-section">
-              <h2>How a Test Moves Through It</h2>
-              <p>An engineer creates the test, which starts it at Initialized. An analyst then ramps it to a small percentage of traffic, typically 1%, moving it into Smoke/QA to confirm it's behaving correctly before anyone relies on its data. Once it looks good, the analyst ramps it further into Experimenting, where it runs at real scale.</p>
-              <p>From either Smoke/QA or Experimenting, a test can move into Paused. This didn't exist before, and without it, any hold on a test caused data loss and made the surrounding results untrustworthy. With Paused, an analyst can stop a test cleanly, without corrupting what's already been collected.</p>
-              <p>When an analyst has enough signal, the test moves to Rollout if it should go live to everyone, or No Rollout if it shouldn't. Once engineering bakes the outcome into production, the test is moved to Archived and its life in the platform is done.</p>
-
-              <div class="flow-sequence">
-              <div class="flow-row">
-
-              <div class="flow-step">
-              <img class="flow-step-image" src="images/interaction-initialized.webp" alt="Test panel at Initialized, with a Move to Smoke/QA action">
-              <span class="flow-step-label">Initialized</span>
-              </div>
-
-              <span class="flow-arrow">→</span>
-
-              <div class="flow-step">
-              <img class="flow-step-image" src="images/interaction-smoke-qa.webp" alt="Test panel at Smoke/QA, ramped to 1% with Pause and Move to Experimenting actions">
-              <span class="flow-step-label">Smoke/QA</span>
-              </div>
-
-              <span class="flow-arrow">→</span>
-
-              <div class="flow-step">
-              <img class="flow-step-image" src="images/interaction-experimenting.webp" alt="Test panel at Experimenting, ramped to 100% with Pause, Mark no rollout, and Mark rollout actions">
-              <span class="flow-step-label">Experimenting</span>
-              </div>
-
-              </div>
-              </div>
-              </section>
 
               <!-- Admin Overview Before & After -->
               <section class="content-section">
-              <h2>Before & After</h2>
+              <h2>Admin Overview</h2>
               <p>The admin overview is where users go to look up a specific test, so the redesign focused on making it scannable and surfacing the right information in each field.</p>
               </section>
 
@@ -250,6 +165,101 @@
               </div>
               </div>
               </div>
+
+              <!-- Workflow Diagrams -->
+              <section class="content-section">
+              <h2>Old vs. New Workflow</h2>
+              <p>The old workflow was a straight line that couldn't represent validation, pausing, or a final outcome. The new one adds the states that were missing.</p>
+
+              <div class="workflow-diagram-columns">
+
+              <div class="workflow-diagram-column">
+              <p class="workflow-label">Old workflow</p>
+              <div class="workflow-diagram workflow-diagram--old">
+                  <div class="workflow-row">
+                      <div class="workflow-node">Created</div>
+                      <span class="workflow-arrow">→</span>
+                      <div class="workflow-node">Initialized</div>
+                      <span class="workflow-arrow">→</span>
+                      <div class="workflow-node">Active</div>
+                      <span class="workflow-arrow">→</span>
+                      <div class="workflow-node">Inactive</div>
+                      <span class="workflow-arrow">→</span>
+                      <div class="workflow-node">Archived</div>
+                  </div>
+              </div>
+              </div>
+
+              <div class="workflow-diagram-column">
+              <p class="workflow-label">New workflow</p>
+              <div class="workflow-diagram workflow-diagram--new">
+                  <div class="workflow-row">
+                      <div class="workflow-node">Initialized</div>
+                      <span class="workflow-arrow">→</span>
+                      <div class="workflow-branch-group">
+                          <div class="workflow-branch-top">
+                              <div class="workflow-node">Smoke/QA</div>
+                              <span class="workflow-arrow">→</span>
+                              <div class="workflow-node">Experimenting</div>
+                          </div>
+                          <div class="workflow-branch-connector"></div>
+                          <div class="workflow-node workflow-node--pause">Paused</div>
+                      </div>
+                      <span class="workflow-arrow">→</span>
+                      <div class="workflow-outcome-group">
+                          <div class="workflow-node workflow-node--rollout">Rollout</div>
+                          <div class="workflow-node workflow-node--no-rollout">No Rollout</div>
+                      </div>
+                      <span class="workflow-arrow">→</span>
+                      <div class="workflow-node">Archived</div>
+                  </div>
+              </div>
+              </div>
+
+              </div>
+              </section>
+
+              <!-- How It Works -->
+              <section class="content-section">
+              <h2>How a Test Moves Through It</h2>
+              <p>An engineer creates the test, which starts it at Initialized. An analyst then ramps it to a small percentage of traffic, typically 1%, moving it into Smoke/QA to confirm it's behaving correctly before anyone relies on its data. Once it looks good, the analyst ramps it further into Experimenting, where it runs at real scale.</p>
+              <p>From either Smoke/QA or Experimenting, a test can move into Paused. This didn't exist before, and without it, any hold on a test caused data loss and made the surrounding results untrustworthy. With Paused, an analyst can stop a test cleanly, without corrupting what's already been collected.</p>
+              <p>When an analyst has enough signal, the test moves to Rollout if it should go live to everyone, or No Rollout if it shouldn't. Once engineering bakes the outcome into production, the test is moved to Archived and its life in the platform is done.</p>
+              <div class="flow-before-row">
+              <div class="flow-before-image">
+              <span class="before-after-label before-after-label--standalone">Before</span>
+              <img class="flow-step-image" src="images/interaction-before.webp" alt="Old test detail panel with plain percentage input fields per locale and device">
+              </div>
+              <p class="flow-before-text">During workshops, analysts kept comparing this panel to tools like Optimizely, where allocation is controlled with sliders. To declutter the panel and match a mental model they already had, we landed on a slider UI that shows where a test's allocation stands at a glance, while still letting analysts type in an exact percentage manually.</p>
+              </div>
+
+              <span class="before-after-label before-after-label--after-blue before-after-label--standalone">After</span>
+
+              <div class="flow-sequence">
+              <div class="flow-row">
+
+              <div class="flow-step">
+              <img class="flow-step-image" src="images/interaction-initialized.webp" alt="Test panel at Initialized, with a Move to Smoke/QA action">
+              <span class="flow-step-label">Initialized</span>
+              </div>
+
+              <span class="flow-arrow">→</span>
+
+              <div class="flow-step">
+              <img class="flow-step-image" src="images/interaction-smoke-qa.webp" alt="Test panel at Smoke/QA, ramped to 1% with Pause and Move to Experimenting actions">
+              <span class="flow-step-label">Smoke/QA</span>
+              </div>
+
+              <span class="flow-arrow">→</span>
+
+              <div class="flow-step">
+              <img class="flow-step-image" src="images/interaction-experimenting.webp" alt="Test panel at Experimenting, ramped to 100% with Pause, Mark no rollout, and Mark rollout actions">
+              <span class="flow-step-label">Experimenting</span>
+              </div>
+
+              </div>
+              </div>
+              </section>
 
               <!-- Test Creation Flow -->
               <section class="content-section">
