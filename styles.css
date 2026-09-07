@@ -574,32 +574,6 @@ img {
     max-width: 100%;
 }
 
-.project-meta {
-    display: flex;
-    gap: 3rem;
-    flex-wrap: wrap;
-    margin-bottom: 1.5rem;
-}
-
-.meta-item {
-    display: flex;
-    flex-direction: column;
-    gap: 0.3rem;
-}
-
-.meta-label {
-    font-size: 0.65rem;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--muted);
-}
-
-.meta-value {
-    font-family: var(--sans);
-    font-size: 1rem;
-    color: var(--text);
-}
-
 .btn-primary, .btn-secondary {
     display: inline-flex;
     align-items: center;
