@@ -625,6 +625,14 @@ img {
     max-width: 100%;
 }
 
+.project-disclaimer {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.02em;
+    color: var(--muted);
+    margin-top: 0.8rem;
+}
+
 .btn-primary, .btn-secondary {
     display: inline-flex;
     align-items: center;
