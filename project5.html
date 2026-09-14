@@ -230,13 +230,10 @@
               <p>An engineer creates the test, which starts it at Initialized. An analyst then ramps it to a small percentage of traffic, typically 1%, moving it into Smoke/QA to confirm it's behaving correctly before anyone relies on its data. Once it looks good, the analyst ramps it further into Experimenting, where it runs at real scale.</p>
               <p>From either Smoke/QA or Experimenting, a test can move into Paused. This didn't exist before, and without it, any hold on a test caused data loss and made the surrounding results untrustworthy. With Paused, an analyst can stop a test cleanly, without corrupting what's already been collected.</p>
               <p>When an analyst has enough signal, the test moves to Rollout if it should go live to everyone, or No Rollout if it shouldn't. Once engineering bakes the outcome into production, the test is moved to Archived and its life in the platform is done.</p>
-              <div class="flow-before-row">
-              <div class="flow-before-image">
+              <p>During workshops, analysts kept comparing this panel to tools like Optimizely, where allocation is controlled with sliders. To declutter the panel and match a mental model they already had, we landed on a slider UI that shows where a test's allocation stands at a glance, while still letting analysts type in an exact percentage manually.</p>
+
               <span class="before-after-label before-after-label--standalone">Before</span>
-              <img class="flow-step-image" src="images/interaction-before.webp" alt="Old test detail panel with plain percentage input fields per locale and device">
-              </div>
-              <p class="flow-before-text">During workshops, analysts kept comparing this panel to tools like Optimizely, where allocation is controlled with sliders. To declutter the panel and match a mental model they already had, we landed on a slider UI that shows where a test's allocation stands at a glance, while still letting analysts type in an exact percentage manually.</p>
-              </div>
+              <img class="flow-step-image flow-step-image--single" src="images/interaction-before.webp" alt="Old test detail panel with plain percentage input fields per locale and device">
 
               <span class="before-after-label before-after-label--after-blue before-after-label--standalone">After</span>
 
