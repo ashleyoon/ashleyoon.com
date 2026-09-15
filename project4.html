@@ -92,6 +92,13 @@
               </div>
               </section>
 
+              <!-- Carousel Logic -->
+              <section class="content-section">
+              <h2>Designing the Carousel Logic</h2>
+              <p>To expand on the photo carousel: if a model had a YouTube video attached, the page should surface that video; if it didn't, it should fall back to the photo gallery. My first instinct was to treat these as two separate layouts, but that meant designing and maintaining two different top-of-page states for what was really the same slot.</p>
+              <p>Out of the options I brainstormed, the one with the least friction was to borrow the gallery pattern from CarGurus' own Vehicle Detail Pages (VDP), because it collapsed both cases into a single component. If a video exists, it becomes the first item in the carousel and everything after it is the photo gallery. If there's no video, the first item is simply the first gallery photo. Same pattern, same code, two behaviors handled by the data rather than by a separate design.</p>
+              </section>
+
               <!-- Redesigned Screens -->
               <section class="content-section">
               <h2>Before & After</h2>
