@@ -1346,6 +1346,10 @@ img {
     margin-bottom: 3rem;
 }
 
+.before-after-grid--spaced {
+    margin-bottom: 5rem;
+}
+
 .before-after-pair {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
