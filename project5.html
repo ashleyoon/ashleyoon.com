@@ -224,14 +224,26 @@
               </div>
               </section>
 
+              <!-- Redesigning Test Targeting -->
+              <section class="content-section">
+              <h2>Redesigning Test Targeting</h2>
+              <p>Before this redesign, clicking into a test opened an entirely new page, and country, locale, and device targeting were treated as three separate ideas that each lived on their own page. Switching between them meant losing your place and navigating back to get to the test.</p>
+              <p>I consolidated all of it into a single side panel that flies out from the admin table, so opening a test never takes you off the page and the interaction is a lot more seamless.</p>
+              <p>I also met with the analysts who use this part of the system to understand how their workflow actually works, and found that around 99% of the time, they already know exactly which targets a test needs. So instead of keeping targeting as a separate step after a test exists, I moved target selection into the test creation flow itself.</p>
+              <p>Rather than treating country, locale, and device as three separate ideas, I structured them to live inside one another: tabs are organized per country (United States, Canada), locale is automatically selected based on the country (United States maps to en_US, for example), and device-level allocation lives underneath that. Analysts can still add a target they forgot, like iOS, at any time from the panel.</p>
+              <p>During workshops, analysts kept comparing this panel to tools like Optimizely, where allocation is controlled with sliders. To declutter the panel and match a mental model they already had, we landed on a slider UI that shows where a test's allocation stands at a glance, while still letting analysts type in an exact percentage manually.</p>
+
+              </section>
+
               <!-- How It Works -->
               <section class="content-section">
               <h2>How a Test Moves Through It</h2>
               <p>An engineer creates the test, which starts it at Initialized. An analyst then ramps it to a small percentage of traffic, typically 1%, moving it into Smoke/QA to confirm it's behaving correctly before anyone relies on its data. Once it looks good, the analyst ramps it further into Experimenting, where it runs at real scale.</p>
               <p>From either Smoke/QA or Experimenting, a test can move into Paused. This didn't exist before, and without it, any hold on a test caused data loss and made the surrounding results untrustworthy. With Paused, an analyst can stop a test cleanly, without corrupting what's already been collected.</p>
               <p>When an analyst has enough signal, the test moves to Rollout if it should go live to everyone, or No Rollout if it shouldn't. Once engineering bakes the outcome into production, the test is moved to Archived and its life in the platform is done.</p>
-              <p>During workshops, analysts kept comparing this panel to tools like Optimizely, where allocation is controlled with sliders. To declutter the panel and match a mental model they already had, we landed on a slider UI that shows where a test's allocation stands at a glance, while still letting analysts type in an exact percentage manually.</p>
+              </section>
 
+              <section class="content-section">
               <span class="before-after-label before-after-label--standalone">Before</span>
               <img class="flow-step-image flow-step-image--single" src="images/interaction-before.webp" alt="Old test detail panel with plain percentage input fields per locale and device">
 
