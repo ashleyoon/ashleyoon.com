@@ -89,7 +89,7 @@
               <p>Added a Shorts section at the bottom of the page to keep shoppers engaged longer and surface CarGurus' video content in a quick, visual format, reusing the same carousel component from CarGurus' design system instead of building a new one.</p>
               </div>
               </div>
-              <img src="images/seo-research.webp" alt="Research collage: VDP gallery carousel precedent, competitor site logos, and a note on designing for SEO" width="1150" height="445" style="max-width:100%; width:1150px; height:auto; border-radius:12px; margin-top:1.5rem;">
+              <img class="research-collage-standalone" src="images/seo-research.webp" alt="Research collage: VDP gallery carousel precedent, competitor site logos, and a note on designing for SEO" width="1150" height="445" style="max-width:100%; width:1150px; height:auto; border-radius:12px; margin-top:1.5rem; cursor:zoom-in;">
               </section>
 
               <!-- Redesigned Screens -->
@@ -344,7 +344,7 @@
         const lightboxImg = document.getElementById('lightbox-img');
         const lightboxClose = document.querySelector('.lightbox-close');
 
-        document.querySelectorAll('.browser-screen img').forEach(img => {
+        document.querySelectorAll('.browser-screen img, .research-collage-standalone').forEach(img => {
             img.addEventListener('click', () => {
                 lightbox.style.display = 'flex';
                 lightboxImg.src = img.src;
