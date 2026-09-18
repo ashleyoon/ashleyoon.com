@@ -63,15 +63,23 @@
                   <h2>Overview</h2>
                   <p class="lead">A powerful testing tool that nobody could read at a glance.</p>
                   <p>As a UX Design Intern at CarGurus, I worked on the internal platform teams use to run A/B and multivariate tests. The old workflow had five statuses (Created, Initialized, Active, Inactive, Archived), and treated a test's entire life as one long "Active" phase. A test running at 1% of traffic looked identical, status-wise, to one fully ramped and being watched for real results.</p>
-                  <p>The work broke into three parts: information architecture, defining the new statuses and how they relate; interaction model, mapping how a test moves from one status to the next; and UI redesign, rebuilding the interface around that workflow.</p>
               </section>
 
               <!-- Research & Discovery -->
               <section class="content-section">
                   <h2>Research & Discovery</h2>
-                  <p>I started by digging into the three power users of this tool, PMs, analysts, and engineers, mapping out each one's responsibilities and where their pain points showed up. From there, I traced a full flow of where each role enters and exits a test's lifecycle, which made it clear the existing status list didn't match how any of them actually worked.</p>
-                  <p>To pressure-test that mapping, I workshopped several workflow iterations with stakeholders from all three groups and used their input to converge on a structure that would hold up for people using it every day. I also ran one-on-one interviews to get more candid, specific feedback than a workshop setting allows, which gave me real data to back up the design decisions in the final workflow.</p>
-                  <p>For those workshops, I used AI to turn my static Figma frames into a clickable prototype instead of building every micro-interaction by hand. That sped up the process, but more importantly, it let stakeholders click through a version that felt like the real thing instead of talking through static screens, so I could watch in real time where the flow felt messy or broke down, hear their reactions directly, and iterate much faster between sessions.</p>
+                  <div class="research-split">
+                  <div class="research-text">
+                  <p>I started by mapping the responsibilities and pain points of the tool's three power users, PMs, analysts, and engineers, then traced where each role enters and exits a test's lifecycle. That made it clear the existing status list didn't match how any of them actually worked.</p>
+                  <p>To pressure-test that mapping, I workshopped several workflow iterations with stakeholders from all three groups, then ran one-on-one interviews for more candid feedback than a workshop setting allows. Both fed directly into the final workflow.</p>
+                  <p>For those workshops, I used AI to turn my static Figma frames into a clickable prototype instead of building every micro-interaction by hand. That let stakeholders click through something that felt real instead of talking through static screens, so I could watch where the flow broke down and iterate faster between sessions.</p>
+                  </div>
+                  <div class="research-collage">
+                  <img src="images/mvt1.webp" alt="Workflow mapping diagram from research">
+                  <img src="images/mvt3.webp" alt="Workflow mapping exploration">
+                  <img src="images/mvt2.webp" alt="Status research notes">
+                  </div>
+                  </div>
               </section>
 
               <!-- Approach -->
@@ -80,15 +88,15 @@
               <div class="features-grid">
               <div class="feature-item">
               <h3>Information architecture</h3>
-              <p>Defined seven statuses in place of the old five, each mapped to a real moment in a test's life: initial setup, small-scale validation, full experimentation, an intentional hold, and the two possible outcomes before archiving.</p>
+              <p>Defined seven statuses in place of the old five, each mapped to a real moment in a test's life, from setup through validation, experimentation, and its final outcome.</p>
               </div>
               <div class="feature-item">
               <h3>Interaction model</h3>
-              <p>Mapped exactly how and when a test can move between statuses, including who is responsible for that transition, an engineer, an analyst, or the system itself, and designed how that action is actually taken in the UI and how the interface reflects it back.</p>
+              <p>Mapped how and when a test moves between statuses, who's responsible, an engineer, analyst, or the system, and how that action shows up in the UI.</p>
               </div>
               <div class="feature-item">
               <h3>UI redesign</h3>
-              <p>Rebuilt the interface around the new workflow so a test's current status, and what can happen to it next, is clear without digging into its history.</p>
+              <p>Rebuilt the interface around the new workflow so a test's status, and what can happen to it next, is clear without digging into its history.</p>
               </div>
               </div>
               </section>
@@ -175,7 +183,6 @@
               <div class="workflow-diagram-columns">
 
               <div class="workflow-diagram-column">
-              <p class="workflow-label">Old workflow</p>
               <div class="workflow-diagram workflow-diagram--old">
                   <div class="workflow-row">
                       <div class="workflow-node">Created</div>
@@ -192,7 +199,6 @@
               </div>
 
               <div class="workflow-diagram-column">
-              <p class="workflow-label">New workflow</p>
               <div class="workflow-diagram workflow-diagram--new">
                   <div class="workflow-row">
                       <div class="workflow-node">Initialized</div>
@@ -227,19 +233,18 @@
               <!-- Redesigning Test Targeting -->
               <section class="content-section">
               <h2>Redesigning Test Targeting</h2>
-              <p>Before this redesign, clicking into a test opened an entirely new page, and country, locale, and device targeting were treated as three separate ideas that each lived on their own page. Switching between them meant losing your place and navigating back to get to the test.</p>
-              <p>I consolidated all of it into a single side panel that flies out from the admin table, so opening a test never takes you off the page and the interaction is a lot more seamless.</p>
-              <p>I also met with the analysts who use this part of the system to understand how their workflow actually works, and found that around 99% of the time, they already know exactly which targets a test needs. So instead of keeping targeting as a separate step after a test exists, I moved target selection into the test creation flow itself.</p>
-              <p>Rather than treating country, locale, and device as three separate ideas, I structured them to live inside one another: tabs are organized per country (United States, Canada), locale is automatically selected based on the country (United States maps to en_US, for example), and device-level allocation lives underneath that. Analysts can still add a target they forgot, like iOS, at any time from the panel.</p>
-              <p>During workshops, analysts kept comparing this panel to tools like Optimizely, where allocation is controlled with sliders. To declutter the panel and match a mental model they already had, we landed on a slider UI that shows where a test's allocation stands at a glance, while still letting analysts type in an exact percentage manually.</p>
+              <p>Before this redesign, clicking into a test opened an entirely new page, and country, locale, and device targeting each lived on their own separate page, so switching between them meant losing your place. I consolidated all of it into a single side panel that flies out from the admin table, so opening a test never takes you off the page.</p>
+              <p>Meeting with the analysts who use this part of the system, I found that around 99% of the time they already know exactly which targets a test needs, so I moved target selection into the test creation flow itself instead of keeping it as a separate step after.</p>
+              <p>I also restructured the hierarchy so the three live inside one another instead of side by side: tabs are organized per country (United States, Canada), locale is auto-selected from the country, and device-level allocation lives underneath. Analysts can still add a forgotten target, like iOS, at any time.</p>
+              <p>During workshops, analysts kept comparing this panel to tools like Optimizely, which use sliders for allocation. To match that mental model, we landed on a slider UI that shows allocation at a glance while still letting analysts type in an exact percentage.</p>
 
               </section>
 
               <!-- How It Works -->
               <section class="content-section">
               <h2>How a Test Moves Through It</h2>
-              <p>An engineer creates the test, which starts it at Initialized. An analyst then ramps it to a small percentage of traffic, typically 1%, moving it into Smoke/QA to confirm it's behaving correctly before anyone relies on its data. Once it looks good, the analyst ramps it further into Experimenting, where it runs at real scale.</p>
-              <p>From either Smoke/QA or Experimenting, a test can move into Paused. This didn't exist before, and without it, any hold on a test caused data loss and made the surrounding results untrustworthy. With Paused, an analyst can stop a test cleanly, without corrupting what's already been collected.</p>
+              <p>An engineer creates the test, starting it at Initialized. An analyst ramps it to a small percentage of traffic, typically 1%, moving it into Smoke/QA to confirm it behaves correctly before anyone relies on its data, then ramps it further into Experimenting once it looks good.</p>
+              <p>From either Smoke/QA or Experimenting, a test can move into Paused, a status that didn't exist before. Without it, any hold on a test caused data loss and made its results untrustworthy; with it, an analyst can stop a test cleanly without corrupting what's already been collected.</p>
               <p>When an analyst has enough signal, the test moves to Rollout if it should go live to everyone, or No Rollout if it shouldn't. Once engineering bakes the outcome into production, the test is moved to Archived and its life in the platform is done.</p>
               </section>
 
@@ -486,7 +491,7 @@
         const lightboxImg = document.getElementById('lightbox-img');
         const lightboxClose = document.querySelector('.lightbox-close');
 
-        document.querySelectorAll('.browser-screen img, .flow-step-image').forEach(img => {
+        document.querySelectorAll('.browser-screen img, .flow-step-image, .research-collage img').forEach(img => {
             img.addEventListener('click', () => {
                 lightbox.style.display = 'flex';
                 lightboxImg.src = img.src;
