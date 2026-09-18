@@ -78,24 +78,18 @@
               <div class="features-grid">
               <div class="feature-item">
               <h3>New hero and photo carousel</h3>
-              <p>A large hero image with a gallery carousel directly below it, a pattern borrowed from CarGurus' own Vehicle Detail Pages (VDP), giving the page a much stronger visual first impression.</p>
+              <p>A large hero image with a gallery carousel below it, reusing an existing component from CarGurus' own Vehicle Detail Pages (VDP) rather than building a new one. If a model has a YouTube video, it leads the carousel; if not, the first photo does, so one component handles both cases.</p>
               </div>
               <div class="feature-item">
               <h3>Right rail action box</h3>
-              <p>Kept the existing right rail format, but added a new box up top with pricing, expert score, and Search Listings and Compare buttons, placed above the original external links.</p>
+              <p>Kept the existing right rail format, but added a new box up top with pricing, expert score, and Search Listings and Compare buttons. I tried the owner rating and expert score side by side, but they competed, so I led with just the expert score.</p>
               </div>
               <div class="feature-item">
               <h3>YouTube Shorts module</h3>
-              <p>Added a Shorts section at the bottom of the page to keep shoppers engaged longer and surface CarGurus' video content in a quick, visual format.</p>
+              <p>Added a Shorts section at the bottom of the page to keep shoppers engaged longer and surface CarGurus' video content in a quick, visual format, reusing the same carousel component from CarGurus' design system instead of building a new one.</p>
               </div>
               </div>
-              </section>
-
-              <!-- Carousel Logic -->
-              <section class="content-section">
-              <h2>Designing the Carousel Logic</h2>
-              <p>To expand on the photo carousel: if a model had a YouTube video attached, the page should surface that video; if it didn't, it should fall back to the photo gallery. My first instinct was to treat these as two separate layouts, but that meant designing and maintaining two different top-of-page states for what was really the same slot.</p>
-              <p>Out of the options I brainstormed, the one with the least friction was to borrow the gallery pattern from CarGurus' own Vehicle Detail Pages (VDP), because it collapsed both cases into a single component. If a video exists, it becomes the first item in the carousel and everything after it is the photo gallery. If there's no video, the first item is simply the first gallery photo. Same pattern, same code, two behaviors handled by the data rather than by a separate design.</p>
+              <img src="images/seo-research.webp" alt="Research collage: VDP gallery carousel precedent, competitor site logos, and a note on designing for SEO" width="1150" height="445" style="max-width:100%; width:1150px; height:auto; border-radius:12px; margin-top:1.5rem;">
               </section>
 
               <!-- Redesigned Screens -->
