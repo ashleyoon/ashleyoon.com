@@ -1529,6 +1529,12 @@ img {
     margin-top: 1.2rem;
 }
 
+.feature-item {
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.3rem 1.4rem;
+}
+
 .feature-item h3 {
     font-family: var(--sans);
     font-size: 1.05rem;
