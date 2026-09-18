@@ -1099,7 +1099,7 @@ img {
 /* Research & Discovery text + overlapping photo-collage layout */
 .research-split {
     display: flex;
-    align-items: flex-start;
+    align-items: center;
     gap: 3rem;
     margin-top: 1.2rem;
 }
@@ -1114,7 +1114,6 @@ img {
     flex-shrink: 0;
     width: 280px;
     height: 260px;
-    margin-top: 1rem;
 }
 
 .research-collage img {
