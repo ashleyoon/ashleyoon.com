@@ -35,14 +35,20 @@
               <img src="./images/editorial-hero-3.webp" alt="Postcard mockup 2">
           </div>
 
-          <div class="project-images-grid">
-              <img src="./images/editorial-detail-1.webp" alt="Detail 1">
-              <img src="./images/editorial-detail-2.webp" alt="Detail 2">
-              <img src="./images/editorial-detail-3.webp" alt="Detail 3">
-              <img src="./images/editorial-detail-4.webp" alt="Detail 4">
-              <img src="./images/editorial-detail-5.webp" alt="Detail 5">
-              <img src="./images/editorial-detail-6.webp" alt="Detail 6">
+          <div class="accordion-gallery-wrap">
+              <div id="editorialGallery"></div>
           </div>
+
+          <noscript>
+              <div class="project-images-grid">
+                  <img src="./images/editorial-detail-1.webp" alt="Detail 1">
+                  <img src="./images/editorial-detail-2.webp" alt="Detail 2">
+                  <img src="./images/editorial-detail-3.webp" alt="Detail 3">
+                  <img src="./images/editorial-detail-4.webp" alt="Detail 4">
+                  <img src="./images/editorial-detail-5.webp" alt="Detail 5">
+                  <img src="./images/editorial-detail-6.webp" alt="Detail 6">
+              </div>
+          </noscript>
 
       </div>
     </div>
@@ -100,6 +106,36 @@
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape' && lightbox.style.display === 'flex') {
                 lightbox.style.display = 'none';
+            }
+        });
+    </script>
+
+    <script type="module">
+        import { initAccordionGallery } from './accordion-gallery.js';
+
+        initAccordionGallery(document.getElementById('editorialGallery'), {
+            items: [
+                { image: './images/editorial-detail-1.webp', alt: 'Editorial spread detail 1' },
+                { image: './images/editorial-detail-2.webp', alt: 'Editorial spread detail 2' },
+                { image: './images/editorial-detail-3.webp', alt: 'Editorial spread detail 3' },
+                { image: './images/editorial-detail-4.webp', alt: 'Editorial spread detail 4' },
+                { image: './images/editorial-detail-5.webp', alt: 'Editorial spread detail 5' },
+                { image: './images/editorial-detail-6.webp', alt: 'Editorial spread detail 6' }
+            ],
+            defaultIndex: 2,
+            expandRatio: 0.52,
+            trigger: 'hover',
+            // keeps the open panel near the spreads' own 1.546 aspect ratio
+            height: 390,
+            showLabels: false,
+            grayscale: false,
+            overlayColor: '#FFFFFF',
+            dim: 0,
+            className: 'accordion-gallery--light accordion-gallery--no-labels',
+            onItemClick: (item) => {
+                const lightbox = document.getElementById('lightbox');
+                lightbox.style.display = 'flex';
+                document.getElementById('lightbox-img').src = item.image;
             }
         });
     </script>
