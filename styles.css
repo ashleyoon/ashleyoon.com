@@ -2373,7 +2373,8 @@ img {
     justify-content: space-between;
     gap: 1.5rem;
     padding: 0.62rem 0;
-    border-top: 1px solid rgb(84, 84, 84);
+    /* same grey as the labels, dialled back so it reads as a hairline */
+    border-top: 1px solid rgba(84, 84, 84, 0.35);
 }
 
 .work-meta__k {
