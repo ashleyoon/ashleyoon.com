@@ -6,6 +6,41 @@
 
 const PROJECTS = [
     {
+        title: 'Helvetica Type Specimen',
+        blurb:
+            "Postcard sets that showcase Helvetica's typeface anatomy, characteristics, and more.",
+        tags: ['Typography', '2025'],
+        meta: [
+            { label: 'Category', value: 'Typography' },
+            { label: 'Year', value: '2025' }
+        ],
+        cover: '/images/helvetica-hero-3.webp',
+        images: [
+            '/images/helvetica-hero-3.webp',
+            '/images/helvetica-hero-1.webp',
+            '/images/helvetica-hero-2.webp',
+            '/images/helvetica-detail-1.webp',
+            '/images/helvetica-detail-2.webp',
+            '/images/helvetica-detail-3.webp',
+            '/images/helvetica-detail-4.webp',
+            '/images/helvetica-detail-5.webp',
+            '/images/helvetica-detail-6.webp'
+        ]
+    },
+    {
+        title: 'Cortis',
+        blurb: 'A video edit of GO, a music video by the band Cortis.',
+        tags: ['Video', '2025'],
+        meta: [
+            { label: 'Category', value: 'Video edit' },
+            { label: 'Year', value: '2025' }
+        ],
+        cover: { video: '/images/cortis-edit.mp4', poster: '/images/cortis-poster.webp', w: 1024, h: 576 },
+        images: [
+            { video: '/images/cortis-edit.mp4', poster: '/images/cortis-poster.webp' }
+        ]
+    },
+    {
         title: 'Editorial Spreads',
         blurb:
             'A series of editorial spread designs reimagining a Stephen Curry article through varied visual approaches.',
@@ -28,28 +63,6 @@ const PROJECTS = [
             '/images/editorial-detail-5.webp',
             '/images/editorial-detail-6.webp'
         ]
-    },
-    {
-        title: 'Helvetica Type Specimen',
-        blurb:
-            "Postcard sets that showcase Helvetica's typeface anatomy, characteristics, and more.",
-        tags: ['Typography', '2025'],
-        meta: [
-            { label: 'Category', value: 'Typography' },
-            { label: 'Year', value: '2025' }
-        ],
-        cover: '/images/helvetica-hero-1.webp',
-        images: [
-            '/images/helvetica-hero-1.webp',
-            '/images/helvetica-hero-2.webp',
-            '/images/helvetica-hero-3.webp',
-            '/images/helvetica-detail-1.webp',
-            '/images/helvetica-detail-2.webp',
-            '/images/helvetica-detail-3.webp',
-            '/images/helvetica-detail-4.webp',
-            '/images/helvetica-detail-5.webp',
-            '/images/helvetica-detail-6.webp'
-        ]
     }
 ];
 
@@ -66,7 +79,6 @@ const PLACEHOLDER_HEIGHTS = [240, 180, 300, 210, 270, 190];
    Pitch direction carries the meaning: rising to open, falling to close.
    A flat tick for stepping sideways through images. */
 let audioCtx = null;
-let muted = false;
 
 function ctx() {
     const AC = window.AudioContext || window.webkitAudioContext;
@@ -106,13 +118,61 @@ const SOUNDS = {
 };
 
 function boop(kind) {
-    if (muted) return;
     try {
         const ac = ctx();
         if (ac) (SOUNDS[kind] || SOUNDS.open)(ac);
     } catch (e) {
         /* sound is a flourish, never let it break the click */
     }
+}
+
+/* ---------- media ---------- */
+/* Build an <img> or a <video> from a media entry. A string is an image, an
+   object with .video is a clip. Grid clips autoplay muted and looping, which
+   is the only form of autoplay browsers allow, and are paused while offscreen
+   or when the visitor has asked for less motion. */
+const reducedMotion =
+    window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+let seen = null;
+
+function mediaEl(item, inGrid) {
+    if (typeof item === 'string') {
+        const img = document.createElement('img');
+        img.src = item;
+        img.alt = '';
+        return img;
+    }
+    const v = document.createElement('video');
+    v.src = item.video;
+    if (item.poster) v.poster = item.poster;
+    if (item.w) { v.width = item.w; v.height = item.h; }
+    v.muted = true;
+    v.loop = true;
+    v.playsInline = true;
+    v.setAttribute('muted', '');
+    v.setAttribute('playsinline', '');
+    if (inGrid) {
+        v.preload = 'metadata';
+        if (!reducedMotion) {
+            v.autoplay = true;
+            // only spend decode time on clips that are actually on screen
+            if (!seen && 'IntersectionObserver' in window) {
+                seen = new IntersectionObserver(entries => {
+                    entries.forEach(en => {
+                        if (en.isIntersecting) en.target.play().catch(() => {});
+                        else en.target.pause();
+                    });
+                }, { rootMargin: '200px' });
+            }
+            if (seen) seen.observe(v);
+        }
+    } else {
+        // short silent loop, so controls would only be clutter
+        v.autoplay = !reducedMotion;
+        v.preload = 'auto';
+    }
+    return v;
 }
 
 /* ---------- grid ---------- */
@@ -125,11 +185,12 @@ function buildGrid(root) {
 
         const media = document.createElement('div');
         media.className = 'work-card__media';
-        const img = document.createElement('img');
-        img.src = p.cover;
-        img.alt = p.title;
-        img.loading = i > 1 ? 'lazy' : 'eager';
-        media.appendChild(img);
+        const el = mediaEl(p.cover, true);
+        if (el.tagName === 'IMG') {
+            el.alt = p.title;
+            el.loading = i > 1 ? 'lazy' : 'eager';
+        }
+        media.appendChild(el);
 
         // no caption on the card, the title and tags live in the dialog
         card.setAttribute('aria-label', p.title);
@@ -164,9 +225,8 @@ let index = 0;
 function renderMeta(p) {
     const tbl = document.getElementById('workMeta');
     tbl.innerHTML = '';
-    const rows = (p.meta || []).concat([
-        { label: 'Pieces', value: String(p.images.length) }
-    ]);
+    const rows = (p.meta || []).slice();
+    if (p.images.length > 1) rows.push({ label: 'Pieces', value: String(p.images.length) });
     rows.forEach(r => {
         const row = document.createElement('div');
         row.className = 'work-meta__row';
@@ -194,12 +254,11 @@ function showImage(i) {
     stage.innerHTML = '';
     const frame = document.createElement('div');
     frame.className = 'work-stage__frame';
-    const im = document.createElement('img');
-    im.src = current.images[index];
-    im.alt = current.title + ', image ' + (index + 1) + ' of ' + n;
-    frame.appendChild(im);
+    const el = mediaEl(current.images[index], false);
+    if (el.tagName === 'IMG') el.alt = current.title + ', image ' + (index + 1) + ' of ' + n;
+    frame.appendChild(el);
     stage.appendChild(frame);
-    document.getElementById('workCount').textContent = (index + 1) + ' / ' + n;
+    document.getElementById('workCount').textContent = n > 1 ? (index + 1) + ' / ' + n : '';
 }
 
 function openDialog(p) {
@@ -246,17 +305,6 @@ function init() {
         else if (e.key === 'ArrowRight') { boop('tick'); showImage(index + 1); }
         else if (e.key === 'ArrowLeft') { boop('tick'); showImage(index - 1); }
     });
-
-    const mute = document.getElementById('workMute');
-    if (mute) {
-        mute.addEventListener('click', () => {
-            muted = !muted;
-            mute.classList.toggle('is-muted', muted);
-            mute.setAttribute('aria-pressed', String(muted));
-            mute.setAttribute('aria-label', muted ? 'Unmute click sound' : 'Mute click sound');
-            if (!muted) boop('open');
-        });
-    }
 }
 
 if (document.readyState === 'loading') {

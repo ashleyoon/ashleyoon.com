@@ -975,7 +975,7 @@ img {
 
 .workflow-caption {
     font-size: 0.85rem;
-    color: rgba(0, 0, 0, 0.55);
+    color: rgb(84, 84, 84);
     margin-top: 0.2rem;
 }
 
@@ -2203,39 +2203,6 @@ img {
    on one page. CSS columns do the masonry, which needs no JS and reflows
    on its own.
 ---------------------------------------- */
-.work-head {
-    display: flex;
-    align-items: baseline;
-    justify-content: space-between;
-    gap: 1rem;
-    margin-bottom: 2rem;
-}
-
-.work-head h1 {
-    font-size: 1.9rem;
-    font-weight: 500;
-    letter-spacing: -0.01em;
-}
-
-.work-mute {
-    width: 30px;
-    height: 30px;
-    flex-shrink: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: 1px solid var(--border);
-    border-radius: 50%;
-    background: transparent;
-    color: var(--muted);
-    transition: color 0.2s ease, border-color 0.2s ease;
-}
-.work-mute:hover { color: var(--text); border-color: var(--text); }
-.work-mute svg { width: 15px; height: 15px; }
-.work-mute__off { display: none; }
-.work-mute.is-muted .work-mute__on { display: none; }
-.work-mute.is-muted .work-mute__off { display: block; }
-
 .work-grid {
     column-count: 3;
     column-gap: 1.1rem;
@@ -2260,14 +2227,16 @@ img {
     background: var(--surface-2, #F0F0F0);
 }
 
-.work-card__media img {
+.work-card__media img,
+.work-card__media video {
     display: block;
     width: 100%;
     height: auto;
     transition: transform 0.4s ease;
 }
 
-.work-card:hover .work-card__media img { transform: scale(1.03); }
+.work-card:hover .work-card__media img,
+.work-card:hover .work-card__media video { transform: scale(1.03); }
 
 /* Empty slots, so the grid reads as a grid before the work fills it */
 .work-card--empty {
@@ -2351,7 +2320,7 @@ img {
 
 .work-dialog__title {
     font-size: 1.05rem;
-    font-weight: 600;
+    font-weight: 500;
     margin-top: 0.2rem;
     letter-spacing: -0.01em;
     margin-bottom: 1rem;
@@ -2360,7 +2329,8 @@ img {
 .work-dialog__blurb {
     font-size: 0.88rem;
     line-height: 1.6;
-    color: var(--text);
+    /* the site's description grey */
+    color: rgb(84, 84, 84);
     margin-bottom: 1.8rem;
 }
 
@@ -2412,7 +2382,8 @@ img {
 }
 
 /* the image stands on its own, no frame around it */
-.work-stage__frame img {
+.work-stage__frame img,
+.work-stage__frame video {
     display: block;
     max-width: 100%;
     max-height: 84vh;
@@ -2441,7 +2412,8 @@ img {
 
 @media (prefers-reduced-motion: reduce) {
     .work-stage__frame { animation: none; }
-    .work-card__media img { transition: none; }
+    .work-card__media img,
+    .work-card__media video { transition: none; }
 }
 
 @media (max-width: 900px) {
@@ -2458,7 +2430,8 @@ img {
         border-top: 1px solid var(--border);
     }
     .work-stage { padding: 1.2rem; }
-    .work-stage__frame img { max-height: 46vh; }
+    .work-stage__frame img,
+    .work-stage__frame video { max-height: 46vh; }
     .work-stage__count { left: 1.2rem; bottom: auto; top: 1.2rem; }
 }
 
