@@ -27,7 +27,7 @@
               </li>
               <li>
                 <a href="about.html" class="sidebar-link" aria-current="page">
-                  <span class="sidebar-link-text">About Me</span>
+                  <span class="sidebar-link-text">About</span>
                   <span class="sidebar-arrow"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></span>
                 </a>
               </li>
@@ -89,20 +89,22 @@
 
         <div class="about-intro" style="margin-bottom: 4rem">
           <div class="about-blurb">
+            <p class="greeting" aria-label="Hello">
+              <span class="greeting-word" id="greetingWord" aria-hidden="true">Hello!</span>
+            </p>
             <p>
               I'm a designer with a love for beautiful, purposeful work,
               currently studying Computer Science and Design at Northeastern
               University. I care about
-              <span class="em-big">understanding people</span> and making
-              things that make someone's day a little easier.
+              <span class="em-big">understanding people</span>.
             </p>
             <br />
             <p>
               Outside of class I go to museums
-              <span class="em-icon" aria-hidden="true">🖼️</span> a lot.
-              My friends have finally gotten me into hiking
-              <span class="em-icon em-icon--r" aria-hidden="true">🥾</span>, and
-              I'm learning guitar
+              <span class="em-icon" aria-hidden="true">🖼️</span>. I love
+              walking, running, and hiking
+              <span class="em-icon em-icon--r" aria-hidden="true">🥾</span>. I'm
+              learning guitar
               <span class="em-icon" aria-hidden="true">🎸</span>. I'll also go an
               unreasonable distance for good food
               <span class="em-icon em-icon--r" aria-hidden="true">🍜</span>! Here are a
@@ -225,6 +227,19 @@
     </div>
 
     <script>
+      // Live clock in the sidebar footer
+      function updateTime() {
+        const el = document.getElementById("liveTime");
+        if (el)
+          el.textContent = new Date().toLocaleTimeString("en-US", {
+            hour: "2-digit",
+            minute: "2-digit",
+            second: "2-digit",
+          });
+      }
+      updateTime();
+      setInterval(updateTime, 1000);
+
       const cursor = document.querySelector(".custom-cursor");
       document.addEventListener("mousemove", (e) => {
         cursor.style.left = e.clientX + "px";
@@ -262,6 +277,61 @@
           lightbox.style.display = "none";
         }
       });
+    
+      // Greeting types itself out in a few languages. Static for anyone who
+      // has asked for less motion, and for anyone without JS, since the
+      // markup ships with "Hello!" already in place.
+      (function () {
+        var el = document.getElementById("greetingWord");
+        if (!el) return;
+        if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+        var greetings = [
+          "Hello!",
+          "\uc548\ub155\ud558\uc138\uc694!",
+          "\u00a1Hola!",
+          "Bonjour!",
+          "\u4f60\u597d!",
+          "\u3053\u3093\u306b\u3061\u306f!",
+          "Ol\u00e1!",
+          "Hallo!",
+          "Ciao!",
+          "\u0928\u092e\u0938\u094d\u0924\u0947!"
+        ];
+
+        var TYPE = 85;     // per character going in
+        var ERASE = 40;    // coming out, faster, the way real typing feels
+        var HOLD = 1700;   // rest on the finished word
+        var GAP = 320;     // beat before the next one starts
+
+        var i = 0, n = greetings[0].length;
+
+        el.classList.add("is-typing");
+
+        function step() {
+          var word = greetings[i];
+          if (n < word.length) {
+            n++;
+            el.textContent = word.slice(0, n);
+            setTimeout(step, TYPE);
+          } else {
+            setTimeout(erase, HOLD);
+          }
+        }
+
+        function erase() {
+          if (n > 0) {
+            n--;
+            el.textContent = greetings[i].slice(0, n);
+            setTimeout(erase, ERASE);
+          } else {
+            i = (i + 1) % greetings.length;
+            setTimeout(step, GAP);
+          }
+        }
+
+        setTimeout(erase, HOLD);
+      })();
     </script>
   </body>
 </html>

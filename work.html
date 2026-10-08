@@ -27,7 +27,7 @@
               </li>
               <li>
                 <a href="about.html" class="sidebar-link">
-                  <span class="sidebar-link-text">About Me</span>
+                  <span class="sidebar-link-text">About</span>
                   <span class="sidebar-arrow"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></span>
                 </a>
               </li>
@@ -139,6 +139,19 @@
     </div>
 
     <script>
+      // Live clock in the sidebar footer
+      function updateTime() {
+        const el = document.getElementById("liveTime");
+        if (el)
+          el.textContent = new Date().toLocaleTimeString("en-US", {
+            hour: "2-digit",
+            minute: "2-digit",
+            second: "2-digit",
+          });
+      }
+      updateTime();
+      setInterval(updateTime, 1000);
+
       const cursor = document.querySelector(".custom-cursor");
       document.addEventListener("mousemove", (e) => {
         cursor.style.left = e.clientX + "px";

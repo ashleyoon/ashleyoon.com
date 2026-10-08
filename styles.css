@@ -279,7 +279,7 @@ img {
 
 .about-blurb p {
     font-size: 0.92rem;
-    color: var(--text);
+    color: rgb(84, 84, 84);
     line-height: 1.85;
     max-width: 540px;
 }
@@ -549,6 +549,43 @@ img {
     .em-icon { transition: none; }
 }
 
+/* Greeting that cycles through languages above the about copy */
+.about-blurb .greeting {
+    font-size: 1.55rem;
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    line-height: 1.25;
+    color: var(--text);
+    margin-bottom: 0.9rem;
+    /* holds the line height steady as the word changes length */
+    min-height: 1.1em;
+}
+
+.greeting-word {
+    display: inline-block;
+}
+
+/* caret only appears once the script takes over, so the no-JS fallback
+   is a plain "Hello!" with nothing blinking after it */
+.greeting-word.is-typing::after {
+    content: '';
+    display: inline-block;
+    width: 2px;
+    height: 1em;
+    margin-left: 2px;
+    vertical-align: -0.12em;
+    background: currentColor;
+    animation: greeting-caret 1s steps(1) infinite;
+}
+
+@keyframes greeting-caret {
+    50% { opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .greeting-word.is-typing::after { animation: none; display: none; }
+}
+
 /* Overlapping photo collage, same idea as .research-collage on the MVT page */
 .about-collage {
     position: relative;
@@ -562,8 +599,10 @@ img {
     width: 120px;
     display: block;
     border-radius: 12px;
-    /* no border, so the shadow alone has to hold the pale photos off the page */
-    box-shadow: 0 4px 16px -6px rgba(0, 0, 0, 0.26);
+    /* white mat around each photo, which only reads because of the shadow
+       holding it off an equally white page */
+    border: 2px solid #fff;
+    box-shadow: 0 5px 18px -6px rgba(0, 0, 0, 0.3);
     cursor: zoom-in;
     transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
