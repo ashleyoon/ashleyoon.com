@@ -19,23 +19,30 @@
         <div class="about-intro" style="margin-bottom: 4rem">
           <div class="about-blurb">
             <p>
-              Ashley is a product designer who leads with people first.
-              Currently pursuing her degree, she builds interfaces that are
-              intuitive, inclusive, and crafted with the kind of care that makes
-              users feel considered.
+              I care about <span class="em-big">understanding people</span>
+              and making things that make someone's day a little easier.
             </p>
             <br />
             <p>
-              Outside of design, Ashley finds inspiration in music, film,
-              travel, and new people. She's a collector of perspectives, and it
-              comes through in everything she creates.
+              Outside of class I go to museums
+              <span class="em-icon" aria-hidden="true">🖼️</span> a lot.
+              My friends have finally gotten me into hiking
+              <span class="em-icon em-icon--r" aria-hidden="true">🥾</span>, and
+              I'm learning guitar
+              <span class="em-icon" aria-hidden="true">🎸</span>. I'll also go an
+              unreasonable distance for good food
+              <span class="em-icon em-icon--r" aria-hidden="true">🍜</span>! Here are a
+              few photos from my <span class="em-ul">camera roll</span>, if
+              you're curious :D
             </p>
           </div>
-          <img
-            src="/images/about-baby-photo.png"
-            alt="Ashley Yoon"
-            class="about-photo"
-          />
+          <div class="about-collage">
+            <img src="/images/about-museum.webp" alt="Ashley at a museum" />
+            <img src="/images/about-music.webp" alt="Ashley at a sound and light installation" />
+            <img src="/images/about-hiking.webp" alt="Ashley hiking at dusk" />
+            <img src="/images/about-guitar.webp" alt="Ashley playing guitar" />
+            <img src="/images/about-food.webp" alt="Ashley out for a meal" />
+          </div>
         </div>
 
         <div class="extracurriculars">
@@ -136,6 +143,12 @@
       </div>
     </div>
 
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox">
+      <span class="lightbox-close">&times;</span>
+      <img class="lightbox-content" id="lightbox-img" alt="Enlarged view" />
+    </div>
+
     <script>
       const cursor = document.querySelector(".custom-cursor");
       document.addEventListener("mousemove", (e) => {
@@ -147,6 +160,32 @@
         el.addEventListener("mouseleave", () =>
           cursor.classList.remove("hover"),
         );
+      });
+    
+      // Lightbox for the collage photos
+      const lightbox = document.getElementById("lightbox");
+      const lightboxImg = document.getElementById("lightbox-img");
+      const lightboxClose = document.querySelector(".lightbox-close");
+
+      document.querySelectorAll(".about-collage img").forEach((img) => {
+        img.addEventListener("click", () => {
+          lightbox.style.display = "flex";
+          lightboxImg.src = img.src;
+        });
+      });
+
+      lightboxClose.addEventListener("click", () => {
+        lightbox.style.display = "none";
+      });
+
+      lightbox.addEventListener("click", (e) => {
+        if (e.target === lightbox) lightbox.style.display = "none";
+      });
+
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape" && lightbox.style.display === "flex") {
+          lightbox.style.display = "none";
+        }
       });
     </script>
   </body>
