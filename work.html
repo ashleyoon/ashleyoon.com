@@ -16,75 +16,67 @@
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 6 9 12 15 18"/></svg>
         </a>
 
-        <div class="projects-grid">
-          <a href="project2.html" class="project-card">
-            <div class="project-card-image">
-              <img src="/images/editorial-cover.webp" alt="Editorial Spreads" />
-            </div>
-            <div class="project-card-info">
-              <div class="project-card-top">
-                <h3>Editorial Spreads</h3>
-                <span class="project-card-arrow"
-                  ><svg
-                    width="14"
-                    height="14"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2.5"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  >
-                    <polyline points="9 18 15 12 9 6" /></svg
-                ></span>
-              </div>
-              <p>
-                A series of editorial spread designs reimagining a Stephen Curry
-                article through varied visual approaches.
-              </p>
-              <div class="project-tags">
-                <span>Editorial</span>
-                <span>2025</span>
-              </div>
-            </div>
-          </a>
-
-          <a href="project3.html" class="project-card">
-            <div class="project-card-image">
-              <img
-                src="/images/helvetica-hero-1.webp"
-                alt="Helvetica Type Specimen"
-              />
-            </div>
-            <div class="project-card-info">
-              <div class="project-card-top">
-                <h3>Helvetica Type Specimen</h3>
-                <span class="project-card-arrow"
-                  ><svg
-                    width="14"
-                    height="14"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2.5"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  >
-                    <polyline points="9 18 15 12 9 6" /></svg
-                ></span>
-              </div>
-              <p>
-                Postcard sets that showcase Helvetica&rsquo;s typeface anatomy,
-                characteristics, and more.
-              </p>
-              <div class="project-tags">
-                <span>Typography</span>
-                <span>2025</span>
-              </div>
-            </div>
-          </a>
+        <div class="work-head">
+          <h1>Other work</h1>
+          <button id="workMute" class="work-mute" type="button" aria-pressed="false" aria-label="Mute click sound">
+            <svg class="work-mute__on" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <polygon points="4 9 8 9 13 5 13 19 8 15 4 15"/><path d="M16.5 9.5a4 4 0 0 1 0 5"/><path d="M19 7a7.5 7.5 0 0 1 0 10"/>
+            </svg>
+            <svg class="work-mute__off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <polygon points="4 9 8 9 13 5 13 19 8 15 4 15"/><line x1="17" y1="9" x2="22" y2="15"/><line x1="22" y1="9" x2="17" y2="15"/>
+            </svg>
+          </button>
         </div>
+
+        <div class="work-grid" id="workGrid"></div>
+
+        <noscript>
+          <div class="projects-grid">
+            <a href="project2.html" class="project-card">
+              <div class="project-card-image"><img src="/images/editorial-cover.webp" alt="Editorial Spreads" /></div>
+              <div class="project-card-info"><div class="project-card-top"><h3>Editorial Spreads</h3></div></div>
+            </a>
+            <a href="project3.html" class="project-card">
+              <div class="project-card-image"><img src="/images/helvetica-hero-1.webp" alt="Helvetica Type Specimen" /></div>
+              <div class="project-card-info"><div class="project-card-top"><h3>Helvetica Type Specimen</h3></div></div>
+            </a>
+          </div>
+        </noscript>
       </div>
+    </div>
+
+    <!-- Project dialog -->
+    <div class="work-dialog" id="workDialog" role="dialog" aria-modal="true" aria-labelledby="workDialogTitle">
+      <aside class="work-rail">
+        <div class="work-rail__nav">
+          <button class="work-dialog__close" type="button" aria-label="Close">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true">
+              <line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/>
+            </svg>
+          </button>
+          <div class="work-nav">
+            <button class="work-nav__prev" type="button" aria-label="Previous image">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <line x1="19" y1="12" x2="5" y2="12"/><polyline points="11 18 5 12 11 6"/>
+              </svg>
+            </button>
+            <button class="work-nav__next" type="button" aria-label="Next image">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <line x1="5" y1="12" x2="19" y2="12"/><polyline points="13 6 19 12 13 18"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <div class="work-rail__scroll">
+          <h2 class="work-dialog__title" id="workDialogTitle"></h2>
+          <p class="work-dialog__blurb"></p>
+          <div class="work-meta" id="workMeta"></div>
+        </div>
+      </aside>
+
+      <div class="work-stage" id="workStage"></div>
+      <span class="work-stage__count" id="workCount"></span>
     </div>
 
     <script>
@@ -93,12 +85,13 @@
         cursor.style.left = e.clientX + "px";
         cursor.style.top = e.clientY + "px";
       });
-      document.querySelectorAll("a, button").forEach((el) => {
-        el.addEventListener("mouseenter", () => cursor.classList.add("hover"));
-        el.addEventListener("mouseleave", () =>
-          cursor.classList.remove("hover"),
-        );
+      document.addEventListener("mouseover", (e) => {
+        if (e.target.closest("a, button, .work-card")) cursor.classList.add("hover");
+      });
+      document.addEventListener("mouseout", (e) => {
+        if (e.target.closest("a, button, .work-card")) cursor.classList.remove("hover");
       });
     </script>
+    <script src="/work.js" defer></script>
   </body>
 </html>
