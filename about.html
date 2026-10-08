@@ -10,17 +10,91 @@
   <body>
     <div class="custom-cursor"></div>
 
-    <div class="about-page">
-      <div class="about-page-inner">
-        <a href="/" class="back-button back-button--circle" aria-label="Back to home">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 6 9 12 15 18"/></svg>
-        </a>
+    <div class="layout">
+      <aside class="sidebar">
+        <div class="sidebar-inner">
+          <div class="sidebar-bio">
+            <img src="/images/site-logo.png" alt="Ashley Yoon" class="sidebar-avatar" />
+          </div>
+
+          <nav class="sidebar-nav">
+            <ul class="sidebar-list">
+              <li>
+                <a href="/" class="sidebar-link">
+                  <span class="sidebar-link-text">Home</span>
+                  <span class="sidebar-arrow"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></span>
+                </a>
+              </li>
+              <li>
+                <a href="about.html" class="sidebar-link" aria-current="page">
+                  <span class="sidebar-link-text">About Me</span>
+                  <span class="sidebar-arrow"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></span>
+                </a>
+              </li>
+              <li>
+                <a href="work.html" class="sidebar-link">
+                  <span class="sidebar-link-text">Other</span>
+                  <span class="sidebar-arrow"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></span>
+                </a>
+              </li>
+            </ul>
+
+            <ul class="sidebar-list">
+              <li>
+                <a href="mailto:yoon.ash@northeastern.edu" class="sidebar-link">
+                  <span class="sidebar-link-text">Email</span>
+                  <span class="sidebar-arrow"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></span>
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://www.linkedin.com/in/ashleyooon/"
+                  target="_blank"
+                  class="sidebar-link"
+                >
+                  <span class="sidebar-link-text">LinkedIn</span>
+                  <span class="sidebar-arrow"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></span>
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://github.com/ashleyoon"
+                  target="_blank"
+                  class="sidebar-link"
+                >
+                  <span class="sidebar-link-text">GitHub</span>
+                  <span class="sidebar-arrow"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></span>
+                </a>
+              </li>
+              <li>
+                <a
+                  href="/images/ashley-yoon-resume.pdf"
+                  target="_blank"
+                  class="sidebar-link"
+                >
+                  <span class="sidebar-link-text">Resume</span>
+                  <span class="sidebar-arrow"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></span>
+                </a>
+              </li>
+            </ul>
+          </nav>
+
+          <div class="sidebar-footer">
+            <span class="live-time" id="liveTime"></span>
+          </div>
+        </div>
+      </aside>
+      <main class="main-content">
+        <div class="subpage-inner">
 
         <div class="about-intro" style="margin-bottom: 4rem">
           <div class="about-blurb">
             <p>
-              I care about <span class="em-big">understanding people</span>
-              and making things that make someone's day a little easier.
+              I'm a designer with a love for beautiful, purposeful work,
+              currently studying Computer Science and Design at Northeastern
+              University. I care about
+              <span class="em-big">understanding people</span> and making
+              things that make someone's day a little easier.
             </p>
             <br />
             <p>
@@ -140,7 +214,8 @@
             </p>
           </div>
         </div>
-      </div>
+        </div>
+      </main>
     </div>
 
     <!-- Lightbox -->
