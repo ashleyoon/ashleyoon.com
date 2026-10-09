@@ -6,25 +6,24 @@
 
 const PROJECTS = [
     {
-        title: 'Helvetica Type Specimen',
+        title: 'Music Player',
         blurb:
-            "Postcard sets that showcase Helvetica's typeface anatomy, characteristics, and more.",
-        tags: ['Typography', '2025'],
+            'A motion graphic where you can search for a song. Here I searched for Frank Ocean, one of my favorite artists.',
+        tags: ['Motion', '2026'],
         meta: [
-            { label: 'Category', value: 'Typography' },
-            { label: 'Year', value: '2025' }
+            { label: 'Category', value: 'Motion graphics' },
+            { label: 'Year', value: '2026' }
         ],
-        cover: '/images/helvetica-hero-3.webp',
+        cover: {
+            // small cut: the card is 384px wide and autoplays on page load
+            video: '/images/music-player-card.mp4',
+            poster: '/images/music-player-poster.webp',
+            w: 800,
+            h: 800
+        },
+        // full cut: only fetched once the dialog opens
         images: [
-            '/images/helvetica-hero-3.webp',
-            '/images/helvetica-hero-1.webp',
-            '/images/helvetica-hero-2.webp',
-            '/images/helvetica-detail-1.webp',
-            '/images/helvetica-detail-2.webp',
-            '/images/helvetica-detail-3.webp',
-            '/images/helvetica-detail-4.webp',
-            '/images/helvetica-detail-5.webp',
-            '/images/helvetica-detail-6.webp'
+            { video: '/images/music-player.mp4', poster: '/images/music-player-poster.webp', sound: true }
         ]
     },
     {
@@ -97,6 +96,28 @@ const PROJECTS = [
             '/images/sv-5.webp',
             '/images/sv-6.webp',
             '/images/sv-7.webp'
+        ]
+    },
+    {
+        title: 'Helvetica Type Specimen',
+        blurb:
+            "Postcard sets that showcase Helvetica's typeface anatomy, characteristics, and more.",
+        tags: ['Typography', '2025'],
+        meta: [
+            { label: 'Category', value: 'Typography' },
+            { label: 'Year', value: '2025' }
+        ],
+        cover: '/images/helvetica-hero-3.webp',
+        images: [
+            '/images/helvetica-hero-3.webp',
+            '/images/helvetica-hero-1.webp',
+            '/images/helvetica-hero-2.webp',
+            '/images/helvetica-detail-1.webp',
+            '/images/helvetica-detail-2.webp',
+            '/images/helvetica-detail-3.webp',
+            '/images/helvetica-detail-4.webp',
+            '/images/helvetica-detail-5.webp',
+            '/images/helvetica-detail-6.webp'
         ]
     }
 ];
@@ -194,10 +215,13 @@ function mediaEl(item, inGrid) {
     v.src = item.video;
     if (item.poster) v.poster = item.poster;
     if (item.w) { v.width = item.w; v.height = item.h; }
-    v.muted = true;
+    /* Grid clips are always silent, since muted is the only way browsers
+       allow autoplay. In the dialog, a clip with a soundtrack starts audible. */
+    const audible = !inGrid && !!item.sound;
+    v.muted = !audible;
     v.loop = true;
     v.playsInline = true;
-    v.setAttribute('muted', '');
+    if (!audible) v.setAttribute('muted', '');
     v.setAttribute('playsinline', '');
     v.__loop = {
         start() { v.play().catch(() => {}); },
@@ -211,11 +235,26 @@ function mediaEl(item, inGrid) {
             runWhileVisible(v);
         }
     } else {
-        // short silent loop, so controls would only be clutter
-        v.autoplay = !reducedMotion;
+        // started by startVideo rather than the autoplay attribute, so the
+        // click that opened the dialog still counts as user activation
         v.preload = 'auto';
+        // a soundtrack needs controls, so it can be turned back off
+        if (item.sound) v.controls = true;
     }
     return v;
+}
+
+/* Browsers only let a clip play with sound while the click that opened the
+   dialog still counts as user activation, and refuse otherwise. Fall back to
+   a silent play rather than leaving the visitor with a frozen frame. */
+function startVideo(v) {
+    const p = v.play();
+    if (p && p.catch) {
+        p.catch(() => {
+            v.muted = true;
+            v.play().catch(() => {});
+        });
+    }
 }
 
 /* ---------- grid ---------- */
@@ -301,6 +340,7 @@ function showImage(i) {
     if (el.tagName === 'IMG') el.alt = current.title + ', image ' + (index + 1) + ' of ' + n;
     frame.appendChild(el);
     stage.appendChild(frame);
+    if (el.tagName === 'VIDEO' && !reducedMotion) startVideo(el);
     document.getElementById('workCount').textContent = n > 1 ? (index + 1) + ' / ' + n : '';
 }
 
@@ -325,6 +365,9 @@ function closeDialog() {
     if (!dlg.classList.contains('is-open')) return;
     boop('close');
     dlg.classList.remove('is-open');
+    // emptying the stage stops playback. Without this a clip keeps running,
+    // and an audible one keeps playing, behind the closed dialog.
+    document.getElementById('workStage').innerHTML = '';
     document.body.style.overflow = '';
     current = null;
     if (lastFocused) lastFocused.focus();
