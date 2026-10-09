@@ -686,6 +686,44 @@ img {
     color: var(--muted);
 }
 
+/* The experience and involvement titles are links too, but an underline on
+   something that reads as a heading looks like emphasis rather than a link.
+   They carry the same chevron the sidebar uses, so one marker means
+   "this goes somewhere" across the site. Links inside the descriptions keep
+   their underline: in running text the underline is the only thing that
+   finds them. */
+.extra-title.extra-link {
+    text-decoration: none;
+}
+
+/* The shared hover fades a link out, which is right for one inside a
+   paragraph but fights the arrow here, where the title would pale while its
+   arrow darkened. The title holds and the arrow does the moving instead. */
+.extra-title.extra-link:hover {
+    color: var(--text);
+}
+
+.extra-arrow {
+    display: inline-block;
+    margin-left: 0.34rem;
+    /* optically centred on the lowercase, not sat on the baseline */
+    transform: translateY(0.5px);
+    opacity: 0.45;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+/* travels sideways, matching the sidebar chevron rather than a diagonal */
+.extra-title.extra-link:hover .extra-arrow {
+    opacity: 1;
+    transform: translate(3px, 0.5px);
+}
+
+.extra-title.extra-link:focus-visible {
+    outline: 2px solid var(--text);
+    outline-offset: 3px;
+    border-radius: 2px;
+}
+
 .extra-tag {
     font-size: 0.72rem;
     color: var(--text);
