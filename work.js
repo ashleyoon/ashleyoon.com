@@ -384,7 +384,7 @@ function buildGrid(root) {
         card.appendChild(media);
         card.addEventListener('click', () => {
             boop('open');
-            openDialog(p);
+            openDialog(i);
         });
         root.appendChild(card);
     });
@@ -408,6 +408,8 @@ function buildGrid(root) {
 let lastFocused = null;
 let current = null;
 let index = 0;
+/* which project is open, so the rail arrows can step between them */
+let projectIndex = 0;
 
 function renderMeta(p) {
     const tbl = document.getElementById('workMeta');
@@ -433,12 +435,21 @@ function renderMeta(p) {
     });
 }
 
+/* Removes whatever is on the stage without touching its own controls.
+   Dropping the frame is also what stops a clip playing. */
+function clearStage(stage) {
+    const frame = stage.querySelector('.work-stage__frame');
+    if (frame) frame.remove();
+}
+
 function showImage(i) {
     if (!current) return;
     const n = current.images.length;
     index = (i + n) % n;
     const stage = document.getElementById('workStage');
-    stage.innerHTML = '';
+    // only the frame goes: the side arrows are part of the stage itself
+    clearStage(stage);
+    stage.classList.toggle('has-steps', n > 1);
     const frame = document.createElement('div');
     frame.className = 'work-stage__frame';
     const el = mediaEl(current.images[index], false);
@@ -451,22 +462,37 @@ function showImage(i) {
         // nothing worth scrubbing
         if (current.images[index].sound) frame.appendChild(buildPlayer(el));
     }
-    document.getElementById('workCount').textContent = n > 1 ? (index + 1) + ' / ' + n : '';
 }
 
-function openDialog(p) {
-    const dlg = document.getElementById('workDialog');
-    lastFocused = document.activeElement;
+/* Fills the dialog with one project. Shared by opening it and by stepping
+   from one project to the next, which differ only in what happens around it. */
+function renderProject(i) {
+    const n = PROJECTS.length;
+    projectIndex = (i + n) % n;
+    const p = PROJECTS[projectIndex];
     current = p;
 
+    const dlg = document.getElementById('workDialog');
     dlg.querySelector('.work-dialog__title').textContent = p.title;
     dlg.querySelector('.work-dialog__blurb').textContent = p.blurb;
     renderMeta(p);
     showImage(0);
+    dlg.querySelector('.work-rail__scroll').scrollTop = 0;
+}
+
+/* The rail arrows move between projects, so the whole dialog is replaced. */
+function stepProject(by) {
+    boop('open');
+    renderProject(projectIndex + by);
+}
+
+function openDialog(i) {
+    const dlg = document.getElementById('workDialog');
+    lastFocused = document.activeElement;
+    renderProject(i);
 
     dlg.classList.add('is-open');
     document.body.style.overflow = 'hidden';
-    dlg.querySelector('.work-rail__scroll').scrollTop = 0;
     dlg.querySelector('.work-dialog__close').focus();
 }
 
@@ -475,9 +501,9 @@ function closeDialog() {
     if (!dlg.classList.contains('is-open')) return;
     boop('close');
     dlg.classList.remove('is-open');
-    // emptying the stage stops playback. Without this a clip keeps running,
+    // dropping the frame stops playback. Without this a clip keeps running,
     // and an audible one keeps playing, behind the closed dialog.
-    document.getElementById('workStage').innerHTML = '';
+    clearStage(document.getElementById('workStage'));
     document.body.style.overflow = '';
     current = null;
     if (lastFocused) lastFocused.focus();
@@ -489,8 +515,12 @@ function init() {
 
     const dlg = document.getElementById('workDialog');
     dlg.querySelector('.work-dialog__close').addEventListener('click', closeDialog);
-    dlg.querySelector('.work-nav__prev').addEventListener('click', () => { boop('tick'); showImage(index - 1); });
-    dlg.querySelector('.work-nav__next').addEventListener('click', () => { boop('tick'); showImage(index + 1); });
+    // the rail arrows step between projects
+    dlg.querySelector('.work-nav__prev').addEventListener('click', () => stepProject(-1));
+    dlg.querySelector('.work-nav__next').addEventListener('click', () => stepProject(1));
+    // the arrows on the stage step through one project's images
+    dlg.querySelector('.work-side--prev').addEventListener('click', () => { boop('tick'); showImage(index - 1); });
+    dlg.querySelector('.work-side--next').addEventListener('click', () => { boop('tick'); showImage(index + 1); });
     // clicking the stage background closes, same as the backdrop
     document.getElementById('workStage').addEventListener('click', e => {
         if (e.target.id === 'workStage') closeDialog();
@@ -498,8 +528,11 @@ function init() {
     document.addEventListener('keydown', e => {
         if (!dlg.classList.contains('is-open')) return;
         if (e.key === 'Escape') closeDialog();
+        // left and right match the arrows on the stage, up and down the rail
         else if (e.key === 'ArrowRight') { boop('tick'); showImage(index + 1); }
         else if (e.key === 'ArrowLeft') { boop('tick'); showImage(index - 1); }
+        else if (e.key === 'ArrowDown') { e.preventDefault(); stepProject(1); }
+        else if (e.key === 'ArrowUp') { e.preventDefault(); stepProject(-1); }
     });
 }
 

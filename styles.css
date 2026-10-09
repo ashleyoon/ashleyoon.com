@@ -2498,12 +2498,58 @@ img {
 
 /* right stage */
 .work-stage {
+    position: relative;
     flex: 1;
     min-width: 0;
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 3rem 3.5rem;
+}
+
+/* ---------- stepping through one project's images ----------
+   These sit against the edges of the stage. The arrows in the rail step
+   between projects instead, so the two axes never share a control. */
+.work-side {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 2;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    border: none;
+    background: none;
+    color: rgb(84, 84, 84);
+    cursor: pointer;
+    opacity: 0.55;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+/* shown only when the project actually has more than one image */
+.work-stage.has-steps .work-side { display: flex; }
+
+.work-side svg { width: 20px; height: 20px; }
+.work-side--prev { left: 0.9rem; }
+.work-side--next { right: 0.9rem; }
+
+.work-side:hover { opacity: 1; }
+.work-side--prev:hover { transform: translate(-3px, -50%); }
+.work-side--next:hover { transform: translate(3px, -50%); }
+
+.work-side:focus-visible {
+    opacity: 1;
+    outline: 2px solid var(--text);
+    outline-offset: 2px;
+    border-radius: 4px;
+}
+
+@media (max-width: 900px) {
+    .work-side--prev { left: 0.2rem; }
+    .work-side--next { right: 0.2rem; }
 }
 
 .work-stage__frame {
@@ -2628,16 +2674,6 @@ img {
     to   { opacity: 1; transform: none; }
 }
 
-.work-stage__count {
-    position: absolute;
-    bottom: 1.4rem;
-    left: calc(370px + 3.5rem);
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 0.65rem;
-    letter-spacing: 0.08em;
-    color: var(--muted);
-}
-
 @media (prefers-reduced-motion: reduce) {
     .work-stage__frame { animation: none; }
     .work-card__media img,
@@ -2661,7 +2697,6 @@ img {
     .work-stage { padding: 1.2rem; }
     .work-stage__frame img,
     .work-stage__frame video { max-height: 46vh; }
-    .work-stage__count { left: 1.2rem; bottom: auto; top: 1.2rem; }
 }
 
 @media (max-width: 560px) {

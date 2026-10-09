@@ -114,12 +114,12 @@
             </svg>
           </button>
           <div class="work-nav">
-            <button class="work-nav__prev" type="button" aria-label="Previous image">
+            <button class="work-nav__prev" type="button" aria-label="Previous project">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                 <line x1="19" y1="12" x2="5" y2="12"/><polyline points="11 18 5 12 11 6"/>
               </svg>
             </button>
-            <button class="work-nav__next" type="button" aria-label="Next image">
+            <button class="work-nav__next" type="button" aria-label="Next project">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                 <line x1="5" y1="12" x2="19" y2="12"/><polyline points="13 6 19 12 13 18"/>
               </svg>
@@ -134,8 +134,18 @@
         </div>
       </aside>
 
-      <div class="work-stage" id="workStage"></div>
-      <span class="work-stage__count" id="workCount"></span>
+      <div class="work-stage" id="workStage">
+        <button class="work-side work-side--prev" id="workSidePrev" type="button" aria-label="Previous image">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <polyline points="15 18 9 12 15 6"/>
+          </svg>
+        </button>
+        <button class="work-side work-side--next" id="workSideNext" type="button" aria-label="Next image">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <polyline points="9 18 15 12 9 6"/>
+          </svg>
+        </button>
+      </div>
     </div>
 
     <script>
