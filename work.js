@@ -64,6 +64,28 @@ const PROJECTS = [
         ]
     },
     {
+        title: 'Helvetica Type Specimen',
+        blurb:
+            "Postcard sets that showcase Helvetica's typeface anatomy, characteristics, and more.",
+        tags: ['Typography', '2025'],
+        meta: [
+            { label: 'Category', value: 'Typography' },
+            { label: 'Year', value: '2025' }
+        ],
+        cover: '/images/helvetica-hero-3.webp',
+        images: [
+            '/images/helvetica-hero-3.webp',
+            '/images/helvetica-hero-1.webp',
+            '/images/helvetica-hero-2.webp',
+            '/images/helvetica-detail-1.webp',
+            '/images/helvetica-detail-2.webp',
+            '/images/helvetica-detail-3.webp',
+            '/images/helvetica-detail-4.webp',
+            '/images/helvetica-detail-5.webp',
+            '/images/helvetica-detail-6.webp'
+        ]
+    },
+    {
         title: 'Sentimental Value',
         blurb: 'A poster series for Sentimental Value, a film by Joachim Trier.',
         tags: ['Poster', '2026'],
@@ -96,28 +118,6 @@ const PROJECTS = [
             '/images/sv-5.webp',
             '/images/sv-6.webp',
             '/images/sv-7.webp'
-        ]
-    },
-    {
-        title: 'Helvetica Type Specimen',
-        blurb:
-            "Postcard sets that showcase Helvetica's typeface anatomy, characteristics, and more.",
-        tags: ['Typography', '2025'],
-        meta: [
-            { label: 'Category', value: 'Typography' },
-            { label: 'Year', value: '2025' }
-        ],
-        cover: '/images/helvetica-hero-3.webp',
-        images: [
-            '/images/helvetica-hero-3.webp',
-            '/images/helvetica-hero-1.webp',
-            '/images/helvetica-hero-2.webp',
-            '/images/helvetica-detail-1.webp',
-            '/images/helvetica-detail-2.webp',
-            '/images/helvetica-detail-3.webp',
-            '/images/helvetica-detail-4.webp',
-            '/images/helvetica-detail-5.webp',
-            '/images/helvetica-detail-6.webp'
         ]
     }
 ];
@@ -238,8 +238,7 @@ function mediaEl(item, inGrid) {
         // started by startVideo rather than the autoplay attribute, so the
         // click that opened the dialog still counts as user activation
         v.preload = 'auto';
-        // a soundtrack needs controls, so it can be turned back off
-        if (item.sound) v.controls = true;
+        // controls come from buildPlayer, not from the browser's own bar
     }
     return v;
 }
@@ -255,6 +254,112 @@ function startVideo(v) {
             v.play().catch(() => {});
         });
     }
+}
+
+/* ---------- video player ----------
+   The browser's own control bar is a heavy black gradient, so clips with a
+   soundtrack get this instead: play, a scrub bar, the time, and mute. */
+const ICON = {
+    /* both drawn soft: the triangle is stroked with a round join so its
+       corners are blunt, and the pause bars are full pills */
+    play: '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M6 4.3 11.4 8 6 11.7z" fill="currentColor" stroke="currentColor" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round"/></svg>',
+    pause: '<svg viewBox="0 0 16 16" aria-hidden="true"><rect x="3.9" y="3.3" width="3" height="9.4" rx="1.5" fill="currentColor"/><rect x="9.1" y="3.3" width="3" height="9.4" rx="1.5" fill="currentColor"/></svg>',
+    /* the cone is filled and stroked with a round join, so it carries the
+       same soft weight as the play triangle rather than reading as outline */
+    loud: '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M7.5 3.6 4.6 6.1H3v3.8h1.6l2.9 2.5z" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/><path d="M10.6 6.4a2.4 2.4 0 0 1 0 3.2" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/><path d="M12.9 4.5a5.2 5.2 0 0 1 0 7" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/></svg>',
+    quiet: '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M7.5 3.6 4.6 6.1H3v3.8h1.6l2.9 2.5z" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/><path d="m10.9 6.5 3.2 3.2M14.1 6.5l-3.2 3.2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>'
+};
+
+function clock(t) {
+    if (!isFinite(t)) t = 0;
+    const m = Math.floor(t / 60);
+    const s = Math.floor(t % 60);
+    return m + ':' + (s < 10 ? '0' : '') + s;
+}
+
+function buildPlayer(v) {
+    const bar = document.createElement('div');
+    bar.className = 'vplayer';
+    bar.innerHTML =
+        '<button type="button" class="vplayer__toggle"></button>' +
+        '<div class="vplayer__track"><div class="vplayer__rail"></div>' +
+        '<div class="vplayer__buffer"></div><div class="vplayer__fill"></div>' +
+        '<div class="vplayer__knob"></div></div>' +
+        '<span class="vplayer__time"></span>' +
+        '<button type="button" class="vplayer__mute"></button>';
+
+    const toggle = bar.querySelector('.vplayer__toggle');
+    const mute = bar.querySelector('.vplayer__mute');
+    const track = bar.querySelector('.vplayer__track');
+    const buffer = bar.querySelector('.vplayer__buffer');
+    const fill = bar.querySelector('.vplayer__fill');
+    const knob = bar.querySelector('.vplayer__knob');
+    const time = bar.querySelector('.vplayer__time');
+
+    function paintToggle() {
+        toggle.innerHTML = v.paused ? ICON.play : ICON.pause;
+        toggle.setAttribute('aria-label', v.paused ? 'Play' : 'Pause');
+    }
+    function paintMute() {
+        mute.innerHTML = v.muted ? ICON.quiet : ICON.loud;
+        mute.setAttribute('aria-label', v.muted ? 'Unmute' : 'Mute');
+    }
+    function paint() {
+        const d = v.duration;
+        const pct = d ? (v.currentTime / d) * 100 : 0;
+        fill.style.width = pct + '%';
+        knob.style.left = pct + '%';
+        if (v.buffered.length) {
+            buffer.style.width = (d ? (v.buffered.end(v.buffered.length - 1) / d) * 100 : 0) + '%';
+        }
+        time.textContent = clock(v.currentTime) + ' / ' + clock(d);
+    }
+
+    // the clicks belong to the player, not to the stage behind it, which
+    // would read them as "close the dialog"
+    bar.addEventListener('click', e => e.stopPropagation());
+
+    toggle.addEventListener('click', () => (v.paused ? startVideo(v) : v.pause()));
+    mute.addEventListener('click', () => { v.muted = !v.muted; paintMute(); });
+
+    /* scrubbing: pointer events so a drag works the same with a mouse,
+       a trackpad or a finger */
+    let scrubbing = false;
+    function seekTo(e) {
+        const r = track.getBoundingClientRect();
+        const at = Math.min(1, Math.max(0, (e.clientX - r.left) / r.width));
+        if (v.duration) { v.currentTime = at * v.duration; paint(); }
+    }
+    track.addEventListener('pointerdown', e => {
+        scrubbing = true;
+        bar.classList.add('is-scrubbing');
+        track.setPointerCapture(e.pointerId);
+        seekTo(e);
+    });
+    track.addEventListener('pointermove', e => { if (scrubbing) seekTo(e); });
+    track.addEventListener('pointerup', e => {
+        scrubbing = false;
+        bar.classList.remove('is-scrubbing');
+        track.releasePointerCapture(e.pointerId);
+    });
+
+    v.addEventListener('play', paintToggle);
+    v.addEventListener('pause', paintToggle);
+    v.addEventListener('volumechange', paintMute);
+    v.addEventListener('loadedmetadata', paint);
+
+    /* a frame loop keeps the bar smooth between timeupdate events, and stops
+       itself once the dialog has emptied the stage */
+    (function tick() {
+        if (!v.isConnected) return;
+        paint();
+        requestAnimationFrame(tick);
+    })();
+
+    paintToggle();
+    paintMute();
+    paint();
+    return bar;
 }
 
 /* ---------- grid ---------- */
@@ -340,7 +445,12 @@ function showImage(i) {
     if (el.tagName === 'IMG') el.alt = current.title + ', image ' + (index + 1) + ' of ' + n;
     frame.appendChild(el);
     stage.appendChild(frame);
-    if (el.tagName === 'VIDEO' && !reducedMotion) startVideo(el);
+    if (el.tagName === 'VIDEO') {
+        if (!reducedMotion) startVideo(el);
+        // only clips with a soundtrack get a player; a short silent loop has
+        // nothing worth scrubbing
+        if (current.images[index].sound) frame.appendChild(buildPlayer(el));
+    }
     document.getElementById('workCount').textContent = n > 1 ? (index + 1) + ' / ' + n : '';
 }
 

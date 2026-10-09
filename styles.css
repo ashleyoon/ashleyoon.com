@@ -2469,10 +2469,106 @@ img {
 }
 
 .work-stage__frame {
+    position: relative;
     max-width: 100%;
     max-height: 100%;
     display: flex;
     animation: work-stage-in 0.28s cubic-bezier(0.2, 0.8, 0.3, 1);
+}
+
+/* ---------- video player ----------
+   Replaces the browser's own control bar, which is a heavy black gradient
+   that sits badly on pale footage. A frosted pill instead, borrowing the
+   dialog's blur, so it reads on light and dark frames alike. */
+.vplayer {
+    position: absolute;
+    left: 0.9rem;
+    right: 0.9rem;
+    bottom: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.5rem 0.75rem;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.72);
+    backdrop-filter: blur(20px) saturate(1.3);
+    -webkit-backdrop-filter: blur(20px) saturate(1.3);
+    box-shadow: 0 2px 16px -6px rgba(0, 0, 0, 0.28);
+    /* out of the way until the frame is hovered or something has focus */
+    opacity: 0;
+    transform: translateY(4px);
+    transition: opacity 0.22s ease, transform 0.22s ease;
+}
+
+.work-stage__frame:hover .vplayer,
+.vplayer:focus-within,
+.vplayer.is-idle { opacity: 1; transform: none; }
+
+.vplayer button {
+    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 22px;
+    height: 22px;
+    padding: 0;
+    border: none;
+    background: none;
+    color: var(--text);
+    cursor: pointer;
+}
+
+.vplayer button svg { width: 15px; height: 15px; display: block; }
+.vplayer button:hover { opacity: 0.6; }
+.vplayer button:focus-visible { outline: 2px solid var(--text); outline-offset: 3px; border-radius: 3px; }
+
+/* the scrub bar. Padded vertically so it is easy to grab, while the line
+   itself stays hairline thin */
+.vplayer__track {
+    flex: 1 1 auto;
+    position: relative;
+    height: 16px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    touch-action: none;
+}
+
+.vplayer__rail,
+.vplayer__buffer,
+.vplayer__fill {
+    position: absolute;
+    left: 0;
+    height: 3px;
+    border-radius: 999px;
+}
+
+.vplayer__rail { right: 0; background: rgba(26, 26, 26, 0.16); }
+.vplayer__buffer { background: rgba(26, 26, 26, 0.16); width: 0; }
+.vplayer__fill { background: var(--text); width: 0; }
+
+.vplayer__knob {
+    position: absolute;
+    width: 9px;
+    height: 9px;
+    margin-left: -4.5px;
+    border-radius: 50%;
+    background: var(--text);
+    left: 0;
+    opacity: 0;
+    transition: opacity 0.18s ease;
+}
+
+.vplayer__track:hover .vplayer__knob,
+.vplayer.is-scrubbing .vplayer__knob { opacity: 1; }
+
+.vplayer__time {
+    flex: 0 0 auto;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.04em;
+    color: rgb(84, 84, 84);
+    font-variant-numeric: tabular-nums;
 }
 
 /* the image stands on its own, no frame around it */
