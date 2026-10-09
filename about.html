@@ -108,7 +108,7 @@
               <span class="em-icon" aria-hidden="true">🎸</span>. I'll also go an
               unreasonable distance for good food
               <span class="em-icon em-icon--r" aria-hidden="true">🍜</span>! Here are a
-              few photos from my <span class="em-ul">camera roll</span>, if
+              few photos from my <button type="button" class="em-ul em-ul--btn" id="cameraRollLink">camera roll</button>, if
               you're curious :D
             </p>
           </div>
@@ -457,6 +457,9 @@
         }
 
         photos.forEach((img, i) => img.addEventListener("click", () => open(i)));
+
+        const rollLink = document.getElementById("cameraRollLink");
+        if (rollLink) rollLink.addEventListener("click", () => open(0));
 
         root.querySelector(".photo-lb__nav--prev").addEventListener("click", () => step(-1));
         root.querySelector(".photo-lb__nav--next").addEventListener("click", () => step(1));

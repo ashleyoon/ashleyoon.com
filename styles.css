@@ -529,6 +529,27 @@ img {
     text-underline-offset: 4px;
 }
 
+/* same treatment as a button, so it can be clicked and tabbed to */
+.em-ul--btn {
+    border: none;
+    background: none;
+    padding: 0;
+    font: inherit;
+    color: inherit;
+    cursor: pointer;
+    transition: text-decoration-color 0.2s ease;
+}
+
+.em-ul--btn:hover {
+    text-decoration-color: var(--text);
+}
+
+.em-ul--btn:focus-visible {
+    outline: 2px solid var(--text);
+    outline-offset: 3px;
+    border-radius: 2px;
+}
+
 .em-icon {
     display: inline-block;
     font-size: 1.1em;
