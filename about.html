@@ -281,11 +281,30 @@
     </div>
 
     <!-- Lightbox -->
-    <div class="lightbox" id="lightbox">
-      <span class="lightbox-close">&times;</span>
-      <img class="lightbox-content" id="lightbox-img" alt="Enlarged view" />
+    <div class="photo-lb" id="photoLb" role="dialog" aria-modal="true" aria-label="Photo gallery">
+      <button class="photo-lb__close" type="button" aria-label="Close">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true">
+          <line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/>
+        </svg>
+      </button>
+
+      <button class="photo-lb__nav photo-lb__nav--prev" type="button" aria-label="Previous photo">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <polyline points="15 6 9 12 15 18"/>
+        </svg>
+      </button>
+
+      <div class="photo-lb__stage" id="photoLbStage"></div>
+
+      <button class="photo-lb__nav photo-lb__nav--next" type="button" aria-label="Next photo">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <polyline points="9 6 15 12 9 18"/>
+        </svg>
+      </button>
+
     </div>
 
+    <script src="/sound.js" defer></script>
     <script>
       // Live clock in the sidebar footer
       function updateTime() {
@@ -312,32 +331,191 @@
         );
       });
     
-      // Lightbox for the collage photos
-      const lightbox = document.getElementById("lightbox");
-      const lightboxImg = document.getElementById("lightbox-img");
-      const lightboxClose = document.querySelector(".lightbox-close");
+      // Photo gallery. A rail of three cells, previous, current and next,
+      // springs sideways so the neighbours peek in at the edges. Arrows,
+      // keys and swipe all drive it.
+      (function () {
+        const root = document.getElementById("photoLb");
+        const stage = document.getElementById("photoLbStage");
+        const photos = [...document.querySelectorAll(".about-collage img")];
+        if (!root || !photos.length) return;
 
-      document.querySelectorAll(".about-collage img").forEach((img) => {
-        img.addEventListener("click", () => {
-          lightbox.style.display = "flex";
-          lightboxImg.src = img.src;
-        });
-      });
+        const SLIDE = 600; // ms, matches the CSS spring
+        const PEEK = 74;   // px of each neighbour left showing
+        const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        const sound = (kind) => window.siteSound && window.siteSound.boop(kind);
+        const mod = (n, m) => ((n % m) + m) % m;
 
-      lightboxClose.addEventListener("click", () => {
-        lightbox.style.display = "none";
-      });
+        const rail = document.createElement("div");
+        rail.className = "photo-lb__rail";
+        stage.appendChild(rail);
 
-      lightbox.addEventListener("click", (e) => {
-        if (e.target === lightbox) lightbox.style.display = "none";
-      });
+        let index = 0;
+        let cellW = 0;
+        let busy = false;
+        let lastFocused = null;
 
-      document.addEventListener("keydown", (e) => {
-        if (e.key === "Escape" && lightbox.style.display === "flex") {
-          lightbox.style.display = "none";
+        // Cell width is derived from the centred photo rather than the stage.
+        // The photos are portrait, so they are much narrower than the stage,
+        // and a percentage-based cell would park the neighbours just out of
+        // sight. Solving for the peek keeps it the same at any window size.
+        function measure() {
+          const stageW = stage.clientWidth;
+          const mid = rail.querySelector(".photo-lb__cell.is-mid .photo-lb__img");
+          // the centred photo sits at scale 1, so its box is its true width
+          const imgW = mid && mid.getBoundingClientRect().width
+            ? mid.getBoundingClientRect().width
+            : stageW * 0.6;
+          // neighbour inner edge = cellW - (scaled half width); want that
+          // PEEK inside the stage edge
+          let w = stageW / 2 - PEEK + 0.42 * imgW;
+          w = Math.max(w, imgW + 28);  // never squeeze the centred photo
+          w = Math.min(w, stageW);     // never push neighbours fully away
+          cellW = Math.round(w);
+          rail.querySelectorAll(".photo-lb__cell").forEach((c) => {
+            c.style.width = cellW + "px";
+          });
         }
-      });
-    
+
+        // re-run once the centred photo has real dimensions to measure
+        function relayout() {
+          measure();
+          rail.style.transition = "none";
+          rail.style.transform = "translateX(" + offset(1) + "px)";
+          void rail.offsetWidth;
+          rail.style.transition = "";
+        }
+
+        // rail sits at left:50%, so centring cell k means shifting it back
+        // by its own half plus every cell before it
+        function offset(k) {
+          return -((k + 0.5) * cellW);
+        }
+
+        function paint() {
+          rail.innerHTML = "";
+          [-1, 0, 1].forEach((o) => {
+            const cell = document.createElement("div");
+            cell.className = "photo-lb__cell" + (o === 0 ? " is-mid" : "");
+            const im = document.createElement("img");
+            im.className = "photo-lb__img";
+            im.src = photos[mod(index + o, photos.length)].src;
+            im.alt = "";
+            im.draggable = false;
+            if (o === 0) im.addEventListener("load", relayout, { once: true });
+            cell.appendChild(im);
+            rail.appendChild(cell);
+          });
+          measure();
+          rail.style.transition = "none";
+          rail.style.transform = "translateX(" + offset(1) + "px)";
+          // force the browser to take the jump before transitions resume
+          void rail.offsetWidth;
+          rail.style.transition = "";
+        }
+
+        function step(dir) {
+          if (busy) return; // ignore input mid-slide
+          busy = true;
+          sound("tick");
+
+          if (reduced) {
+            index = mod(index + dir, photos.length);
+            paint();
+            busy = false;
+            return;
+          }
+
+          rail.style.transform = "translateX(" + offset(1 + dir) + "px)";
+          rail.querySelectorAll(".photo-lb__cell").forEach((c, n) => {
+            c.classList.toggle("is-mid", n === 1 + dir);
+          });
+
+          setTimeout(() => {
+            index = mod(index + dir, photos.length);
+            paint();
+            busy = false;
+          }, SLIDE);
+        }
+
+        function open(i) {
+          lastFocused = document.activeElement;
+          index = i;
+          paint();
+          root.classList.add("is-open");
+          document.body.style.overflow = "hidden";
+          sound("open");
+          root.querySelector(".photo-lb__close").focus();
+        }
+
+        function close() {
+          if (!root.classList.contains("is-open")) return;
+          sound("close");
+          root.classList.remove("is-open");
+          document.body.style.overflow = "";
+          if (lastFocused) lastFocused.focus();
+        }
+
+        photos.forEach((img, i) => img.addEventListener("click", () => open(i)));
+
+        root.querySelector(".photo-lb__nav--prev").addEventListener("click", () => step(-1));
+        root.querySelector(".photo-lb__nav--next").addEventListener("click", () => step(1));
+        root.querySelector(".photo-lb__close").addEventListener("click", close);
+        root.addEventListener("click", (e) => {
+          // the controls handle themselves
+          if (e.target.closest(".photo-lb__nav, .photo-lb__close")) return;
+
+          // a tap on a neighbour brings it to the centre
+          const img = e.target.closest(".photo-lb__img");
+          if (img) {
+            const cell = img.closest(".photo-lb__cell");
+            if (cell && !cell.classList.contains("is-mid")) {
+              const cells = [...rail.querySelectorAll(".photo-lb__cell")];
+              step(cells.indexOf(cell) - 1);
+            }
+            return; // the centred photo is not a close target
+          }
+
+          // anything else, backdrop, stage, rail, or the empty part of a
+          // cell, closes. The cells cover most of the stage now, so testing
+          // the target type is the only reliable way to catch a tap out.
+          close();
+        });
+
+        document.addEventListener("keydown", (e) => {
+          if (!root.classList.contains("is-open")) return;
+          if (e.key === "Escape") close();
+          else if (e.key === "ArrowRight") { e.preventDefault(); step(1); }
+          else if (e.key === "ArrowLeft") { e.preventDefault(); step(-1); }
+        });
+
+        // swipe
+        let x0 = null, y0 = null;
+        stage.addEventListener("touchstart", (e) => {
+          x0 = e.touches[0].clientX;
+          y0 = e.touches[0].clientY;
+        }, { passive: true });
+        stage.addEventListener("touchend", (e) => {
+          if (x0 === null) return;
+          const dx = e.changedTouches[0].clientX - x0;
+          const dy = e.changedTouches[0].clientY - y0;
+          // horizontal intent only, so a vertical scroll is not hijacked
+          if (Math.abs(dx) > 45 && Math.abs(dx) > Math.abs(dy)) step(dx < 0 ? 1 : -1);
+          x0 = y0 = null;
+        }, { passive: true });
+
+        // keep the rail centred when the window changes size
+        window.addEventListener("resize", () => {
+          if (!root.classList.contains("is-open") || busy) return;
+          const t = rail.style.transition;
+          rail.style.transition = "none";
+          measure();
+          rail.style.transform = "translateX(" + offset(1) + "px)";
+          void rail.offsetWidth;
+          rail.style.transition = t;
+        });
+      })();
+
       // Greeting types itself out in a few languages. Static for anyone who
       // has asked for less motion, and for anyone without JS, since the
       // markup ships with "Hello!" already in place.

@@ -71,59 +71,10 @@ const PROJECTS = [
    land, or set to 0 to turn them off. */
 const PLACEHOLDER_HEIGHTS = [240, 180, 300, 210, 270, 190];
 
-/* ---------- sound ----------
-   Synthesised rather than loaded, so there is no audio file to ship. The
-   context is created on the first click, which is the user gesture browsers
-   require before audio may start.
-
-   Pitch direction carries the meaning: rising to open, falling to close.
-   A flat tick for stepping sideways through images. */
-let audioCtx = null;
-
-function ctx() {
-    const AC = window.AudioContext || window.webkitAudioContext;
-    if (!AC) return null;
-    if (!audioCtx) audioCtx = new AC();
-    if (audioCtx.state === 'suspended') audioCtx.resume();
-    return audioCtx;
-}
-
-/* one sine sweep with an exponential envelope */
-function tone(ac, t, from, to, peak, dur, delay) {
-    const osc = ac.createOscillator();
-    const gain = ac.createGain();
-    const t0 = t + (delay || 0);
-    osc.type = 'sine';
-    osc.frequency.setValueAtTime(from, t0);
-    osc.frequency.exponentialRampToValueAtTime(to, t0 + dur * 0.75);
-    gain.gain.setValueAtTime(0.0001, t0);
-    gain.gain.exponentialRampToValueAtTime(peak, t0 + 0.012);
-    gain.gain.exponentialRampToValueAtTime(0.0001, t0 + dur);
-    osc.connect(gain).connect(ac.destination);
-    osc.start(t0);
-    osc.stop(t0 + dur + 0.02);
-}
-
-const SOUNDS = {
-    // opening: rising, with a fifth above it for body, so it feels like more
-    open: ac => {
-        const t = ac.currentTime;
-        tone(ac, t, 400, 760, 0.15, 0.22);
-        tone(ac, t, 600, 1140, 0.055, 0.18, 0.015);
-    },
-    // closing: falling, shorter and quieter, so it reads as the way out
-    close: ac => tone(ac, ac.currentTime, 620, 340, 0.09, 0.14),
-    // stepping sideways: a flat, quiet tick
-    tick: ac => tone(ac, ac.currentTime, 520, 495, 0.06, 0.07)
-};
-
+/* Sounds live in sound.js so the about page gallery uses the same ones.
+   Falls back to a no-op if that file has not loaded. */
 function boop(kind) {
-    try {
-        const ac = ctx();
-        if (ac) (SOUNDS[kind] || SOUNDS.open)(ac);
-    } catch (e) {
-        /* sound is a flourish, never let it break the click */
-    }
+    if (window.siteSound) window.siteSound.boop(kind);
 }
 
 /* ---------- media ---------- */
