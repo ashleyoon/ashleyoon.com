@@ -63,6 +63,41 @@ const PROJECTS = [
             '/images/editorial-detail-5.webp',
             '/images/editorial-detail-6.webp'
         ]
+    },
+    {
+        title: 'Sentimental Value',
+        blurb: 'A poster series for Sentimental Value, a film by Joachim Trier.',
+        tags: ['Poster', '2026'],
+        meta: [
+            { label: 'Category', value: 'Poster series' },
+            { label: 'Year', value: '2026' }
+        ],
+        // the card cycles the whole series; the dialog steps through them one
+        // at a time, so each poster can be looked at properly
+        cover: {
+            // small cuts: the card is 384px wide, and all seven load at once
+            frames: [
+                '/images/sv-1-card.webp',
+                '/images/sv-2-card.webp',
+                '/images/sv-3-card.webp',
+                '/images/sv-4-card.webp',
+                '/images/sv-5-card.webp',
+                '/images/sv-6-card.webp',
+                '/images/sv-7-card.webp'
+            ],
+            w: 800,
+            h: 1132
+        },
+        // full cuts: the dialog loads one at a time
+        images: [
+            '/images/sv-1.webp',
+            '/images/sv-2.webp',
+            '/images/sv-3.webp',
+            '/images/sv-4.webp',
+            '/images/sv-5.webp',
+            '/images/sv-6.webp',
+            '/images/sv-7.webp'
+        ]
     }
 ];
 
@@ -78,14 +113,74 @@ function boop(kind) {
 }
 
 /* ---------- media ---------- */
-/* Build an <img> or a <video> from a media entry. A string is an image, an
-   object with .video is a clip. Grid clips autoplay muted and looping, which
-   is the only form of autoplay browsers allow, and are paused while offscreen
-   or when the visitor has asked for less motion. */
+/* Build the element for a media entry. A string is an image, an object with
+   .video is a clip, and an object with .frames is a run of stills that cycles
+   like a gif. Clips autoplay muted and looping, which is the only form of
+   autoplay browsers allow. Both kinds only run while they are on screen, and
+   hold still when the visitor has asked for less motion. */
 const reducedMotion =
     window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+/* how long each still in a sequence holds */
+const FRAME_MS = 1200;
+
 let seen = null;
+
+/* Run el.__loop only while el is near the viewport, so offscreen cards cost
+   nothing. */
+function runWhileVisible(el) {
+    if (!('IntersectionObserver' in window)) {
+        el.__loop.start();
+        return;
+    }
+    if (!seen) {
+        seen = new IntersectionObserver(entries => {
+            entries.forEach(en => {
+                if (en.isIntersecting) en.target.__loop.start();
+                else en.target.__loop.stop();
+            });
+        }, { rootMargin: '200px' });
+    }
+    seen.observe(el);
+}
+
+/* The stills are stacked and cross faded rather than swapped into one <img>,
+   so a step never reflows and never waits on a decode. */
+function framesEl(item, inGrid) {
+    const box = document.createElement('div');
+    box.className = 'work-frames';
+    if (item.w) box.style.aspectRatio = item.w + ' / ' + item.h;
+
+    const stills = item.frames.map((src, n) => {
+        const img = document.createElement('img');
+        img.src = src;
+        img.alt = '';
+        if (n === 0) img.className = 'is-on';
+        box.appendChild(img);
+        return img;
+    });
+
+    let at = 0;
+    let timer = null;
+    box.__loop = {
+        start() {
+            if (timer || reducedMotion || stills.length < 2) return;
+            timer = setInterval(() => {
+                stills[at].classList.remove('is-on');
+                at = (at + 1) % stills.length;
+                stills[at].classList.add('is-on');
+            }, item.ms || FRAME_MS);
+        },
+        stop() {
+            clearInterval(timer);
+            timer = null;
+        }
+    };
+
+    if (inGrid) runWhileVisible(box);
+    else box.__loop.start();
+    return box;
+}
 
 function mediaEl(item, inGrid) {
     if (typeof item === 'string') {
@@ -94,6 +189,7 @@ function mediaEl(item, inGrid) {
         img.alt = '';
         return img;
     }
+    if (item.frames) return framesEl(item, inGrid);
     const v = document.createElement('video');
     v.src = item.video;
     if (item.poster) v.poster = item.poster;
@@ -103,20 +199,16 @@ function mediaEl(item, inGrid) {
     v.playsInline = true;
     v.setAttribute('muted', '');
     v.setAttribute('playsinline', '');
+    v.__loop = {
+        start() { v.play().catch(() => {}); },
+        stop() { v.pause(); }
+    };
     if (inGrid) {
         v.preload = 'metadata';
         if (!reducedMotion) {
-            v.autoplay = true;
             // only spend decode time on clips that are actually on screen
-            if (!seen && 'IntersectionObserver' in window) {
-                seen = new IntersectionObserver(entries => {
-                    entries.forEach(en => {
-                        if (en.isIntersecting) en.target.play().catch(() => {});
-                        else en.target.pause();
-                    });
-                }, { rootMargin: '200px' });
-            }
-            if (seen) seen.observe(v);
+            v.autoplay = true;
+            runWhileVisible(v);
         }
     } else {
         // short silent loop, so controls would only be clutter

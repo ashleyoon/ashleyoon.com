@@ -2312,6 +2312,26 @@ img {
 .work-card:hover .work-card__media img,
 .work-card:hover .work-card__media video { transform: scale(1.03); }
 
+/* A run of stills that cycles like a gif. They stack on top of each other,
+   with the box holding its own aspect ratio so nothing reflows on a step. */
+.work-frames {
+    position: relative;
+    display: block;
+    width: 100%;
+}
+
+.work-card__media .work-frames img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transition: opacity 0.22s ease, transform 0.4s ease;
+}
+
+.work-card__media .work-frames img.is-on { opacity: 1; }
+
 /* Empty slots, so the grid reads as a grid before the work fills it */
 .work-card--empty {
     display: flex;
@@ -2487,7 +2507,8 @@ img {
 @media (prefers-reduced-motion: reduce) {
     .work-stage__frame { animation: none; }
     .work-card__media img,
-    .work-card__media video { transition: none; }
+    .work-card__media video,
+    .work-card__media .work-frames img { transition: none; }
 }
 
 @media (max-width: 900px) {
